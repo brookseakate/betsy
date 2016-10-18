@@ -27,6 +27,7 @@ gem 'graphviz'
 
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'faker'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -40,8 +41,13 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'dotenv-rails'
-  gem 'better_errors'
-  gem 'binding_of_caller'
+
+end
+
+group :test do
+    gem 'minitest-rails'
+    gem 'minitest-reporters'
+    gem 'simplecov'
 end
 
 group :development do
@@ -51,4 +57,12 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'rails-erd'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'pry-rails'
 end
+#
+# group :production do
+#   gem 'pg'
+#   gem 'rails_12factor'
+# end
