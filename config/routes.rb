@@ -11,21 +11,16 @@ Rails.application.routes.draw do
   get '/products/users/', to: 'products#seller', as: 'products_by_seller'
 
   resources :products, only: [:index, :show]
-  
+
   resources :categories
 
   resources :reviews, only: [:new, :create] do
-    resources :products, only: [:show] do
+    resources :products, only: [:show] 
   end
-end
 
   resources :users do
-  resources :products, except: [:index, :show] do
+    resources :products, except: [:index, :show]
   end
-end
-
-  resources :orders do
-end
 
   resources :orders
 
