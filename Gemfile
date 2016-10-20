@@ -66,3 +66,4 @@ end
 #   gem 'pg'
 #   gem 'rails_12factor'
 # end
+gem 'bcrypt', '~> 3.1.7'

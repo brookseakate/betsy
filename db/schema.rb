@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018222418) do
+ActiveRecord::Schema.define(version: 20161020030109) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 20161018222418) do
   add_index "order_items", ["product_id"], name: "index_order_items_on_product_id"
 
   create_table "orders", force: :cascade do |t|
-    t.boolean  "paid"
     t.datetime "placed"
     t.string   "email"
     t.string   "mailing_address"
@@ -53,6 +52,7 @@ ActiveRecord::Schema.define(version: 20161018222418) do
     t.string   "billing_zip"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "status"
   end
 
   create_table "products", force: :cascade do |t|
