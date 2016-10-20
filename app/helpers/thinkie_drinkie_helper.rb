@@ -1,0 +1,2 @@
+module ThinkieDrinkieHelper
+end

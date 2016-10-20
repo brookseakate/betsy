@@ -1,4 +1,23 @@
 Rails.application.routes.draw do
+
+  resources :products, only: [:index, :show] do
+    resources :reviews, only: [:new, :create]
+  end
+
+  resources :users do
+    resources :products, except: [:index, :show]
+  end
+
+  resources :orders
+  
+  # resources :users, shallow: do
+  #   resources :products do
+  #     resources :order_items
+  #   end
+  # end
+
+  # Use match or shallow routing with nested products for @user
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
