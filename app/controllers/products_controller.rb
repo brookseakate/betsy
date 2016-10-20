@@ -1,4 +1,4 @@
-class productController < ApplicationController
+class ProductsController < ApplicationController
 
     def index
       @products = Product.where(media_type: params[:media_type])
@@ -38,6 +38,10 @@ class productController < ApplicationController
       else
         render :edit
       end
+    end
+
+    def seller
+      @products = Product.find_by(params[:id])
     end
 
 

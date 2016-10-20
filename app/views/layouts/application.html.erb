@@ -7,8 +7,48 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
- 
+  <h1 class="title"> Good Afternoon!</h1>
+  <h2 class="link"><%= button_to "login", login_path, method: :get %></h2>
+  <h2 class="link"><%= button_to "Browse All Products", all_products_path, method: :get %></h2>
+  <h2 class="link"><%= button_to "Home", drinks_path%></h2>
+  <h2 class="link"><%= button_to "logout", logout_path(:id), method: :delete %></h2>
 <%= yield %>
+<div class="row">
+  <div class="small-12 columns">...</div>
+  <div class="row">
+    <div class="small-3 columns"><%= link_to("Products by Seller ", products_by_seller_path(:id), method: :get)%></div>
+    <div class="small-3 columns"><%= link_to("Products by Category", products_path(:category), method: :get)%></div>
+  </div>
+  <div class="row">
+    <ul class="small-block-grid-3">
+      <li><%#img_tag%></li>
+      <li><%#img_tag%></li>
+      <li><%#img_tag%></li>
+    </ul>
+
+  </div>
+
+  <div class="row">
+    <div class="small-6 large-2 columns">...</div>
+    <div class="small-6 large-8 columns">...</div>
+  </div>
+  <div class="row">
+    <div class="small-3 columns">...</div>
+    <div class="small-9 columns">...</div>
+  </div>
+  <div class="row">
+    <div class="large-4 columns">...</div>
+    <div class="large-8 columns">...</div>
+  </div>
+  <div class="row">
+    <div class="small-6 large-5 columns">...</div>
+    <div class="small-6 large-7 columns">...</div>
+  </div>
+  <div class="row">
+    <div class="large-6 columns">...</div>
+    <div class="large-6 columns">...</div>
+  </div>
+
 
 </body>
 </html>

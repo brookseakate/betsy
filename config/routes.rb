@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   root 'drinks#index'
   get '/drinks', to: 'drinks#index'
+  get '/drinks/products', to: 'products#index', as: 'all_products'
   get '/auth/:provider/callback', to: "sessions#create"
   get '/sessions', to: 'sessions#index', as: 'sessions'
   get '/sessions/new', to: 'sessions#new', as: 'login'
   get '/sessions/login_failure', to: 'sessions#login_failure', as: 'login_failure'
   delete '/sessions/:id', to: 'sessions#destroy', as: 'logout'
   get '/user/:id/order_items/:product_id', to: 'user#order_items', as: 'user_order_items'
+  get '/products/users/', to: 'products#seller', as: 'products_by_seller'
 
   resources :products, only: [:index, :show] do
     resources :categories, only: [:index, :show] do

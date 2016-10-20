@@ -1,14 +1,14 @@
 <div class="row">
   <div class="small-12 columns">...</div>
   <div class="row">
-    <div class="small-3 columns"><%= link_to("Products by Seller ", products/user(:id), method: :get)%></div>
-    <div class="small-9 columns"><%= link_to("Products by Category", products_path(:category), method: :get)%></div>
+    <div class="small-3 columns"><%= link_to("Products by Seller ", products_by_seller_path, method: :get)%></div>
+    <div class="small-3 columns"><%= link_to("Products by Category", products_path(:category), method: :get)%></div>
   </div>
   <div class="row">
     <ul class="small-block-grid-3">
-      <li><%=img_tag%></li>
-      <li><%=img_tag%></li>
-      <li><%=img_tag%></li>
+      <li><%#img_tag%></li>
+      <li><%#img_tag%></li>
+      <li><%#img_tag%></li>
     </ul>
 
   </div>
