@@ -1,1 +1,7 @@
 <h1> View All Categories </h1>
+<% @categories.each do |category| %>
+<section>
+  <p class="small-4 columns"><%# "#{category.name}" %>  </p>
+  <p class="small-4 columns"><%=  link_to "#{category.name}", category_path(category) %>  </p>
+</section>
+<% end %>
