@@ -1,0 +1,21 @@
+<%# @TODO - Format Price & Money as $x.xx %>
+<%# @TODO - Add edit functions/update buttons %>
+<h1>Your Order: <%= @order.id %></h1>
+<% @order_items.each do |item| %>
+<h3><%= item.product.name %></h3>
+<ul>
+  <li>
+    Price: <%= item.product.price %>
+  </li>
+</ul>
+<ul>
+  <li>
+    Quantity: <%= item.quantity %>
+  </li>
+</ul>
+<ul>
+  <li>
+    Subtotal: <%= item.product.price * item.quantity %>
+  </li>
+</ul>
+<% end %>
