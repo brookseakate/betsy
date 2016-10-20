@@ -1,0 +1,15 @@
+<%= form_for @product do |f| %>
+  <%= f.label "ID" %>
+  <%= f.text_field :id %>
+  <%= f.label "User ID" %>
+  <%= f.text_field :user_id %>
+  <%= f.label "Description" %>
+  <%= f.text_field :description %>
+  <%= f.label "link to product photo" %>
+  <%= f.text_field :photo_url%>
+  <%= f.label "discontinued?" %>
+  <%= f.radio_button :retired %>
+  <%= f.label "Inventory in stock" %>
+  <%= f.text_field :inventory %>
+  <%= f.submit :save %>
+<% end %>
