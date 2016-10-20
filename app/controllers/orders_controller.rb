@@ -7,7 +7,6 @@ class OrdersController < ApplicationController
   def show; end
 
   def edit
-    # @order_id = session[:cart_id]
     @order = Order.find(params[:id])
     @order_items = @order.order_items
   end
