@@ -6,15 +6,25 @@ Rails.application.routes.draw do
   get '/sessions/new', to: 'sessions#new', as: 'login'
   get '/sessions/login_failure', to: 'sessions#login_failure', as: 'login_failure'
   delete '/sessions/:id', to: 'sessions#destroy', as: 'logout'
+  get '/user/:id/order_items/:product_id', to: 'user#order_items', as: 'user_order_items'
+
   resources :products, only: [:index, :show] do
-  resources :reviews, only: [:new, :create]
+    resources :categories, only: [:index, :show] do
   end
+end
+
+  resources :reviews, only: [:new, :create] do
+    resources :products, only: [:show] do
+  end
+end
 
   resources :users do
-  resources :products, except: [:index, :show]
+  resources :products, except: [:index, :show] do
   end
+end
 
-  resources :orders
+  resources :orders do
+end
 
 
   # Use match or shallow routing with nested products for @user

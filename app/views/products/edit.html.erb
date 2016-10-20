@@ -5,9 +5,11 @@
   <%= f.text_field :user_id %>
   <%= f.label "Description" %>
   <%= f.text_field :description %>
-  <%= f.label "photo" %>
-  <%= f.text_field %>
+  <%= f.label "link to product photo" %>
+  <%= f.text_field :photo_url%>
   <%= f.label "discontinued?" %>
-  <%= f.text_field :retired %>
+  <%= f.radio_button :retired %>
+  <%= f.label "Inventory in stock" %>
+  <%= f.text_field :inventory %>
   <%= f.submit :save %>
 <% end %>
