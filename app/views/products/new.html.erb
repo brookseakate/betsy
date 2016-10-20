@@ -1,0 +1,13 @@
+<%= form_for @product do |f| %>
+  <%= f.label "ID" %>
+  <%= f.integer :id %>
+  <%= f.label "User ID" %>
+  <%= f.integer :user_id %>
+  <%= f.label "Description" %>
+  <%= f.string :description %>
+  <%= f.label "photo" %>
+  <%= f.string %>
+  <%= f.label "discontinued?" %>
+  <%= f.boolean :retired %>
+  <%= f.submit :save %>
+<% end %>

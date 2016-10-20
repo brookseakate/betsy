@@ -1,20 +1,21 @@
 Rails.application.routes.draw do
-
+  root 'drinks#index'
+  get '/drinks', to: 'drinks#index'
+  get '/auth/:provider/callback', to: "sessions#create"
+  get '/sessions', to: 'sessions#index', as: 'sessions'
+  get '/sessions/new', to: 'sessions#new', as: 'login'
+  get '/sessions/login_failure', to: 'sessions#login_failure', as: 'login_failure'
+  delete '/sessions/:id', to: 'sessions#destroy', as: 'logout'
   resources :products, only: [:index, :show] do
-    resources :reviews, only: [:new, :create]
+  resources :reviews, only: [:new, :create]
   end
 
   resources :users do
-    resources :products, except: [:index, :show]
+  resources :products, except: [:index, :show]
   end
 
   resources :orders
-  
-  # resources :users, shallow: do
-  #   resources :products do
-  #     resources :order_items
-  #   end
-  # end
+
 
   # Use match or shallow routing with nested products for @user
 
