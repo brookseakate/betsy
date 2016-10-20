@@ -10,26 +10,29 @@ Rails.application.routes.draw do
   get '/user/:id/order_items/:product_id', to: 'user#order_items', as: 'user_order_items'
   get '/products/users/', to: 'products#seller', as: 'products_by_seller'
 
-  resources :products, only: [:index, :show] do
-    resources :categories, only: [:index, :show] do
-  end
-end
+  resources :products, only: [:index, :show]
+
+  resources :categories
 
   resources :reviews, only: [:new, :create] do
-    resources :products, only: [:show] do
+    resources :products, only: [:show] 
   end
-end
 
   resources :users do
-  resources :products, except: [:index, :show] do
+    resources :products, except: [:index, :show]
   end
-end
 
-  resources :orders do
-end
+  resources :orders
+
+  # resources :users, shallow: do
+  #   resources :products do
+  #     resources :order_items
+  #   end
+  # end
 
 
   # Use match or shallow routing with nested products for @user
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
