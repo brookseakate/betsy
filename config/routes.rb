@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :orders
-  
+
   # resources :users, shallow: do
   #   resources :products do
   #     resources :order_items
@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   # Use match or shallow routing with nested products for @user
 
+  resources :categories 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
