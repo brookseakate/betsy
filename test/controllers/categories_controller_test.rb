@@ -13,8 +13,9 @@ class CategoriesControllerTest < ActionController::TestCase
      assert_response :success
      assert_template :show
 
-    assert_equal assigns(:categories), categories(:one)
-
+    assert_equal assigns(:category), categories(:one)
   end
+
+  #how do i test products for each category?
 
  end
