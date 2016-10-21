@@ -1,23 +1,42 @@
-<% if @user.product.blank? %>
-  <p>You have not listed any products yet, time to change that!<%= link_to "get started", new_user_product_path, method: :get %></p>
+<h2>Hello <%= @user.user_name %></h2>
+
+<% if @user.products.blank? %>
+  <p>You have not listed any products yet, time to change that!<%= link_to "get started", new_product_path, method: :get %></p>
 
 <% else %>
-<h2 class="link"><%= link_to "Add a category", new_category_path, method: :get %></h2>
+  <p><%= link_to "Add a category", new_category_path, method: :get %></p>
+  <p><%= link_to "Add a product", new_product_path, method: :get %></p>
 
-  <h1 class="productlist"> Here Are All of Your Products To Date: </h1>
-  <% @products.each do |t| %>
-  <article>
-  <p>
-  <%= t.name %>
-  <%= t.description%>
-  <%= t.status %>
-  <%= t.retired %>
-  <%= t.id %>
-  <!-- <%#t.product.reviews.id %> -->
-  </p>
-
-  <h2 class="link"><%= link_to "Edit this product", edit_product_path, method: :get %></h2>
-  <h2 class="link"><%= link_to "Delete", task_path(t), method: :delete, data: { confirm: 'Are you certain you want to delete this?' } %></h2>
-    </article>
-  <%end%>
+  <h2 class="productlist"> Active Products: </h2>
+  <table>
+    <!-- <thead>
+      <tr>
+        <th>Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead> -->
+    <tbody>
+      <% @products.each do |t| %>
+      <tr>
+        <td><%= link_to "#{t.name.capitalize}", product_path(t) %></td>
+        <td><%= link_to "Edit", edit_product_path(t), { method: :get, class: "hollow button" }  %></td>
+        <td><%= link_to "Retire", product_path(t), { method: :update, class: "secondary hollow button" } %></td>
+        <td><%= link_to "Delete", product_path(t), method: :delete, class: "button alert", data: { confirm: 'Are you certain you want to delete this?' } %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <h2 class="retiredproducts"> Retired Products: </h2>
+  <table>
+    <tbody>
+      <% @retired.each do |t| %>
+      <tr>
+        <td><%= link_to "Edit", edit_product_path(t), { method: :get, class: "hollow button" }  %></td>
+        <td><%= link_to "Activate", product_path(t), { method: :update, class: "secondary hollow button" } %></td>
+        <td><%= link_to "Delete", product_path(t), method: :delete, class: "button alert", data: { confirm: 'Are you certain you want to delete this?' }%>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 <%end%>
