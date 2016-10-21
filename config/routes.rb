@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   end
 
   get 'orders/:id/checkout', to: 'orders#checkout', as: :checkout_order
-  
+
   # resources :users, shallow: do
   #   resources :products do
   #     resources :order_items
