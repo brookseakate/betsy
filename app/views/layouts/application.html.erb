@@ -9,8 +9,8 @@
 <body>
   <h1 class="title"> Good Afternoon!</h1>
   <h2 class="link"><%= button_to "login", login_path, method: :get %></h2>
-  <h2 class="link"><%= button_to "Browse All Products", all_products_path, method: :get %></h2>
-  <h2 class="link"><%= button_to "Home", drinks_path%></h2>
+  <h2 class="link"><%= button_to "Browse All Products", products_path, method: :get %></h2>
+  <h2 class="link"><%= button_to "Home", drinks_path, method: :get%></h2>
   <h2 class="link"><%= button_to "logout", logout_path(:id), method: :delete %></h2>
 <%= yield %>
 <div class="row">
