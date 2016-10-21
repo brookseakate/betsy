@@ -1,1 +1,44 @@
 <%# @TODO - This view will be the "Order Confirmation" page on completed purchases - ks %>
+
+<!-- from registered view:
+should show buyer information and payment
+should also show order items for the associated seller/authorized user -->
+
+
+<h1> Order confirmation for <%= @order.cc_holder_name %></h1>
+
+<h2> Buyer Information </h2>
+<ul>
+  <li> Name: <%= @order.cc_holder_name %> </li>
+  <li> Email Address: <%= @order.email %> </li>
+  <li> Mailing Address: <%= @order.mailing_address %> </li>
+  <li> Credit Card Number: <%= @order.cc_number %> </li>
+  <!-- change this to last 4 numbers, using model method -->
+  <li> Credit Card Exp. Date: <%= @order.exp %> </li>
+
+  <li> Order placed at: <%= @order.created_at %> </li>
+  <li> Order status: <%= @order.status %> </li>
+</ul>
+
+<h2> Ordered Items </h2>
+<% @order.order_items.each do |item| %>
+<li>  Name: <%= link_to "#{item.product.name}", product_path(item.product_id) %></li>
+  <!-- Add a link_to that will go to the Product page for said item  -->
+<li>  Quantity:  <%= item.quantity %></li>
+<li>  Cost:  <%= item.product.price %></li>
+<!-- Convert price to dollars in the model , and also mutliply it with the quantity -->
+<% end  %>
+
+
+
+<!-- Name
+Email address
+Mailing address
+Last four digits of their credit card
+Credit card expiration date
+
+Each item in the order with a quantity and line-item subtotal
+A link to the item description page
+Order total price
+DateTime the order was placed
+The current status of the order -->
