@@ -10,13 +10,11 @@ Rails.application.routes.draw do
   get '/user/:id/order_items/:product_id', to: 'user#order_items', as: 'user_order_items'
   get '/products/users/', to: 'products#seller', as: 'products_by_seller'
 
-  resources :products
+  resources :products do
+    resources :reviews, only: [:new, :create]
+  end
 
   resources :categories
-
-  resources :reviews, only: [:new, :create] do
-    resources :products, only: [:show]
-  end
 
   resources :users do
     resources :products, except: [:index, :show]
@@ -27,7 +25,7 @@ Rails.application.routes.draw do
   end
 
   get 'orders/:id/checkout', to: 'orders#checkout', as: :checkout_order
-  
+
   # resources :users, shallow: do
   #   resources :products do
   #     resources :order_items
