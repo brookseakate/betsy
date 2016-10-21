@@ -10,12 +10,12 @@ Rails.application.routes.draw do
   get '/user/:id/order_items/:product_id', to: 'user#order_items', as: 'user_order_items'
   get '/products/users/', to: 'products#seller', as: 'products_by_seller'
 
-  resources :products, only: [:index, :show]
+  resources :products
 
   resources :categories
 
   resources :reviews, only: [:new, :create] do
-    resources :products, only: [:show] 
+    resources :products, only: [:show]
   end
 
   resources :users do
