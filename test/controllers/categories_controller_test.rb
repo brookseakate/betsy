@@ -7,12 +7,14 @@ class CategoriesControllerTest < ActionController::TestCase
    assert_template :index
  end
 
-  test "should display the products of one category" do
+  test "should show the requested category" do
     @category = categories(:one)
     get :show, { id: categories(:one).id }
      assert_response :success
      assert_template :show
+
+    assert_equal assigns(:categories), categories(:one)
+
   end
 
-  #  assert_equal assigns(:categories), categories(:one)
  end
