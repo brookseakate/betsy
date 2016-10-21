@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
 
   def checkout # "edit"-like action for checkout/order confirmation when moving order to paid
     @order = Order.find(params[:id])
-    render :order
+    render :checkout
   end
 
   def update # update action for checkout - order moving to paid
