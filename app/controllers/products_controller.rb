@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
     def index
-      @products = Product.where(media_type: params[:media_type])
+      @products = Product.all
     end
 
     def new

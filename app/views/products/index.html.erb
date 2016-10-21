@@ -3,7 +3,7 @@
 <h3><%= @category %></h3>
 <% @products.each do |item| %>
 <tr>
-  <td>Seller: <%= item.user %><%=link_to item.name, product_path(item.id), method: :get %><%= button_to "review this item", product_review_path(item.id) %><%= review, method: :post %></td>
+  <td>Seller: <%= item.user %><%=link_to "#{item.name}", product_path(item.id), method: :get %><%= button_to "review this item", product_review_path(item.id) %><%# review, method: :post %></td>
   <td><%= link_to 'view all products by this merchant', products_path(item.user_id) %></td>
 
   <% end %>
