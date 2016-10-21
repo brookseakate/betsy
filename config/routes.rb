@@ -15,14 +15,16 @@ Rails.application.routes.draw do
   resources :categories
 
   resources :reviews, only: [:new, :create] do
-    resources :products, only: [:show] 
+    resources :products, only: [:show]
   end
 
   resources :users do
     resources :products, except: [:index, :show]
   end
 
-  resources :orders
+  resources :orders do
+    resources :order_items, only: [:create, :update, :destroy]
+  end
 
   # resources :users, shallow: do
   #   resources :products do

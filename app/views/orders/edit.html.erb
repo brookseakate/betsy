@@ -5,17 +5,18 @@
 <h3><%= item.product.name %></h3>
 <ul>
   <li>
-    Price: <%= item.product.price %>
+    Price: <%= sprintf("$%0.02f", item.product.price/100.to_f) %>
   </li>
-</ul>
-<ul>
   <li>
-    Quantity: <%= item.quantity %>
+    <%= form_for [@order, item] do |f| %>
+    <%= f.label :quantity %>
+    <%= f.text_field :quantity %>
+    <%= f.submit "Update" %>
+    <% end %>
+    <%= button_to [@order, item], method: :delete, class: "button", data: { confirm: "Are you sure?" } do %>Remove from Cart<% end %>
   </li>
-</ul>
-<ul>
   <li>
-    Subtotal: <%= item.product.price * item.quantity %>
+    Subtotal: <%= sprintf("$%0.02f", item.subtotal/100.to_f) %>
   </li>
 </ul>
 <% end %>
