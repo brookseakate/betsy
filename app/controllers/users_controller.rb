@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
   def require_login
     if current_user.nil?
-      flash[:error] = "You must be logged in to view this section" #this only shows if you tell it to show
+      flash[:error] = "You must be logged in to make seller changes" #this only shows if you tell it to show
       redirect_to root_path
     end
   end
