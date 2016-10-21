@@ -1,17 +1,19 @@
 class OrdersController < ApplicationController
-  # def new
-  #   @order_id = session[:cart_id]
-  #   @order = Order.find(@order_id)
-  # end
+  def show # for paid order confirmation
+    @order = Order.find(params[:id])
+  end
 
-  def show; end
-
-  def edit # for cart
+  def edit # for "cart"/pending order (the update actions for this happen in OrderItemsController)
     @order = Order.find(params[:id])
     @order_items = @order.order_items
   end
 
-  def update # for cart
+  def checkout # "edit"-like action for checkout/order confirmation when moving order to paid
+    @order = Order.find(params[:id])
+    render :order
+  end
+
+  def update # update action for checkout - order moving to paid
     @order = Order.find(params[:id])
 
     if @order.update(order_params)

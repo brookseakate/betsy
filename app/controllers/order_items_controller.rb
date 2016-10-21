@@ -1,5 +1,11 @@
 class OrderItemsController < ApplicationController
-  def create
+  # # @TODO: remove #new action if unused; it will likely not be needed, as new OrderItems will be originating from a Product view
+  # def new
+  #   @order = Order.find(session[:cart_id])
+  #   @order_item = @order.order_item.new
+  # end
+
+  def create # this action gets the order_id from the url/params (because of nested routing)
     @order = Order.find(params[:order_id])
     @order_item = @order.order_item.new(order_item_params)
 
@@ -29,7 +35,7 @@ class OrderItemsController < ApplicationController
 
     @order_item.destroy
 
-    redirect_to edit_order_path(@order)    
+    redirect_to edit_order_path(@order)
   end
 
   private

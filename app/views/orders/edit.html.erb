@@ -1,5 +1,3 @@
-<%# @TODO - Format Price & Money as $x.xx %>
-<%# @TODO - Add edit functions/update buttons %>
 <h1>Your Order: <%= @order.id %></h1>
 <% @order_items.each do |item| %>
 <h3><%= item.product.name %></h3>
@@ -20,3 +18,4 @@
   </li>
 </ul>
 <% end %>
+<%= button_to "Checkout", checkout_order_path(@order), method: :get %>
