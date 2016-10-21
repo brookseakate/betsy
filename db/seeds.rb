@@ -12,7 +12,9 @@ users = []
 10.times do |user|
   users <<
   { email: Faker::Internet.email,
-    user_name: Faker::Internet.user_name
+    user_name: Faker::Internet.user_name,
+    uid: rand(1..5000),
+    provider: "github"
   }
 end
 
@@ -29,7 +31,8 @@ products = []
     name: Faker::Beer.name,
     photo_url: Faker::Company.logo,
     price: rand(1..50000),
-    retired: false
+    retired: false,
+    user_id: rand(1..10)
   }
 end
 
