@@ -3,7 +3,7 @@
 
 <% else %>
   <h1 class="productlist"> Here Are All of Your Products To Date: </h1>
-  <% @products_by_id.each do |t| %>
+  <% @products.each do |t| %>
   <article>
   <h2 class="link"><%= link_to "Add a category to this product", new_category_path, method: :get(t) %></h2>
   <h2 class="link"><%= link_to "Edit this product", edit_product_path, method: :get(t) %></h2>
@@ -15,7 +15,8 @@
   <%= t.retired %>
   <%= t.id %>
   </p>
-<h2 class="link"><%= link_to "Delete", task_path(t), method: :delete, data: { confirm: 'Are you certain you want to delete this?' } %></h2>
+
+<h2 class="link"><%= link_to "Delete", product_path(:id), method: :delete, data: { confirm: 'Are you certain you want to delete this?' } %></h2>
     </article>
   <%end%>
 <%end%>

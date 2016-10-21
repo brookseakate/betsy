@@ -2,10 +2,10 @@
 <h1> Product Home </h1>
 <h3><%= @category %></h3>
 <% @products.each do |item| %>
-<tr>
-  <td>Seller: <%= item.user %><%=link_to item.name, product_path(item.id), method: :get %><%= button_to "review this item", product_review_path(item.id) %><%= review, method: :post %></td>
-  <td><%= link_to 'view all products by this merchant', products_path(item.user_id) %></td>
-
+<ul>
+  <li>Seller: <%# user name find to display as link %><%=link_to item.name, product_path(item.id), method: :get %></td>
+    <td><%= button_to "review this item", review_product_path(item.id), method: :get %></td>
+    <td><%= link_to 'view all products by this merchant', products_path(item.user_id) %></td>
+  </ul>
   <% end %>
-  <td><%= link_to "popular products", products_path, method: :get %></td>
-</tr>
+    <h3><%= link_to "popular products", products_path, method: :get %></h3>
