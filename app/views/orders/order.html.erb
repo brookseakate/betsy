@@ -3,17 +3,17 @@
   email: <%= f.text_field :exp %>
   Name On Card: <%= f.text_field :cc_holder_name %>
   Credit Card Number: <%= f.text_field :cc_number%>
-  exp:<%= f.date :exp %>cvv: <%= f.text_field :cvv %>billing zip code: <%= f.text_field :billing_zip %>
+  exp:<%= f.date_field :exp %>cvv: <%= f.text_field :cvv %>billing zip code: <%= f.text_field :billing_zip %>
 
   Mailing Address:
   Street: <%= f.text_field :mailing_address %>
   City: <%= f.text_field :mailing_city %>
-  State:<%= f.radio_button :exp %>
+  State:<%= f.text_field :mailing_state %>
   Zip Code:<%= f.text_field :exp %>
   <%= f.submit "Submit" %></h2>
   <% end %>
 
-  
+
 
 
 
