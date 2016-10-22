@@ -21,4 +21,18 @@ class User < ActiveRecord::Base
     return user
   end
 
+  def orders
+    orders = self.order_items.map do |item|
+      item.order
+    end
+    return orders.uniq
+  end
+
+  def revenues
+    revs = self.order_items.map do |item|
+      item.subtotal
+    end
+    return revs.reduce(:+)
+  end
+
 end
