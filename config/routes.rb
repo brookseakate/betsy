@@ -26,6 +26,9 @@ Rails.application.routes.draw do
 
   get 'orders/:id/checkout', to: 'orders#checkout', as: :checkout_order
 
+  # This path may not be RESTful; could be nice to have ultimately, or could be deleted after testing - ks
+  get '/cart', to: 'orders#cart', as: :cart
+
   # resources :users, shallow: do
   #   resources :products do
   #     resources :order_items
