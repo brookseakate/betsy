@@ -7,31 +7,24 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-  <h1 class="title"> Good Afternoon!</h1>
-  <h2 class="link"><%= button_to "login", login_path, method: :get %></h2>
-  <h2 class="link"><%= button_to "Browse All Products", products_path, method: :get %></h2>
-  <h2 class="link"><%= button_to "Home", drinks_path, method: :get%></h2>
-  <h2 class="link"><%= button_to "logout", logout_path(:id), method: :delete %></h2>
-
   <header>
     <h1 class="title"> Good Afternoon!</h1>
     <h2 class="link"><%= button_to "Browse All Products", all_products_path, method: :get %></h2>
-    <h2 class="link"><%= button_to "Home", drinks_path%></h2>
+    <h2 class="link"><%= link_to "Home", root_path%></h2>
     <% if session[:user_id].nil? %>
-      <%= button_to "Login", login_path, method: :get %>
-      <%= button_to "Sign Up", login_path, method: :get %> <%# need to adjust the sign up path %>
+      <%= link_to "Login", "/auth/github", class: "button" %>
+      <%= link_to "Sign Up", "/auth/github", class: "button" %> <%# need to adjust the sign up path %>
     <% else %>
-      <%= button_to "Logout", logout_path(:id), method: :delete %>
+      <%= link_to "Logout", logout_path(:id), method: :delete, class: "button" %>
     <% end %>
   </header>
   <p>
-  
+  -------- end header --------
   </p>
 
 <%= yield %>
   <p>
-
+  ---------- begin footer? ------------
   </p>
 <footer>
   <div class="row">

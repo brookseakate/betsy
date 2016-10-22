@@ -2,10 +2,19 @@
 
 # This model initially had no columns defined.  If you add columns to the
 # model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
+# below each fixture per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+one:
+ order_id: 1
+ product_id: 2
+ quantity: 2
+
+two:
+ order_id: 2
+ product_id: 1
+ quantity: 5
+
+lil:
+ order_id: 2
+ product_id: 99
+ quantity: 5
