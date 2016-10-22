@@ -1,8 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
-  user_id: 4
+  user_id: 2
   name: MyString
   price: 999
   # 12: MyString
@@ -14,7 +13,6 @@ one:
   updated_at: 2016-10-19 21:56:43
 
 two:
-  id: 2
   user_id: 1
   name: MyString
   price: 999
@@ -23,5 +21,30 @@ two:
   description: MyString
   photo_url: MyString
   retired: false
+  created_at: 2016-10-19 21:56:43
+  updated_at: 2016-10-19 21:56:43
+
+lil_product:
+  id: 99
+  user_id: 246879948
+  name: test product
+  price: 1999
+  # 12: MyString
+  # 3: MyString
+  description: MyString
+  photo_url: MyString
+  retired: false
+  created_at: 2016-10-19 21:56:43
+  updated_at: 2016-10-19 21:56:43
+
+lil_product2:
+  user_id: 246879948
+  name: test product
+  price: 1999
+  # 12: MyString
+  # 3: MyString
+  description: MyString
+  photo_url: MyString
+  retired: true
   created_at: 2016-10-19 21:56:43
   updated_at: 2016-10-19 21:56:43

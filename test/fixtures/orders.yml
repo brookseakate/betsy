@@ -2,7 +2,7 @@
 
 # This model initially had no columns defined.  If you add columns to the
 # model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
+# below each fixture per the syntax in the comments below
 #
 pending_one:
   id: 1
@@ -63,3 +63,37 @@ cancelled_order:
   cvv: 555
   billing_zip: 51111
   status: "cancelled"
+
+six:
+ id: 6
+ placed: 2016-10-29 21:56:43
+ email: cd@ma.com
+ mailing_address: 123 main st
+ mailing_city: seattle
+ mailing_state: wa
+ mailing_zip: 98118
+ cc_holder_name: jane doe
+ cc_number: 1234 1233 1235 1243
+ exp: 0820
+ cvv: 152
+ billing_zip: 11231
+ created_at: 2016-10-19 21:56:43
+ updated_at: 2016-10-19 21:56:43
+ status: paid
+
+lil_order:
+ id: 88
+ placed: 2016-10-19 21:56:43
+ email: sd@laksj.com
+ mailing_address: 555 main st
+ mailing_city: seattle
+ mailing_state: wa
+ mailing_zip: 98118
+ cc_holder_name: john doe
+ cc_number: 5555 1233 1235 1243
+ exp: 0820
+ cvv: 152
+ billing_zip: 11231
+ created_at: 2016-10-19 21:56:43
+ updated_at: 2016-10-19 21:56:43
+ status: completed

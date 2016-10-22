@@ -5,15 +5,17 @@ class UsersController < ApplicationController
   def show
     @products = @user.products.where(retired: false)
     @retired = @user.products.where(retired: true)
+    @orders = @user.orders
+    @order_items = @user.order_items
   end
 
-  def new; end
-
-  def create; end
-
-  def edit; end
-
-  def update; end
+  # def new; end
+  #
+  # def create; end
+  #
+  # def edit; end
+  #
+  # def update; end
 
   private
 
