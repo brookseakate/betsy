@@ -6,6 +6,10 @@ class SessionsControllerTest < ActionController::TestCase
     get :create,  {provider: "github"}
   end
 
+  def logout_a_user
+    delete :destroy
+  end
+
   test "Can Create a user" do
     assert_difference('User.count', 1) do
       login_a_user
@@ -27,7 +31,10 @@ class SessionsControllerTest < ActionController::TestCase
     end
   end
 
-  test "If a user logs out... " do
-
+  test "If a user logs out they will have restricted access" do
+    logout_a_user
+    assert_nil session[:user_id]
+    assert_response :redirect
+    assert_redirected_to root_path
   end
 end
