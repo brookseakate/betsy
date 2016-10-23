@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def set_cart_id
     if session[:cart_id].nil?
-      new_order = Order.create
+      new_order = Order.create(status: "pending")
       session[:cart_id] = new_order.id
     end
   end

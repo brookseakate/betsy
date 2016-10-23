@@ -14,6 +14,6 @@
  *= require_self
  */
 
-h1.title, h2.link form input {
-   display: inline-block;
- }
+.errors {
+  color: red;
+}

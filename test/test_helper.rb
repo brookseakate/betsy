@@ -18,4 +18,14 @@ class ActiveSupport::TestCase
       provider: 'github', uid: '99999', info: { email: "a@b.com", name: "Ada" }
       })
   end
+
+  # def login_a_user
+  #   request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:github]
+  #   get sessions,  {
+  #     provider: 'github', uid: '99999', info: { email: "a@b.com", name: "Ada"}}
+  # end
+  #
+  # def logout_a_user
+  #   delete :destroy
+  # end
 end

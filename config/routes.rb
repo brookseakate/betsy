@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/sessions', to: 'sessions#index', as: 'sessions'
   get '/sessions/new', to: 'sessions#new', as: 'login'
   get '/sessions/login_failure', to: 'sessions#login_failure', as: 'login_failure'
-  delete '/sessions/:id', to: 'sessions#destroy', as: 'logout'
+  delete '/sessions', to: 'sessions#destroy', as: 'logout'
   get '/user/:id/order_items/:product_id', to: 'user#order_items', as: 'user_order_items'
   get '/products/users/', to: 'products#seller', as: 'products_by_seller'
 
@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   end
 
   get 'orders/:id/checkout', to: 'orders#checkout', as: :checkout_order
+
+  # This path may not be RESTful; could be nice to have ultimately, or could be deleted after testing - ks
+  get '/cart', to: 'orders#cart', as: :cart
 
   # resources :users, shallow: do
   #   resources :products do

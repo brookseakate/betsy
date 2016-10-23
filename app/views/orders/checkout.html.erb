@@ -1,0 +1,57 @@
+<h2 class="link"><%= link_to "back", orders_path%></h2>
+<h2><%= form_for @order do |f| %>
+  <h1>Checkout: Complete Your Order</h1>
+  <h2>
+    Mailing Address:
+  </h2>
+  <ul>
+    <li>
+      <%= f.label :mailing_address, "Street Address" %>
+      <%= f.text_field :mailing_address %>
+    </li>
+    <li>
+      <%= f.label :mailing_city, "City" %>
+      <%= f.text_field :mailing_city %>
+    </li>
+    <li>
+      <%= f.label :mailing_state, "State" %>
+      <%= f.text_field :mailing_state %>
+    </li>
+    <li>
+      <%= f.label :mailing_zip, "Zip Code" %>
+      <%= f.text_field :mailing_zip %>
+    </li>
+  </ul>
+  <ul>
+    <li>
+    <%= f.label :email, "Email Address" %>
+    <%= f.text_field :email %>
+  </li>
+  <li>
+    <%= f.label :cc_holder_name, "Name on Credit Card" %>
+    <%= f.text_field :cc_holder_name %>
+  </li>
+  <li>
+    <%= f.label :cc_number, "Credit Card Number:"%>
+    <%= f.text_field :cc_number%>
+  </li>
+  <li>
+    <%= f.label :exp, "Expiration Date" %>
+    <%= f.date_field :exp %>
+  </li>
+  <li>
+    <%= f.label :cvv, "CVV" %>
+    <%= f.text_field :cvv %>
+  </li>
+  <li>
+    <%= f.label :billing_zip, "Billing Zip Code" %>
+    <%= f.text_field :billing_zip %>
+  </li>
+  <ul>
+
+  </ul>
+  <%= f.submit "Submit" %></h2>
+  <% end %>
+
+<!-- @TODO - Revise below link? -->
+<h2 class="link"><%= link_to "keep shopping", products_path%></h2>
