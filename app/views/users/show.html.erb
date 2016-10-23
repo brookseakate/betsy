@@ -8,7 +8,7 @@
     <h2>ORDER FULFILLMENT</h2>
     <section class="order-summary">
       <h3><%= "Total Number of Orders: #{@orders.count}" %></h3>
-      <h3><%= "Total Revenues: #{@user.revenues}" %></h3>
+      <h3><%= "Total Revenues: #{currency(@user.revenues)}" %></h3>
     </section>
     <table>
       <thead>
