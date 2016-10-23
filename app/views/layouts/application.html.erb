@@ -12,7 +12,7 @@
     <nav>
       <%= link_to "Browse All Products", products_path, method: :get, class: "button" %>
       <%= link_to "view popular products", popular_path, method: :get, class:"button" %></h3>
-      <%= link_to("Products by Category", products_path(:category), method: :get)%></div>
+      <%= link_to"Products by Category", products_path(:category), method: :get, class:"button"%></div>
 
       <%= link_to "Home", root_path, class: "button" %>
       <% if session[:user_id].nil? %>

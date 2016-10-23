@@ -3,18 +3,19 @@
 
 <h1 class="details"><%= "#{@product.name.capitalize}" %></h1>
 
-
 <%=image_tag "#{@product.photo_url}"%>
-<h3><%= "#{@product.price}" %></h3>
-<h3><%= "#{@product.description}" %></h3>
-<h3><%# button_to ##TODO make a button to "buy this product" method: :get %></h3>
-<h3>There are<%= "#{@product.inventory}" %>  remaining items, for  <%= "#{@product.name}" %> left!</h3>
-<h3><%= button_to "view related items", category_path(@product.id), method: :get %></h3>
-<h3><%= button_to "view all products by this seller", search_sellers_products_path(@product.user_id), method: :get %></h3>
+<%= "#{@product.price}" %>
+<%= "#{@product.description}" %>
+<%# link_to ##TODO make a button to "buy this product" method: :get %>
+There are<%= "#{@product.inventory}" %>  remaining items, for  <%= "#{@product.name}" %> left!
+<%= link_to "view related items", category_path(@product.id), method: :get, class: "button" %>
+<%= link_to "view all products by this seller", search_sellers_products_path(@product.user_id), method: :get, class: "button" %>
 <% if @session == false %>
-<h3><%= button_to "review this product", new_product_review_path(@product.id), method: :get %></h3>
-<% else @product.user_id == @product.id%>
-<h3><%= button_to "edit this product", edit_product_path(@product.id), method: :get %></h3>
-<h3><%= button_to "add another product", new_product_path, method: :get %></h3>
-<h3><%= button_to "delete this product", product_path(@product.id), method: :delete %></h3>
+<%= link_to "review this product", new_product_review_path(@product.id), method: :get, class: "button" %>
+<%end %>
+<%#TODO: how do I make the method to only allow the user selling the product to be able to edit it? %>
+<% if @session == true %>
+<%= link_to "edit this product", edit_product_path(@product.id), method: :get, class: "button" %>
+<%= link_to "add another product", new_product_path, method: :get %>
+<%= link_to "delete this product", product_path(@product.id), method: :delete, class: "button" %>
 <%end%>
