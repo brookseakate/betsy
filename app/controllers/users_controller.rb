@@ -7,7 +7,9 @@ class UsersController < ApplicationController
     @retired = @user.products.where(retired: true)
   end
 
-  def new; end
+  def new
+    @user
+  end
 
   private
 
