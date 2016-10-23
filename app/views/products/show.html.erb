@@ -1,21 +1,18 @@
 
-<h1 class="AllList"> </h1>
-<% @product = product %>
+<h1 class="details"><%= "#{@product.name.capitalize}" %></h1>
 
 
-<% if @session == true %>
-  <%=image_tag "#{product.photo_url}"%>
-  <td><%= "#{product.name.capitalize}" %></td>
-  <td><%= "#{product.price}" %></td>
-  <td><%= "#{product.inventory}" %></td>
-  <td><%= "#{product.description}" %></td>
-  <%end %>
-
-   <%=image_tag "#{product.photo_url}"%>
-    <td><%= "#{product.name.capitalize}" %></td>
-    <td><%= "#{product.price}" %></td>
-    <td><%= "#{product.inventory}" %></td>
-    <td><%= "#{product.description}" %></td>
-  <h3><%= button_to "review this product", new_product_review_path(product.id), method: :get %></h3>
-  <h3><%# button_to ##TODO make a button to "buy this product" method: :get %></h3>
-  <h3><%= button_to "view other products in this category" method: :get %></h3>
+    <%=image_tag "#{@product.photo_url}"%>
+    <h3><%= "#{@product.price}" %></h3>
+    <h3><%= "#{@product.description}" %></h3>
+    <h3><%# button_to ##TODO make a button to "buy this product" method: :get %></h3>
+    <h3>There are<%= "#{@product.inventory}" %>remaining items, for <%= "{@product.name.capitalize}"%> left!</h3>
+    <h3><%= button_to "view related items", category_path(@product.id), method: :get %></h3>
+    <h3><%= button_to "view all products by this seller", search_sellers_products_path(@product.user_id), method: :get %></h3>
+  <% if @session == false %>
+  <h3><%= button_to "review this product", new_product_review_path(@product.id), method: :get %></h3>
+  <% else @product.user_id == @product.id%>
+  <h3><%= button_to "edit this product", edit_product_path(@product.id), method: :get %></h3>
+  <h3><%= button_to "add another product", new_product_path(@product.id), method: :get %></h3>
+  <h3><%= button_to "delete this product", product_path(@product.id), method: :delete %></h3>
+<%end%>

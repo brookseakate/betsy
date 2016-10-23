@@ -39,9 +39,13 @@ class ProductsController < ApplicationController
         render :edit
       end
     end
+    
+    def category
+      @product =Product.where(name: :q)
+    end
 
     def seller
-      @user = Product.order(user_id: :desc)
+      @products = Product.find(params[:user_id])
     end
 
     def popular

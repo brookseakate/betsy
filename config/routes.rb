@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   get '/drinks', to: 'drinks#index'
   get '/products', to: 'products#index'
   get '/products/:id', to: 'products#show'
-  get 'products/user_id', to: 'products#seller', as: 'search_sellers_products'
+  get '/products', to: 'products#popular', as: 'popular'
+  get '/search', to: 'products#category', as: 'by_category'
+  get 'products/:user_id', to: 'products#seller', as: 'search_sellers_products'
   get '/auth/:provider/callback', to: "sessions#create"
   get '/sessions', to: 'sessions#index', as: 'sessions'
   get '/sessions/new', to: 'sessions#new', as: 'login'
