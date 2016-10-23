@@ -9,18 +9,18 @@
 <body>
   <header>
     <h1 class="title"> Good Afternoon!</h1>
-    <h2 class="link"><%= button_to "Browse All Products", all_products_path, method: :get %></h2>
-    <h2 class="link"><%= link_to "Home", root_path%></h2>
-    <% if session[:user_id].nil? %>
-      <%= link_to "Login", "/auth/github", class: "button" %>
-      <%= link_to "Sign Up", "/auth/github", class: "button" %> <%# need to adjust the sign up path %>
-    <% else %>
-      <%= link_to "Logout", logout_path(:id), method: :delete, class: "button" %>
-    <% end %>
+    <nav>
+      <%= link_to "Browse All Products", all_products_path, method: :get, class: "button" %>
+      <%= link_to "Home", root_path, class: "button" %>
+      <% if session[:user_id].nil? %>
+        <%= link_to "Login", "/auth/github", class: "button" %>
+        <%= link_to "Sign Up", "/auth/github", class: "button" %> <%# need to adjust the sign up path %>
+      <% else %>
+        <%= link_to "My Account", user_path(:id), class: "button" %>
+        <%= link_to "Logout", logout_path(:id), method: :delete, class: "button" %>
+      <% end %>
+    </nav>
   </header>
-  <p>
-  -------- end header --------
-  </p>
 
 <%= yield %>
   <p>
