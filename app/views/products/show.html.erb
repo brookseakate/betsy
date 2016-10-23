@@ -1,21 +1,21 @@
-<% if @user.product.blank? %>
-  <p>You have not listed any products yet, time to change that!<%= link_to "get started", new_user_product_path, method: :get %></p>
 
-<% else %>
-  <h1 class="productlist"> Here Are All of Your Products To Date: </h1>
-  <% @products_by_id.each do |t| %>
-  <article>
-  <h2 class="link"><%= link_to "Add a category to this product", new_category_path, method: :get(t) %></h2>
-  <h2 class="link"><%= link_to "Edit this product", edit_product_path, method: :get(t) %></h2>
+<h1 class="AllList"> </h1>
+<% @product = product %>
 
-  <p>
-  <%= t.name %>
-  <%=t.description%>
-  <%= t.status %>
-  <%= t.retired %>
-  <%= t.id %>
-  </p>
-<h2 class="link"><%= link_to "Delete", task_path(t), method: :delete, data: { confirm: 'Are you certain you want to delete this?' } %></h2>
-    </article>
-  <%end%>
-<%end%>
+
+<% if @session == true %>
+  <%=image_tag "#{product.photo_url}"%>
+  <td><%= "#{product.name.capitalize}" %></td>
+  <td><%= "#{product.price}" %></td>
+  <td><%= "#{product.inventory}" %></td>
+  <td><%= "#{product.description}" %></td>
+  <%end %>
+
+   <%=image_tag "#{product.photo_url}"%>
+    <td><%= "#{product.name.capitalize}" %></td>
+    <td><%= "#{product.price}" %></td>
+    <td><%= "#{product.inventory}" %></td>
+    <td><%= "#{product.description}" %></td>
+  <h3><%= button_to "review this product", new_product_review_path(product.id), method: :get %></h3>
+  <h3><%# button_to ##TODO make a button to "buy this product" method: :get %></h3>
+  <h3><%= button_to "view other products in this category" method: :get %></h3>

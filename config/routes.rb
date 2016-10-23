@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
   root 'drinks#index'
   get '/drinks', to: 'drinks#index'
-  get '/drinks/products', to: 'products#index', as: 'all_products'
+  get '/products', to: 'products#index'
+  get '/products/:id', to: 'products#show'
+  get 'products/user_id', to: 'products#seller', as: 'search_sellers_products'
   get '/auth/:provider/callback', to: "sessions#create"
   get '/sessions', to: 'sessions#index', as: 'sessions'
   get '/sessions/new', to: 'sessions#new', as: 'login'
   get '/sessions/login_failure', to: 'sessions#login_failure', as: 'login_failure'
   delete '/sessions/:id', to: 'sessions#destroy', as: 'logout'
   get '/user/:id/order_items/:product_id', to: 'user#order_items', as: 'user_order_items'
-  get '/products/users/', to: 'products#seller', as: 'products_by_seller'
+  get 'orders/:id/checkout', to: 'orders#checkout', as: 'checkout_order'
+
+
 
   resources :products do
     resources :reviews, only: [:new, :create]
@@ -24,7 +28,6 @@ Rails.application.routes.draw do
     resources :order_items, only: [:create, :update, :destroy]
   end
 
-  get 'orders/:id/checkout', to: 'orders#checkout', as: :checkout_order
 
   # resources :users, shallow: do
   #   resources :products do

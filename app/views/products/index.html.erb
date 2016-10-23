@@ -1,11 +1,29 @@
 
-<h1> Product Home </h1>
-<h3><%= @category %></h3>
-<% @products.each do |item| %>
-<tr>
-  <td>Seller: <%= item.user %><%=link_to item.name, product_path(item.id), method: :get %><%= button_to "review this item", product_review_path(item.id) %><%= review, method: :post %></td>
-  <td><%= link_to 'view all products by this merchant', products_path(item.user_id) %></td>
+<h1> Products </h1>
+<h1 class="AllList"> </h1>
 
-  <% end %>
-  <td><%= link_to "popular products", products_path, method: :get %></td>
+<% if @session == true %>
+<% @product.each do |product| %>
+<%#image_tag "#{product.photo_url}"%>
+<tr>
+<td><%= "#{product.name.capitalize}" %></td>
+<td><%= "#{product.price}" %></td>
+<td><%= "#{product.inventory}" %></td>
+<td><%= "#{product.description}" %></td>
 </tr>
+  <%end %>
+<%end %>
+
+<% @product.each do |product| %>
+<tr>
+  <td><%= "#{product.name.capitalize}" %></td>
+  <%=image_tag "#{product.photo_url}"%>
+  <td><%= "#{product.price}" %></td>
+  <td><%= button_to "view more about this product", new_product_review_path(product.id), method: :get %></td>
+  <h3><%= button_to "review this product", new_product_review_path(product.id), method: :get %></h3>
+  <h3><%= button_to "view other products in this category", category_path(product.id), method: :get %></h3>
+  <h3><%= button_to "view all products by this seller", search_sellers_products_path(product.user_id), method: :get %></td>
+    <h3><%# button_to ##TODO make a button to "buy this product" method: :get %></h3>
+    <%# this assumes that category_path #show is used to show a list of products in one category. %>
+  </tr>
+    <% end %>

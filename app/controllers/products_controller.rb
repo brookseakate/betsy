@@ -1,7 +1,8 @@
 class ProductsController < ApplicationController
 
+
     def index
-      @products = Product.where(media_type: params[:media_type])
+      @products = Product.all
     end
 
     def new
@@ -10,7 +11,6 @@ class ProductsController < ApplicationController
 
     def show
       @product = Product.find(params[:id])
-      @product.save
     end
 
     def create
@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
 
     def destroy
       @product = Product.find(params[:id]).destroy
-      redirect_to media_path
+      redirect_to products_path
     end
 
     def edit
@@ -41,8 +41,13 @@ class ProductsController < ApplicationController
     end
 
     def seller
-      @products = Product.find_by(params[:id])
+      @user = Product.order(user_id: :desc)
     end
+
+    def popular
+      @products = Product.order(rating: :desc)
+    end
+
 
 
     private
