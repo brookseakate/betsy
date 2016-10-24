@@ -13,43 +13,40 @@
     </section>
     <section class="filter">
       <span>Select View</span>
-      <%= link_to "Paid", orderstatus_path(@user.id, orderstatus: "paid") %>
-      <!-- <ul class="dropdown menu" data-dropdown-menu> -->
-        <!-- <li><%# link_to "Pending", orderstatus_path(@user.id, status: "pending") %></li> -->
-        <!-- <li><%# link_to "Paid", orderstatus_path(@user.id, status: "paid") %></li> -->
-      <!-- </ul> -->
-      <!-- <label for="view_only">View Only</label>
-      <select name="status" onchange="this.form.submit();">
-        <option value="all">All</option>
-        <option value="complete">Complete</option>
-        <option value="cancelled">Cancelled</option>
-      </select> -->
-    </section>
-    <table>
-      <thead>
-        <tr>
-          <th>Order</th>
-          <!-- <th>Order Item</th>
-          <th>Quantity</th>
-          <th>Subtotal</th>
-          <th>Description (show product link)</th>
-          <th>Date/Time Placed</th>
-          <th>Mark Shipped</th> -->
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @orders.each do |order| %>
-        <tr>
-          <td><%= link_to "Order No. #{order.id}", order_path(order) %></td>
-          <td>Status: <%= order.status %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-<%= @orders_paid %>
-  </article>
+      <%= link_to "All", orderstatus_path(@user.id, orderstatus: "all"), class: "hollow button" %>
+      <%= link_to "Paid", orderstatus_path(@user.id, orderstatus: "paid"), class: "hollow button" %>
+      <%= link_to "Pending", orderstatus_path(@user.id, orderstatus: "pending"), class: "hollow button" %>
+      <%= link_to "Completed", orderstatus_path(@user.id, orderstatus: "completed"), class: "hollow button" %>
+      <%= link_to "Cancelled", orderstatus_path(@user.id, orderstatus: "cancelled"), class: "hollow button" %>
 
+    </section>
+    <% if @orders.empty? %>
+      <%= "You have no #{@status} orders" %>
+    <% else %>
+      <table>
+        <thead>
+          <tr>
+            <th>Order</th>
+            <!-- <th>Order Item</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+            <th>Description (show product link)</th>
+            <th>Date/Time Placed</th>
+            <th>Mark Shipped</th> -->
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+          <tr>
+            <td><%= link_to "Order No. #{order.id}", order_path(order) %></td>
+            <td>Status: <%= order.status %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </article>
   <article class="products-summary">
     <h2>PRODUCTS</h2>
     <%= link_to "Add a category", new_category_path, method: :get, class: "button hollow" %>

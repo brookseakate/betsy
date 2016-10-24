@@ -33,9 +33,11 @@ class User < ActiveRecord::Base
   end
 
   def orders_by_status(status)
-    orders.map do |order|
-      order if order.status == status
+    results = []
+    self.orders.each do |order|
+      results << order if order.status == status
     end
+    return results
   end
 
   def revenues
