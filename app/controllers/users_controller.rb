@@ -10,8 +10,10 @@ class UsersController < ApplicationController
       @orders = @user.orders
     when "pending"
       @orders = @user.orders_by_status("pending")
+      @revenues = @user.revenues_by_status("pending")
     when "paid"
       @orders = @user.orders_by_status("paid")
+      @revenues = @user.revenues_by_status("paid")
     when "completed"
       @orders = @user.orders_by_status("completed")
     when "cancelled"
