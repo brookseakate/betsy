@@ -9,6 +9,12 @@ class Order < ActiveRecord::Base
   #   return ["pending", "paid", "complete", "cancelled"]
   # end # self.status_options
 
+  # def status_must_be_limited
+  #   if status != "pending" && status != "paid" && status != "completed" && status != "cancelled"
+  #     errors.add(:status, "Must be pending, paid, completed or cancelled")
+  #   end
+  # end
+
   def complete_checkout
     # Change the order state from "pending" to "paid"
     self.status = "paid"
