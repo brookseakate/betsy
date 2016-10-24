@@ -71,4 +71,8 @@ class OrderTest < ActiveSupport::TestCase
     assert_equal order.order_total, total_cost
   end
 
+  test "should mask appropriate numbers in credit card" do
+    order = orders(:paid_order)
+  end
+
 end

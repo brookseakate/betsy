@@ -39,7 +39,7 @@ class Order < ActiveRecord::Base
   end
 
   def mask(number)
-    "#{("X" * (number.to_s.length - 4))} - #{last_digits(number)}"
+    "#{'X' * (number.to_s.length - 4)} - #{last_digits(number)}"
   end
-  
+
 end
