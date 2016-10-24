@@ -73,6 +73,7 @@ class OrderTest < ActiveSupport::TestCase
 
   test "should mask appropriate numbers in credit card" do
     order = orders(:paid_order)
+    assert_equal "XXX - 3333", order.mask(order.cc_number)
   end
 
 end
