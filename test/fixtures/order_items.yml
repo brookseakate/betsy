@@ -9,8 +9,8 @@ one:
   product_id: 1
   quantity: 5
 two:
-  order_id: 1
-  product_id: 2
+  order_id: 2
+  product_id: 22
   quantity: 10
 three:
   order_id: 2
@@ -18,15 +18,15 @@ three:
   quantity: 15
 four:
   order_id: 3
-  product_id: 2
+  product_id: 22
   quantity: 20
 five:
   order_id: 4
-  product_id: 2
+  product_id: 22
   quantity: 25
 six:
   order_id: 4
-  product_id: 2
+  product_id: 22
   quantity: 25
 
 lil:
