@@ -65,12 +65,12 @@ order_test_product_1:
   description: order test product 1 description
   photo_url: http://product_1.com
   retired: false
-order_test_product_2:
-  id: 2
+order_test_product_22:
+  id: 22
   user_id: 12346
-  name: order test product 2 name
+  name: order test product 22 name
   price: 111111
   inventory: 100
-  description: order test product 2 description
+  description: order test product 22 description
   photo_url: http://product_1.com
   retired: false
