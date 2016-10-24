@@ -17,3 +17,49 @@
 .errors {
   color: red;
 }
+.body {
+  margin: 20px;
+}
+h1.title{
+  border: 10px;
+  width: 100%
+  display: inline-block;
+  color: white;
+  text-align: center;
+  background-color: deepskyblue;
+  font-family: monospace;
+}
+
+.search {
+  display: inline-block;
+  width: 80%;
+  border-style: double;
+  border-color: black;
+  border-width: medium;
+  align-items: center;
+}
+
+a.button, .nav {
+  text-decoration: none;
+  align-items: center;
+  display: inline-block;
+  width: 150px;
+  font-size: 2em;
+  font-family: monospace;
+  padding: 5px;
+  margin: 5px;
+  border-style: double;
+  border-color: black;
+  border-width: medium;
+}
+
+.form, .label, .input#q{
+  display: inline-block;
+  width: 100%;
+  font-family: monospace;
+  text-align: center;
+  border-color: black;
+  margin: 25px, 50px;
+  border-style: groove;
+  align-items: center;
+}

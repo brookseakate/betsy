@@ -1,13 +1,21 @@
-<%= form_for @product do |f| %>
-  <%= f.label "ID" %>
-  <%= f.integer :id %>
-  <%= f.label "User ID" %>
-  <%= f.integer :user_id %>
-  <%= f.label "Description" %>
-  <%= f.string :description %>
-  <%= f.label "photo" %>
-  <%= f.string %>
-  <%= f.label "discontinued?" %>
-  <%= f.boolean :retired %>
-  <%= f.submit :save %>
+
+  <%= form_for @product do |f| %>
+  <%= label "Name" %>
+  <%= text_field :name %>
+  <%= label "Description" %>
+  <%= text_field :description %>
+  <%= label "photo url" %>
+  <%= text_field :photo_url %>
+  <%= label "inventory" %>
+  <%= text_field :inventory %>
+  <p> "would you like to discontinue this product?" </p>
+  <%= radio_button_tag(:product, "retired") %>
+  <%= label_tag(:product, "I would like to retire this product") %>
+  <%= radio_button_tag(:product, "retired") %>
+  <%= label_tag(:product, "No, don't retire this product") %>
+
 <% end %>
+
+<%#IDEA, make this method apart of a default within the database or model %>
+<%#{:id, default= (1..9999).random}) %>
+<%# IDEA, same as for id "User ID" %>

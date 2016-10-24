@@ -4,6 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :set_cart_id
+  before_action :view
+
+
 
   private
 
@@ -11,6 +14,14 @@ class ApplicationController < ActionController::Base
     if session[:cart_id].nil?
       new_order = Order.create(status: "pending")
       session[:cart_id] = new_order.id
+    end
+  end
+
+  def view
+      @product = Product.all
+    if session[:user_id]
+      @session = false
+    else @session = true
     end
   end
 end

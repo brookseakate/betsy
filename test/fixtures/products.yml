@@ -4,8 +4,6 @@ one:
   user_id: 2
   name: MyString
   price: 999
-  # 12: MyString
-  # 3: MyString
   description: MyString
   photo_url: MyString
   retired: false
@@ -16,8 +14,6 @@ two:
   user_id: 1
   name: MyString
   price: 999
-  # 12: MyString
-  # 3: MyString
   description: MyString
   photo_url: MyString
   retired: false
@@ -29,10 +25,13 @@ lil_product:
   user_id: 246879948
   name: test product
   price: 1999
-  # 12: MyString
-  # 3: MyString
+
+  id: 2
+  user_id: 9865
+  name: Kates
+  price: 9.99
   description: MyString
-  photo_url: MyString
+  photo_url: tincture.jpg
   retired: false
   created_at: 2016-10-19 21:56:43
   updated_at: 2016-10-19 21:56:43
@@ -41,13 +40,21 @@ lil_product2:
   user_id: 246879948
   name: test product
   price: 1999
-  # 12: MyString
-  # 3: MyString
   description: MyString
   photo_url: MyString
   retired: true
-  created_at: 2016-10-19 21:56:43
+  created_at: 2016-19-19 21:56:43
   updated_at: 2016-10-19 21:56:43
+
+  id: 3
+  user_id: 9268
+  name: Kates
+  price: 9.99
+  description: MyString
+  photo_url: something.png
+  retired: false
+  created_at: 2016-10-19 21:56:43
+  updated_at: 2016-31-19 21:56:43
 
 order_test_product_1:
   id: 1

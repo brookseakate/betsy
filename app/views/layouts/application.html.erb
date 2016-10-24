@@ -7,63 +7,46 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <header>
-    <h1 class="title"> Good Afternoon!</h1>
-    <nav>
-      <%= link_to "Browse All Products", all_products_path, method: :get, class: "button" %>
-      <%= link_to "Home", root_path, class: "button" %>
-      <% if session[:user_id].nil? %>
-        <%= link_to "Login", "/auth/github", class: "button" %>
-        <%= link_to "Sign Up", "/auth/github", class: "button" %> <%# need to adjust the sign up path %>
-      <% else %>
-        <%= link_to "My Account", user_path(:id), class: "button" %>
-        <%= link_to "Logout", logout_path(:id), method: :delete, class: "button" %>
-      <% end %>
-    </nav>
-  </header>
+  <nav>
+    <header>
+      <div class="row">
+        <div class="small-12 columns">
+          <h1 class="title"> Good Afternoon!</h1>
+          <div class = "row">
+            <ul class="small-block-grid-3">
+              <%= link_to "Browse All Products", products_path, method: :get, class: "button" %>
+              <%= link_to "view popular products", popular_path, method: :get, class:"button" %></h3>
+              <%= link_to"Products by Category", products_path(:category), method: :get, class:"button"%></div>
+              <%= link_to "Home", root_path, class: "button" %>
 
-<%= yield %>
-  <p>
-  ---------- begin footer? ------------
-  </p>
-<footer>
-  <div class="row">
-    <div class="small-12 columns">...</div>
-    <div class="row">
-      <div class="small-3 columns"><%= link_to("Products by Seller ", products_by_seller_path(:id), method: :get)%></div>
-      <div class="small-3 columns"><%= link_to("Products by Category", products_path(:category), method: :get)%></div>
-    </div>
-    <div class="row">
-      <ul class="small-block-grid-3">
-        <li><%#img_tag%></li>
-        <li><%#img_tag%></li>
-        <li><%#img_tag%></li>
-      </ul>
-
-    </div>
-
-    <div class="row">
-      <div class="small-6 large-2 columns">...</div>
-      <div class="small-6 large-8 columns">...</div>
-    </div>
-    <div class="row">
-      <div class="small-3 columns">...</div>
-      <div class="small-9 columns">...</div>
-    </div>
-    <div class="row">
-      <div class="large-4 columns">...</div>
-      <div class="large-8 columns">...</div>
-    </div>
-    <div class="row">
-      <div class="small-6 large-5 columns">...</div>
-      <div class="small-6 large-7 columns">...</div>
-    </div>
-    <div class="row">
-      <div class="large-6 columns">...</div>
-      <div class="large-6 columns">...</div>
-    </div>
-</footer>
+              <% if session[:user_id].nil? %>
+              <%= link_to "Login", "/auth/github", class: "button" %>
+              <%= link_to "Sign Up", "/auth/github", class: "button" %> <%# need to adjust the sign up path %>
+              <% else %>
+              <%= link_to "My Account", user_path(:id), class: "button" %>
+              <%= link_to "Logout", logout_path(:id), method: :delete, class: "button" %>
+              <% end %>
+            </div>
+          </nav>
+        </header>
 
 
-</body>
-</html>
+        <%= yield %>
+
+
+        <div class="row">
+          <div "small-12 columns">
+            <ul class = "search">
+              <%= form_tag("/search", method: "get") do %>
+              <%= label_tag(:q, "Search for a category:") %>
+              <%= text_field_tag(:q) %>
+              <%= submit_tag("Search") %>
+              <% end %>
+            </article>
+          </div>
+        </div>
+
+        <footer>
+        </footer>
+      </body>
+      </html>
