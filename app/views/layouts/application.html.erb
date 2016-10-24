@@ -31,6 +31,8 @@
           </nav>
         </header>
 
+        <!-- We need this Time.zone code to convert UTC times -->
+        <% Time.zone = "Pacific Time (US & Canada)" %>
 
         <%= yield %>
 

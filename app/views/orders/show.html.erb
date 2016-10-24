@@ -4,6 +4,7 @@
 should show buyer information and payment
 should also show order items for the associated seller/authorized user -->
 
+<% Time.zone = "Pacific Time (US & Canada)" %>
 
 <h1> Order confirmation for <%= @order.cc_holder_name %></h1>
 
@@ -16,7 +17,7 @@ should also show order items for the associated seller/authorized user -->
   <!-- change this to last 4 numbers, using model method -->
   <li> Credit Card Exp. Date: <%= @order.exp %> </li>
 
-  <li> Order placed at: <%= @order.created_at %> </li>
+  <li> Order placed at: <%= pretty_date(@order.created_at) %> </li>
   <li> Order status: <%= @order.status %> </li>
 </ul>
 
@@ -25,7 +26,7 @@ should also show order items for the associated seller/authorized user -->
 <li>  Name: <%= link_to "#{item.product.name}", product_path(item.product_id) %></li>
   <!-- Add a link_to that will go to the Product page for said item  -->
 <li>  Quantity:  <%= item.quantity %></li>
-<li>  Cost:  <%= item.product.price %></li>
+<li>  Cost:  <%= currency(item.product.price) %></li>
 <!-- Convert price to dollars in the model , and also mutliply it with the quantity -->
 <% end  %>
 
