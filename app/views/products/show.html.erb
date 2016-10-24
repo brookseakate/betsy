@@ -19,10 +19,11 @@
 <!-- Add to Cart Form -->
 <ul>
   <li>
-    <%= form_for [@order, @product.order_items.new(quantity: 1)] do |f| %>
+    <%= form_for [@order, @order_item] do |f| %>
     <%= f.label :quantity %>
     <%= f.text_field :quantity %>
-    <%# f.hidden_field :product_id, @product.id %>
+
+    <%= f.hidden_field :product_id, value: @product.id %>
     <%= f.submit "Add to Cart" %>
     <% end %>
   </li>
