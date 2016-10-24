@@ -3,7 +3,7 @@
 <h3><%= item.product.name %></h3>
 <ul>
   <li>
-    Price: <%= sprintf("$%0.02f", item.product.price/100.to_f) %>
+    Price: <%= currency(item.product.price) %>
   </li>
   <li>
     <%= form_for [@order, item] do |f| %>
@@ -11,10 +11,10 @@
     <%= f.text_field :quantity %>
     <%= f.submit "Update" %>
     <% end %>
-    <%= button_to [@order, item], method: :delete, class: "button", data: { confirm: "Are you sure?" } do %>Remove from Cart<% end %>
   </li>
   <li>
-    Subtotal: <%= sprintf("$%0.02f", item.subtotal/100.to_f) %>
+    Subtotal: <%= currency(item.subtotal) %>
+    <%= button_to [@order, item], method: :delete, class: "button tiny", data: { confirm: "Are you sure?" } do %>Remove from Cart<% end %>
   </li>
 </ul>
 <% end %>

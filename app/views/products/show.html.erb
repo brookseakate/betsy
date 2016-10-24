@@ -2,7 +2,7 @@
 
 
 <h1 class="details"><%= "#{@product.name.capitalize}" %></h1>
-
+<!-- Product Details -->
 <%=image_tag "#{@product.photo_url}"%>
 <ul>
   <li>
@@ -16,7 +16,18 @@
     There are <%= "#{@product.inventory}" %>  remaining items, for  <%= "#{@product.name}" %> left!
   </li>
 </ul>
-
+<!-- Add to Cart Form -->
+<ul>
+  <li>
+    <%= form_for [@order, @product.order_items.new(quantity: 1)] do |f| %>
+    <%= f.label :quantity %>
+    <%= f.text_field :quantity %>
+    <%# f.hidden_field :product_id, @product.id %>
+    <%= f.submit "Add to Cart" %>
+    <% end %>
+  </li>
+</ul>
+<!-- Buttons -->
 <%= link_to "view related items", category_path(@product.id), method: :get, class: "button" %>
 <%= link_to "view all products by this seller", search_sellers_products_path(@product.user_id), method: :get, class: "button" %>
 <% if @session == false %>
