@@ -2,6 +2,10 @@ class User < ActiveRecord::Base
   has_many :products
   has_many :order_items, through: :products
 
+  # validates :user_name, :email, :uid, :provider presence: true
+  # validates :user_name, :email, uniqueness: true
+
+
   def self.search(search)
     if search
       find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
@@ -26,6 +30,12 @@ class User < ActiveRecord::Base
       item.order
     end
     return orders.uniq
+  end
+
+  def orders_by_status(status)
+    orders.map do |order|
+      order if order.status == status
+    end
   end
 
   def revenues

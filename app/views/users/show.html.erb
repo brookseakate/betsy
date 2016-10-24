@@ -11,6 +11,20 @@
       <h3><%= "Total Number of Orders: #{@orders.count}" %></h3>
       <h3><%= "Total Revenues: #{currency(@user.revenues)}" %></h3>
     </section>
+    <section class="filter">
+      <span>Select View</span>
+      <%= link_to "Paid", orderstatus_path(@user.id, orderstatus: "paid") %>
+      <!-- <ul class="dropdown menu" data-dropdown-menu> -->
+        <!-- <li><%# link_to "Pending", orderstatus_path(@user.id, status: "pending") %></li> -->
+        <!-- <li><%# link_to "Paid", orderstatus_path(@user.id, status: "paid") %></li> -->
+      <!-- </ul> -->
+      <!-- <label for="view_only">View Only</label>
+      <select name="status" onchange="this.form.submit();">
+        <option value="all">All</option>
+        <option value="complete">Complete</option>
+        <option value="cancelled">Cancelled</option>
+      </select> -->
+    </section>
     <table>
       <thead>
         <tr>
@@ -33,7 +47,7 @@
         <% end %>
       </tbody>
     </table>
-
+<%= @orders_paid %>
   </article>
 
   <article class="products-summary">
