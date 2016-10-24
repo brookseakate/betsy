@@ -46,7 +46,7 @@
     <tbody>
       <% @products.each do |product| %>
       <tr>
-        <td><%= button_to "#{productname.capitalize}", product_path(product) %></td>
+        <td><%= button_to "#{product.name.capitalize}", product_path(product) %></td>
         <td><%= button_to "Edit", edit_product_path(product), { method: :get, class: "hollow button" }  %></td>
         <td><%= button_to "Retire", product_path(product), { method: :update, class: "secondary hollow button" } %></td>
         <td><%= button_to "Delete", product_path(product), method: :delete, class: "button alert", data: { confirm: 'Are you certain you want to delete this?' } %></td>
@@ -73,3 +73,4 @@
       </table>
     <% end %>
   </article>
+  <% end %>
