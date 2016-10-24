@@ -2,7 +2,8 @@ require 'test_helper'
 
 class OrdersControllerTest < ActionController::TestCase
   setup do
-    @order = orders(:pending_one)
+    @pending_order = orders(:pending_one)
+    @paid_order = orders(:paid_order)
   end
 
   test "cart should show correct Order page using session[:cart_id] value" do
@@ -13,27 +14,27 @@ class OrdersControllerTest < ActionController::TestCase
     assert_equal assigns(:order), Order.find(1)
   end
 
-  test "should show order" do
-    get :show, id: @order
+  test "should show paid order" do
+    get :show, id: @paid_order
     assert_response :success
     assert_template :show
   end
 
   test "should get edit" do
-    get :edit, id: @order
+    get :edit, id: @pending_order
     assert_response :success
     assert_template :edit
   end
 
   test "should get checkout" do
-    get :checkout, id: @order
+    get :checkout, id: @pending_order
     assert_response :success
     assert_template :checkout
   end
 
 
   test "should update order" do
-    patch :update, id: @order, order: { email: "a@b.com", cc_number: 11111 }
+    patch :update, id: @pending_order, order: { email: "a@b.com", cc_number: 11111 }
 
     assert_response :redirect
     assert_redirected_to order_path(assigns(:order))
@@ -42,7 +43,7 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test "update should complete checkout" do
-    patch :update, id: @order, order: { email: "a@b.com", cc_number: 11111 }
+    patch :update, id: @pending_order, order: { email: "a@b.com", cc_number: 11111 }
 
     assert_equal "paid", assigns(:order).status
     assert_not_nil assigns(:order).placed
@@ -50,7 +51,7 @@ class OrdersControllerTest < ActionController::TestCase
 
   test "update should clear session[:cart_id]" do
     session[:cart_id] = 55555
-    patch :update, id: @order, order: { email: "a@b.com", cc_number: 11111 }
+    patch :update, id: @pending_order, order: { email: "a@b.com", cc_number: 11111 }
 
     assert_nil session[:cart_id]
   end

@@ -11,6 +11,8 @@ class ProductsController < ApplicationController
 
     def show
       @product = Product.find(params[:id])
+      @order = Order.find(session[:cart_id])
+      @order_item = @product.order_items.new(quantity: 1)
     end
 
     def create
@@ -39,7 +41,7 @@ class ProductsController < ApplicationController
         render :edit
       end
     end
-    
+
     def category
       @product =Product.where(name: :q)
     end
