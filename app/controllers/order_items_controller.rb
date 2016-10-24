@@ -7,14 +7,14 @@ class OrderItemsController < ApplicationController
 
   def create # this action gets the order_id from the url/params (because of nested routing)
     @order = Order.find(params[:order_id])
-    @order_item = @order.order_item.new(order_item_params)
+    @order_item = @order.order_items.new(order_item_params)
 
     @product = @order_item.product
 
     if @order_item.save
       redirect_to edit_order_path(@order)
     else
-      render 'product/show'
+      render 'products/show'
     end
   end
 
@@ -25,7 +25,7 @@ class OrderItemsController < ApplicationController
     if @order_item.update(order_item_params)
       redirect_to edit_order_path(@order)
     else
-      render 'order/edit'
+      render 'orders/edit'
     end
   end
 
