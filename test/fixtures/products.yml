@@ -48,3 +48,22 @@ lil_product2:
   retired: true
   created_at: 2016-10-19 21:56:43
   updated_at: 2016-10-19 21:56:43
+
+order_test_product_1:
+  id: 1
+  user_id: 12345
+  name: order test product 1 name
+  price: 999999
+  inventory: 10
+  description: order test product 1 description
+  photo_url: http://product_1.com
+  retired: false
+order_test_product_2:
+  id: 2
+  user_id: 12346
+  name: order test product 2 name
+  price: 111111
+  inventory: 100
+  description: order test product 2 description
+  photo_url: http://product_1.com
+  retired: false
