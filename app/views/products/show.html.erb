@@ -4,10 +4,19 @@
 <h1 class="details"><%= "#{@product.name.capitalize}" %></h1>
 
 <%=image_tag "#{@product.photo_url}"%>
-<%= "#{@product.price}" %>
-<%= "#{@product.description}" %>
-<%# link_to ##TODO make a button to "buy this product" method: :get %>
-There are<%= "#{@product.inventory}" %>  remaining items, for  <%= "#{@product.name}" %> left!
+<ul>
+  <li>
+    <%= "Price: #{currency(@product.price)}" %>
+  </li>
+  <li>
+    <%= "Details: #{@product.description}" %>
+  </li>
+  <%# link_to ##TODO make a button to "buy this product" method: :get %>
+  <li>
+    There are <%= "#{@product.inventory}" %>  remaining items, for  <%= "#{@product.name}" %> left!
+  </li>
+</ul>
+
 <%= link_to "view related items", category_path(@product.id), method: :get, class: "button" %>
 <%= link_to "view all products by this seller", search_sellers_products_path(@product.user_id), method: :get, class: "button" %>
 <% if @session == false %>
