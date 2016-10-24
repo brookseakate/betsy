@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
     auth_hash = request.env['omniauth.auth']
     redirect to login_failure_path unless auth_hash['uid']
 
-    @user = User.find_by(id: auth_hash[:id], provider: 'github')
+    @user = User.find_by(uid: auth_hash[:uid], provider: 'github')
     if @user.nil?
       # User doesn't match anything in the DB.
       # Attempt to create a new user.
@@ -37,7 +37,7 @@ class SessionsController < ApplicationController
     end
 
     # Save the user ID in the session
-    session[:id] = @user.id
+    session[:user_id] = @user.id
 
     redirect_to user_path(@user.id)
   end
