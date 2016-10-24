@@ -1,27 +1,20 @@
 
 <% if flash[:error] %>
-  <h3 class="errors">
-    <%= flash[:error] %>
-  </h3>
+<h3 class="errors">
+  <%= flash[:error] %>
+</h3>
 <% end %>
-
-
 <h1 class ="title">ThinkieDrinkie, for the cerebral drinker with a purpose</h1>
 
 <div class="row">
   <div class="small-12 columns">...</div>
   <div class="row">
-    </div>
+  </div>
   <div class="row">
-    <ul class="small-block-grid-3"/ul>
+    <ul class="small-block-grid-3">
       <li class="link"><%#img_tag%></li>
       <li class="link"><%#img_tag%></li>
       <li class="link"><%#img_tag%></li>
       <li class="link"><%#img_tag%></li>
     </ul>
-    <%= form_tag("/search", method: "get") do %>
-    <%= label_tag(:q, "Search for a category:") %>
-    <%= text_field_tag(:q) %>
-    <%= submit_tag("Search") %>
-    <% end %>
   </div>
