@@ -31,4 +31,12 @@ class Order < ActiveRecord::Base
 
     # This method does not save to database! That needs to be done where called (in controller action, etc.)
   end
+
+  def order_total #totals all the items and its subtotals yes
+    total = 0
+    self.order_items.each do |order_item|
+      total += order_item.subtotal
+    end
+    return total
+  end
 end

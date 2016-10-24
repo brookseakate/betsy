@@ -2,10 +2,12 @@ Rails.application.routes.draw do
   root 'drinks#index'
   get '/drinks', to: 'drinks#index'
   get '/products', to: 'products#index'
-  get '/products/:id', to: 'products#show'
+
+  # @TODO - remove below route; it's redundant due to resources :products
+  # get '/products/:id', to: 'products#show'
+
   get '/products', to: 'products#popular', as: 'popular'
   get '/search', to: 'products#category', as: 'by_category'
-  get 'products/:user_id', to: 'products#seller', as: 'search_sellers_products'
   get '/auth/:provider/callback', to: "sessions#create"
   get '/sessions', to: 'sessions#index', as: 'sessions'
   get '/sessions/new', to: 'sessions#new', as: 'login'
@@ -16,10 +18,11 @@ Rails.application.routes.draw do
 
   get '/users/:id/:orderstatus', to: 'users#show', as: 'orderstatus' #EN
 
-
   resources :products do
     resources :reviews, only: [:new, :create]
   end
+
+  get 'products/:user_id', to: 'products#seller', as: 'search_sellers_products'
 
   resources :categories
 
