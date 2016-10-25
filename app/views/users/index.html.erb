@@ -2,10 +2,10 @@
 <h1>All Merchants And Their Amazing Products</h1>
 
 <% @users.each do |user| %>
-<h2><%= "#{user.user_name}" %></h2>
+<h2><%= link_to "#{user.user_name}", user_path(user) %></h2>
 <ul>Products:
-<% user.products.each do |product| %>
- <li><%= link_to "#{product.name}", product_path(product) %></li>
- <% end %>
+<%# user.products.each do |product| %>
+ <li><%# link_to "#{product.name}", product_path(product) %></li>
+ <%# end %>
  </ul>
 <% end %>
