@@ -1,0 +1,7 @@
+<h1> All Products Sold by <%= @user.user_name %></h1>
+
+<% @products.each do |product|  %>
+<%= link_to "#{product.name}", product_path(product)  %>
+<!-- adds image of the product -->
+<%=image_tag "#{product.photo_url}" %>
+<% end  %>
