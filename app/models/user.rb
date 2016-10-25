@@ -2,6 +2,10 @@ class User < ActiveRecord::Base
   has_many :products
   has_many :order_items, through: :products
 
+  # validates :user_name, :email, :uid, :provider presence: true
+  # validates :user_name, :email, uniqueness: true
+
+
   def self.search(search)
     if search
       find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
@@ -28,6 +32,14 @@ class User < ActiveRecord::Base
     return orders.uniq
   end
 
+  def orders_by_status(status)
+    results = []
+    self.orders.each do |order|
+      results << order if order.status == status
+    end
+    return results
+  end
+
   def revenues
     revs = self.order_items.map do |item|
       item.subtotal
@@ -35,4 +47,13 @@ class User < ActiveRecord::Base
     return revs.reduce(:+)
   end
 
+  def revenues_by_status(status)
+    results = []
+    self.orders_by_status(status).each do |order|
+      order.order_items.each do |item|
+        results << item.subtotal if self.products.include?(item.product)
+      end
+    end
+    return results.reduce(:+)
+  end
 end

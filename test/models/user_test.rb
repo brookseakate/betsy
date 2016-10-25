@@ -20,4 +20,17 @@ class UserTest < ActiveSupport::TestCase
     order = Order.find(88)
     assert_equal user.revenues, item.subtotal
   end
+
+  test "shoudl retrieve revenues by status" do
+    lil = users(:lil).id
+    user = User.find(lil)
+    assert_equal user.revenues_by_status("completed"), order_items(:lil).subtotal
+  end
+
+  test "should retrieve orders by status" do
+    lil = users(:lil).id
+    user = User.find(lil)
+    assert_includes user.orders_by_status("completed"), Order.find(88)
+    assert_not_includes user.orders_by_status("paid"), Order.find(88)
+  end
 end

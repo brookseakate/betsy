@@ -17,7 +17,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_includes assigns(:products), product
     assert_includes assigns(:retired), retired
     assert_includes assigns(:orders), order
-    assert_includes assigns(:order_items), order_item
+    # assert_includes assigns(:order_items), order_item
   end
 
   test "will redirect and flash error if not logged in" do
@@ -26,5 +26,21 @@ class UsersControllerTest < ActionController::TestCase
     assert_not_nil flash[:error]
     assert_response :redirect
     assert_redirected_to root_path
+  end
+
+  test "can filter displayed orders by status" do
+    user_id = users(:lil).id
+    session[:user_id] = user_id
+    user = User.find(user_id)
+    get :show, { id: user_id, orderstatus: "completed" }
+    assert_equal assigns(:status), "completed"
+    assert_includes assigns(:orders), Order.find(orders(:lil_order).id)
+    assert_template :show
+  end
+
+  test "should show a list of merchants" do
+    get :index
+    assert_template 'users/index'
+    assert_response :success
   end
 end

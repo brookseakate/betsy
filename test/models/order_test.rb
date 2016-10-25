@@ -58,4 +58,22 @@ class OrderTest < ActiveSupport::TestCase
     order = orders(:pending_two)
     assert_not_nil order.order_items
   end
+
+  test "Order should have an accurate total cost for all OrderItems" do
+    order = orders(:complete_order)
+
+    total_cost = 0
+    order.order_items.each do |item|
+      total_cost += (item.product.price * item.quantity)
+    end
+
+    assert_not_nil order.order_total
+    assert_equal order.order_total, total_cost
+  end
+
+  test "should mask appropriate numbers in credit card" do
+    order = orders(:paid_order)
+    assert_equal "XXX - 3333", order.mask(order.cc_number)
+  end
+
 end

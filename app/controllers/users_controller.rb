@@ -1,12 +1,33 @@
 class UsersController < ApplicationController
   before_action :require_login, except: [:index]
   # before_action :find_user, except: [:index]
+  def index
+    @users = User.all
+  end
 
   def show
+    @status = params[:orderstatus]
+
+    case @status
+    when nil, "all"
+      @orders = @user.orders
+    when "pending"
+      @orders = @user.orders_by_status("pending")
+      @revenues = @user.revenues_by_status("pending")
+    when "paid"
+      @orders = @user.orders_by_status("paid")
+      @revenues = @user.revenues_by_status("paid")
+    when "completed"
+      @orders = @user.orders_by_status("completed")
+      @revenues = @user.revenues_by_status("completed")
+    when "cancelled"
+      @orders = @user.orders_by_status("cancelled")
+      @revenues = @user.revenues_by_status("cancelled")
+    end
+
     @products = @user.products.where(retired: false)
     @retired = @user.products.where(retired: true)
-    @orders = @user.orders
-    @order_items = @user.order_items
+
   end
 
   # def new; end
