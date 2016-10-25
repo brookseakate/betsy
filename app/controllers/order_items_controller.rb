@@ -5,6 +5,7 @@ class OrderItemsController < ApplicationController
 
     @product = @order_item.product
 
+    # @TODO - remove this block if it remains unused
     # if !@order_item.sufficient_stock?
     #   flash[:insufficient_stock] = "There are only #{@product.inventory} units of #{@product.name} left in stock. Please reduce your order quantity and resubmit."
     # end
