@@ -1,0 +1,5 @@
+<h1> All Products by <%= @user.user_name %></h1>
+
+<% @products.each do |product|  %>
+<%= product.name  %>
+<% end  %>
