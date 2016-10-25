@@ -2,10 +2,10 @@
 <h1>All Merchants And Their Amazing Products</h1>
 
 <% @users.each do |user| %>
-<h2><%= link_to "#{user.user_name}", users_products_path(user) %></h2> <%# is this the right path for this? former: user_path(user)  %>
-<ul>Products:
+<h2><%= link_to "#{user.user_name}", users_products_path(user) %></h2>
+<!-- Not necessary anymore <ul>Products:
 <% user.products.each do |product| %>
  <li><%= link_to "#{product.name}", product_path(product) %></li>
  <% end %>
- </ul>
+ </ul> -->
 <% end %>

@@ -65,7 +65,23 @@ class ProductsController < ApplicationController
       @products = Product.order(rating: :desc)
     end
 
-
+    def retire
+      @product = Product.find(params[:id])
+      @productstatus = params[:productstatus]
+      if @product.user_id != @user.id
+        flash[:error] = "You cannot delete another seller's products! STOP BEING SHADY, YO"
+        redirect_to root_path
+      end
+      if @productstatus == "retire"
+        @product.retire
+      end
+      if @productstatus == "activate"
+        @product.activate
+      end
+      if @product.save
+        redirect_to user_path(@user.id)
+      end
+    end
 
     private
 
