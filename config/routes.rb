@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   root 'drinks#index'
   get '/drinks', to: 'drinks#index'
-  get '/products', to: 'products#index'
-
-
+  
   # @TODO - remove below route; it's redundant due to resources :products
   # get '/products/:id', to: 'products#show'
 

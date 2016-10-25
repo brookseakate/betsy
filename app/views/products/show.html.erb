@@ -44,27 +44,26 @@
 <%= link_to "review this product", new_product_review_path(@product.id), method: :get, class: "button" %>
 <%end %>
 <%#TODO: how do I make the method to only allow the user selling the product to be able to edit it? %>
-<% if @session == true %>
+<% if session[:user_id] == @product.user_id %>
 <%= link_to "edit this product", edit_product_path(@product.id), method: :get, class: "button" %>
-<%= link_to "add another product", new_product_path, method: :get %>
+<%= link_to "add another product", new_product_path, method: :get, class: "button" %>
 <%= link_to "delete this product", product_path(@product.id), method: :delete, class: "button" %>
 
 <% else %>
 <h1 class="productlist"> Here Are All of Your Products To Date: </h1>
-<% @products.each do |t| %>
 <article>
-  <h2 class="link"><%= link_to "Add a category to this product", new_category_path, method: :get %></h2>
-  <h2 class="link"><%= link_to "Edit this product", edit_product_path, method: :get %></h2>
+  <h2 class="link"><%= link_to "Add a category to this product", new_category_path(@product.user_id), method: :get, class: "button" %></h2>
+  <h2 class="link"><%= link_to "Edit this product", edit_product_path(@product.id), method: :get, class: "button" %></h2>
 
-  <p>
-    <%= t.name %>
-    <%=t.description%>
-    <%= t.status %>
-    <%= t.retired %>
-    <%= t.id %>
+    <p>
+    <%= @product.name %>
+    <%= @product.description%>
+    <%= @product.status %>
+    <%= @product.retired %>
+    <%= @product.id %>
   </p>
 
-  <h2 class="link"><%= link_to "Delete", product_path(:id), method: :delete, data: { confirm: 'Are you certain you want to delete this?' } %></h2>
+  <h2 class="link"><%= link_to "Delete", product_path(:id), method: :delete, data: { confirm: 'Are you certain you want to delete this?' }, class: "button" %></h2>
 </article>
 <%end%>
 
