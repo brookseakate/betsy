@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
     end
 
     def create
-      @product = Product.create #EN: I think this will need to change to .new with params or @user.products.new to associate user_id with the product
+      @product = @user.products.new(product_params) #EN: I think this will need to change to .new with params or @user.products.new to associate user_id with the product
       if @product.save
         redirect_to products_path
       else
@@ -26,7 +26,13 @@ class ProductsController < ApplicationController
     end
 
     def destroy
-      @product = Product.find(params[:id]).destroy
+      @product = Product.find(params[:id])
+      if @product.user_id != @user.id
+        flash[:error] = "You cannot delete another seller's products! STOP BEING SHADY, YO"
+        redirect_to root_path # might need to add a return here if doesn't work as expected
+      else
+        @product.destroy # make sure this doesn't execute if the condition is met above
+      end
       redirect_to products_path
     end
 
