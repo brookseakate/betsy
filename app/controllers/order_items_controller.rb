@@ -5,6 +5,10 @@ class OrderItemsController < ApplicationController
 
     @product = @order_item.product
 
+    # if !@order_item.sufficient_stock?
+    #   flash[:insufficient_stock] = "There are only #{@product.inventory} units of #{@product.name} left in stock. Please reduce your order quantity and resubmit."
+    # end
+
     if @order_item.save
       redirect_to edit_order_path(@order)
     else
@@ -15,12 +19,25 @@ class OrderItemsController < ApplicationController
   def update
     @order_item = OrderItem.find(params[:id])
     @order = @order_item.order
+    @product = @order_item.product
 
-    if @order_item.update(order_item_params)
-      redirect_to edit_order_path(@order)
-    else
-      render 'orders/edit'
-    end
+    @order_items = @order.order_items # required for rendering orders/edit page within this action
+
+    # @TODO: display errors correctly if order_items does not update
+    
+    # if @order_item.sufficient_stock? != true
+    #   flash[:insufficient_stock] = "There are only #{@product.inventory} units of #{@product.name} left in stock. Please reduce your order quantity and resubmit."
+    #   redirect_to edit_order_path(@order) and return
+    #   # redirect_to 'orders/edit' and return
+    # else
+
+      if @order_item.update(order_item_params)
+        redirect_to edit_order_path(@order)
+      else
+        # render 'orders/edit'
+        redirect_to edit_order_path(@order)
+      end
+    # end
   end
 
   def destroy

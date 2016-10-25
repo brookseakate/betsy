@@ -1,6 +1,13 @@
+<% if @order_item.errors.any? %>
+  <ul class="errors">
+    <% @order_item.errors.each do |column, message| %>
+      <li>
+        <strong><%= column.capitalize %></strong> <%= message %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
 <h1> <%= @product.name  %></h1>
-
-
 <h1 class="details"><%= "#{@product.name.capitalize}" %></h1>
 <!-- Product Details -->
 <%=image_tag "#{@product.photo_url}"%>
@@ -11,22 +18,24 @@
   <li>
     <%= "Details: #{@product.description}" %>
   </li>
-  <%# link_to ##TODO make a button to "buy this product" method: :get %>
-  <li>
-    There are <%= "#{@product.inventory}" %>  remaining items, for  <%= "#{@product.name}" %> left!
-  </li>
-</ul>
-<!-- Add to Cart Form -->
-<ul>
-  <li>
-    <%= form_for [@order, @order_item] do |f| %>
-    <%= f.label :quantity %>
-    <%= f.text_field :quantity %>
-
-    <%= f.hidden_field :product_id, value: @product.id %>
-    <%= f.submit "Add to Cart" %>
+  <% if @product.in_stock? %>
+    <li>
+      There are <%= "#{@product.inventory}" %>  remaining items, for  <%= "#{@product.name}" %> left!
+    </li>
+  <!-- Add to Cart Form -->
+    <li>
+      <%= form_for [@order, @order_item] do |f| %>
+      <%= f.label :quantity %>
+      <%= f.text_field :quantity %>
+      <%= f.hidden_field :product_id, value: @product.id %>
+      <%= f.submit "Add to Cart" %>
+      <% end %>
+    </li>
+    <% else %>
+    <li>
+      <%= "#{@product.name}" %> is out of stock.
+    </li>
     <% end %>
-  </li>
 </ul>
 <!-- Buttons -->
 <%= link_to "view related items", category_path(@product.id), method: :get, class: "button" %>
