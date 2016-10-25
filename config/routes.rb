@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   delete '/sessions', to: 'sessions#destroy', as: 'logout'
   get '/user/:id/order_items/:product_id', to: 'user#order_items', as: 'user_order_items'
   get 'orders/:id/checkout', to: 'orders#checkout', as: 'checkout_order'
-
+  get '/users/:id/:orderstatus', to: 'users#show', as: 'orderstatus' #EN
+  
   resources :products do
     resources :reviews, only: [:new, :create]
   end
@@ -38,7 +39,7 @@ Rails.application.routes.draw do
   get '/cart', to: 'orders#cart', as: :cart
 
 
-#route to show the products of a user for a public guest...maybe change this?
+#route to show the products of a user for a public guest...maybe change this? dkl
   get '/user/:id/products', to: 'users#public_show', as: 'users_products'
   # resources :users, shallow: do
   #   resources :products do
