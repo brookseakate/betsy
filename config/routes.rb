@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'drinks#index'
   get '/drinks', to: 'drinks#index'
-  
+
   # @TODO - remove below route; it's redundant due to resources :products
   # get '/products/:id', to: 'products#show'
 
@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   get '/user/:id/order_items/:product_id', to: 'user#order_items', as: 'user_order_items'
   get 'orders/:id/checkout', to: 'orders#checkout', as: 'checkout_order'
   get '/users/:id/:orderstatus', to: 'users#show', as: 'orderstatus' #EN
-  
+
+  patch '/products/:id/:productstatus', to: 'products#retire', as: 'productstatus' #EN retire or activate product
+
   resources :products do
     resources :reviews, only: [:new, :create]
   end

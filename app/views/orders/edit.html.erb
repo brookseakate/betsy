@@ -1,19 +1,15 @@
-<!-- @TODO: display errors correctly if order_items does not update -->
-<!-- <% if flash[:insufficient_stock] %>
-<h2><%= flash[:insufficient_stock] %></h2>
-<% end %> -->
+<% if !@order_item.nil? && @order_item.errors.any? %>
+<ul class="errors">
+  <% @order_item.errors.each do |column, message| %>
+  <li>
+    <strong><%= column.capitalize %></strong> <%= message %>
+  </li>
+  <% end %>
+</ul>
+<% end %>
 <h1>Your Order: <%= @order.id %></h1>
 <% @order_items.each do |item| %>
 <h3><%= item.product.name %></h3>
-<!-- <% if item.errors.any? %>
-  <ul class="errors">
-    <% item.errors.each do |column, message| %>
-      <li>
-        <strong><%= column.capitalize %></strong> <%= message %>
-      </li>
-    <% end %>
-  </ul>
-<% end %> -->
 <ul>
   <li>
     Price: <%= currency(item.product.price) %>
