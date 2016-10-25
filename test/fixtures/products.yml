@@ -43,14 +43,14 @@ kates:
   updated_at: 2016-10-19 21:56:43
 
 lil_product2:
-  user_id: 246
+  user_id: 246879948
   name: test product
   price: 1999
   description: MyString
   photo_url: MyString
   retired: true
-  created_at: 2016-19-19 21:56:43
-  updated_at: 2016-10-19 21:56:43
+  created_at: 2016-10-19 21:56:43
+  updated_at: 2016-11-19 21:56:43
 
 esthern:
   id: 3
