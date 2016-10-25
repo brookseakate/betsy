@@ -19,8 +19,10 @@ class UsersController < ApplicationController
       @revenues = @user.revenues_by_status("paid")
     when "completed"
       @orders = @user.orders_by_status("completed")
+      @revenues = @user.revenues_by_status("completed")
     when "cancelled"
       @orders = @user.orders_by_status("cancelled")
+      @revenues = @user.revenues_by_status("cancelled")
     end
 
     @products = @user.products.where(retired: false)
