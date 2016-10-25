@@ -21,11 +21,34 @@ class OrderItemsControllerTest < ActionController::TestCase
     assert_instance_of Order, assigns(:order)
   end
 
+  # @TODO - write this test
+  #  test "should not be able to create order_item with quantity > product.inventory" do
+  #   order_item = order_items(:one)
+  #
+  #   order_item.quantity = 10
+  #
+  #   assert_no_difference('OrderItem.count') do
+  #     post :create, id: order_item.id, order_id: order_item.order_id, order_item: order_item
+  #   end
+  #
+  #   assert_equal order_item_clone, @order_item
+  #   assert_redirected_to edit_order_path(assigns(:order))
+  # end
+
   test "should update order_item" do
     patch :update, id: @order_item, order_id: @order_item.order, order_item: { quantity: 3 }
 
     assert_redirected_to edit_order_path(assigns(:order_item).order)
     assert_equal 3, assigns(:order_item).quantity
+  end
+
+  test "should not be able to update order_item with quantity > product.inventory" do
+    order_item_clone = @order_item.clone
+
+    patch :update, id: @order_item, order_id: @order_item.order, order_item: { quantity: 100 }
+
+    assert_equal order_item_clone, @order_item
+    assert_redirected_to edit_order_path(assigns(:order))
   end
 
   test "should destroy order_item" do
