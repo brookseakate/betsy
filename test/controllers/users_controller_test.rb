@@ -42,5 +42,6 @@ class UsersControllerTest < ActionController::TestCase
     get :index
     assert_template 'users/index'
     assert_response :success
+
   end
 end
