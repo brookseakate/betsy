@@ -15,10 +15,12 @@ class ProductsControllerTest < ActionController::TestCase
   end
 
   test "3. not everyone should be able to create a new product" do
-    product_params = {product: {id: 2, inventory: 80, description: "the best"}}
+    product_params = {product: {id: 2, inventory: 80, description: "the best", user_id: nil}}
+    total = Product.all.count
     post :create, product_params
     assert_response :redirect
-    assert_redirected_to products_path
+    assert_redirected_to root_path
+    assert_equal total, Product.all.count
   end
 
   test "4. should create a product" do
