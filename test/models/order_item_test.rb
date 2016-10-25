@@ -50,18 +50,20 @@ class OrderItemTest < ActiveSupport::TestCase
     assert_equal 14999985, order_item.subtotal
   end
 
-  test "#sufficient_stock? method should return false for inventory < quantity" do
-    order_item = order_items(:three)
+  # @TODO - remove this test if #sufficient_stock? method remains unused
+  # test "#sufficient_stock? method should return false for inventory < quantity" do
+  #   order_item = order_items(:three)
+  #
+  #   assert_equal false, order_item.sufficient_stock?
+  # end
 
-    assert_equal false, order_item.sufficient_stock?
-  end
-
-  test "#sufficient_stock? method should return true for inventory = quantity" do
-    order_item = order_items(:three)
-    order_item.update(quantity: 10)
-
-    assert_equal true, order_item.sufficient_stock?
-  end
+  # @TODO - remove this test if #sufficient_stock? method remains unused
+  # test "#sufficient_stock? method should return true for inventory = quantity" do
+  #   order_item = order_items(:three)
+  #   order_item.update(quantity: 10)
+  #
+  #   assert_equal true, order_item.sufficient_stock?
+  # end
 
   test "#must_have_enough_stock method should add to errors hash if insufficient_stock" do
     order_item = order_items(:three)

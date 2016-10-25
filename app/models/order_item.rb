@@ -15,13 +15,14 @@ class OrderItem < ActiveRecord::Base
     self.product.price * self.quantity
   end
 
-  def sufficient_stock?
-    return self.product.inventory >= self.quantity
-  end
-
+  # Below method is used as a validator on OrderItems
   def must_have_enough_stock
     if self.product.inventory < self.quantity
       errors.add(:stock, "There are only #{self.product.inventory} units of #{self.product.name} left in stock. Please reduce your order quantity and resubmit.")
     end
-  end
+  end #must_have_enough_stock
+
+  # def sufficient_stock?
+  #   return self.product.inventory >= self.quantity
+  # end
 end
