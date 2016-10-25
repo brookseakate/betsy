@@ -39,6 +39,8 @@ Rails.application.routes.draw do
   # This path may not be RESTful; could be nice to have ultimately, or could be deleted after testing - ks
   get '/cart', to: 'orders#cart', as: :cart
 
+  #route to show the products of a user for a public guest...maybe change this? dkl
+    get '/user/:id/products', to: 'users#public_show', as: 'users_products'
   # resources :users, shallow: do
   #   resources :products do
   #     resources :order_items
