@@ -44,4 +44,10 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
 
   end
+
+  test "guest should be able to see a vendors products " do
+    get :public_show
+    assert_template 'users/public_show'
+    assert_response :success
+  end
 end
