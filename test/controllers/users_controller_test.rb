@@ -37,4 +37,10 @@ class UsersControllerTest < ActionController::TestCase
     assert_includes assigns(:orders), Order.find(orders(:lil_order).id)
     assert_template :show
   end
+
+  test "should show a list of merchants" do
+    get :index
+    assert_template 'users/index'
+    assert_response :success
+  end
 end
