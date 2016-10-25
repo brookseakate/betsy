@@ -34,7 +34,7 @@ class ProductsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  # 
+  #
   # test "can't update a product without an id" do
   #   product_params = {product: {id: products(:one).id }}
   #   patch :update, product_params
