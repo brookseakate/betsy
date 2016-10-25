@@ -1,8 +1,9 @@
 <h1> <%= @product.name  %></h1>
 
+<%#product details %>
 
 <h1 class="details"><%= "#{@product.name.capitalize}" %></h1>
-<!-- Product Details -->
+
 <%=image_tag "#{@product.photo_url}"%>
 <ul>
   <li>
@@ -16,7 +17,7 @@
     There are <%= "#{@product.inventory}" %>  remaining items, for  <%= "#{@product.name}" %> left!
   </li>
 </ul>
-<!-- Add to Cart Form -->
+<%#add to cart form %>
 <ul>
   <li>
     <%= form_for [@order, @order_item] do |f| %>
@@ -39,4 +40,24 @@
 <%= link_to "edit this product", edit_product_path(@product.id), method: :get, class: "button" %>
 <%= link_to "add another product", new_product_path, method: :get %>
 <%= link_to "delete this product", product_path(@product.id), method: :delete, class: "button" %>
+
+<% else %>
+  <h1 class="productlist"> Here Are All of Your Products To Date: </h1>
+  <% @products.each do |t| %>
+  <article>
+  <h2 class="link"><%= link_to "Add a category to this product", new_category_path, method: :get(t) %></h2>
+  <h2 class="link"><%= link_to "Edit this product", edit_product_path, method: :get(t) %></h2>
+
+  <p>
+  <%= t.name %>
+  <%=t.description%>
+  <%= t.status %>
+  <%= t.retired %>
+  <%= t.id %>
+  </p>
+
+<h2 class="link"><%= link_to "Delete", product_path(:id), method: :delete, data: { confirm: 'Are you certain you want to delete this?' } %></h2>
+    </article>
+  <%end%>
+
 <%end%>

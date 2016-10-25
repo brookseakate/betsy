@@ -1,4 +1,3 @@
-
 <h1> Products </h1>
 <h1 class="AllList"> </h1>
 
@@ -17,3 +16,14 @@
   <h3><%= link_to "review this product", new_product_review_path(product.id), method: :get, class:"button" %></h3>
   <%end %>
 <% end %>
+
+<h1> Product Home </h1>
+<h3><%= @category %></h3>
+<% @products.each do |item| %>
+<ul>
+  <li>Seller: <%# user name find to display as link %><%=link_to item.name, product_path(item.id), method: :get %></td>
+    <td><%= button_to "review this item", review_product_path(item.id), method: :get %></td>
+    <td><%= link_to 'view all products by this merchant', products_path(item.user_id) %></td>
+  </ul>
+  <% end %>
+    <h3><%= link_to "popular products", products_path, method: :get %></h3>
