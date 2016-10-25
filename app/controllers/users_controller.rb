@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   before_action :require_login, except: [:index]
   # before_action :find_user, except: [:index]
+  def index
+    @users = User.all
+  end
 
   def show
     @status = params[:orderstatus]
@@ -16,8 +19,10 @@ class UsersController < ApplicationController
       @revenues = @user.revenues_by_status("paid")
     when "completed"
       @orders = @user.orders_by_status("completed")
+      @revenues = @user.revenues_by_status("completed")
     when "cancelled"
       @orders = @user.orders_by_status("cancelled")
+      @revenues = @user.revenues_by_status("cancelled")
     end
 
     @products = @user.products.where(retired: false)
