@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_login, except: [:index]
+  before_action :require_login, except: [:index, :public_show]
   # before_action :find_user, except: [:index]
   def index
     @users = User.all
@@ -28,6 +28,11 @@ class UsersController < ApplicationController
     @products = @user.products.where(retired: false)
     @retired = @user.products.where(retired: true)
 
+  end
+
+  def public_show
+    @user = User.find(params[:id])
+    @products = @user.products
   end
 
   # def new; end

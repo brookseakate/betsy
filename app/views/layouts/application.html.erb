@@ -27,6 +27,7 @@
               <%= link_to "My Account", user_path(:id), class: "button" %>
               <%= link_to "Logout", logout_path(:id), method: :delete, class: "button" %>
               <% end %>
+              <%= link_to "View Cart", cart_path(session[:cart_id]), class: "button" %>
             </div>
           </nav>
         </header>
