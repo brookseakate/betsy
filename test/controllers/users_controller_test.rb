@@ -27,4 +27,11 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to root_path
   end
+
+  test "should show a list of merchants" do
+    get :index
+    assert_template 'users/index'
+    assert_response :success
+
+  end
 end

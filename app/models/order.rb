@@ -39,4 +39,13 @@ class Order < ActiveRecord::Base
     end
     return total
   end
+
+  def last_digits(number)
+    number.to_s.length <= 4 ? number : number.to_s.slice(-4..-1)
+  end
+
+  def mask(number)
+    "#{'X' * (number.to_s.length - 4)} - #{last_digits(number)}"
+  end
+
 end

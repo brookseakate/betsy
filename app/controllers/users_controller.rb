@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   before_action :require_login, except: [:index]
   # before_action :find_user, except: [:index]
+  def index
+    @users = User.all
+  end
 
   def show
     @status = params[:orderstatus]
