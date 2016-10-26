@@ -55,4 +55,12 @@ class OrdersControllerTest < ActionController::TestCase
 
     assert_nil session[:cart_id]
   end
+
+  # test "TEST 8: should display the unique items of a user in a unique order" do
+  #   get :show, {id: orders(:lil_order).id }
+  #   assert_template 'orders/show'
+  #   assert_response :success
+  #
+  #
+  # end
 end
