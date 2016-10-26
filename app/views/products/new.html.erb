@@ -1,20 +1,19 @@
 
   <%= form_for @product do |f| %>
-  <%= label "Name" %>
-  <%= text_field :name %>
-  <%= label "Description" %>
-  <%= text_field :description %>
-  <%= label "photo url" %>
-  <%= text_field :photo_url %>
-  <%= label "inventory" %>
-  <%= text_field :inventory %>
-  <p> "would you like to discontinue this product?" </p>
-  <%= radio_button_tag(:product, "retired") %>
-  <%= label_tag(:product, "I would like to retire this product") %>
-  <%= radio_button_tag(:product, "retired") %>
-  <%= label_tag(:product, "No, don't retire this product") %>
-
-<% end %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+    <%= f.label :photo_url %>
+    <%= f.text_field :photo_url %>
+    <%= f.label :inventory %>
+    <%= f.number_field :inventory %>
+    <%= f.radio_button(:retired, false) %>
+    <%= f.label "Keep this product active" %>
+    <%= f.radio_button(:retired, true) %>
+    <%= f.label "Retire this product" %>
+    <%= f.submit "Submit", class: "success button" %>
+  <% end %>
 
 <%#IDEA, make this method apart of a default within the database or model %>
 <%#{:id, default= (1..9999).random}) %>

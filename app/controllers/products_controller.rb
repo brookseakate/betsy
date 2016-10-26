@@ -19,7 +19,7 @@ class ProductsController < ApplicationController
     def create
       @product = @user.products.new(product_params) #EN: I think this will need to change to .new with params or @user.products.new to associate user_id with the product
       if @product.save
-        redirect_to products_path
+        redirect_to user_path(@user)
       else
         render :new
       end
