@@ -9,7 +9,9 @@
     <h2>ORDER FULFILLMENT</h2>
     <section class="order-summary">
       <h3><%= "Total Number of Orders: #{@orders.count}" %></h3>
-      <h3><%= "Total Revenues: #{currency(@user.revenues)}" %></h3>
+      <% unless @user.revenues.nil? %>
+        <h3><%= "Total Revenues: #{currency(@user.revenues)}" %></h3>
+      <% end %>
     </section>
     <section class="filter">
       <span>Select View</span>
@@ -79,7 +81,7 @@
       <tbody>
         <% @retired.each do |t| %>
         <tr>
-          <td><%= link_to "#{t.name.capitalize}", product_path(t) %></td> 
+          <td><%= link_to "#{t.name.capitalize}", product_path(t) %></td>
           <td><%= link_to "Edit", edit_product_path(t), { method: :get, class: "hollow button" }  %></td>
           <td><%= link_to "Activate", productstatus_path(t, productstatus: "activate"), { method: :patch, class: "secondary hollow button" } %></td>
           <td><%= link_to "Delete", product_path(t), method: :delete, class: "button alert", data: { confirm: 'Are you certain you want to delete this?' }%>
