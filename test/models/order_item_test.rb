@@ -14,15 +14,15 @@ class OrderItemTest < ActiveSupport::TestCase
   end
 
   test "Cannote create an OrderItem without a quantity that is: integer greater than 0" do
-    # no quantity
+    # No quantity fails
     order_item_one = OrderItem.new(product_id: 1, order_id: 2)
     assert_not order_item_one.valid?
 
-    # Float quantity
+    # Float quantity fails
     order_item_one = OrderItem.new(product_id: 1, order_id: 2, quantity: 3.3)
     assert_not order_item_one.valid?
 
-    # Quantity 0
+    # Quantity 0 fails
     order_item_one = OrderItem.new(product_id: 1, order_id: 2, quantity: 0)
     assert_not order_item_one.valid?
   end
@@ -50,6 +50,14 @@ class OrderItemTest < ActiveSupport::TestCase
     assert_equal 14999985, order_item.subtotal
   end
 
+  test "#must_have_enough_stock method should add to errors hash if insufficient_stock" do
+    order_item = order_items(:three)
+
+    order_item.must_have_enough_stock
+
+    assert_includes order_item.errors, :stock
+  end
+  
   # @TODO - remove this test if #sufficient_stock? method remains unused
   # test "#sufficient_stock? method should return false for inventory < quantity" do
   #   order_item = order_items(:three)
@@ -64,12 +72,4 @@ class OrderItemTest < ActiveSupport::TestCase
   #
   #   assert_equal true, order_item.sufficient_stock?
   # end
-
-  test "#must_have_enough_stock method should add to errors hash if insufficient_stock" do
-    order_item = order_items(:three)
-
-    order_item.must_have_enough_stock
-
-    assert_includes order_item.errors, :stock
-  end
 end
