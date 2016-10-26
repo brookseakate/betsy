@@ -24,19 +24,7 @@ class ProductsController < ApplicationController
       cat_ids = params[:product][:categories_products]
       new_cat = params[:product][:categories][:name].capitalize
       if @product.save
-        cat_ids.each_value do |v|
-          unless v.blank?
-            @product.categories << Category.find(v)
-          end
-        end
-        unless new_cat.blank?
-          new_category = @product.categories.new(new_cat)
-          if new_category.valid?
-            new_category.save
-          else
-            @product.categories << Categories.find_by(name: new_cat)
-          end
-        end
+        new_category(cat_ids, new_cat)
         # raise
         redirect_to user_path(@user)
       else
@@ -61,12 +49,20 @@ class ProductsController < ApplicationController
          flash[:error] = "You cannot edit another seller's products! WHY ARE YOU TRYING? SHADY, YO"
          redirect_to root_path # might need to add a return here if doesn't work as expected
        end
+       @categories = Category.all.map do | category |
+         [category.name, category.id]
+       end
     end
 
     def update # EN: do I need the same logic from edit?
       @product = Product.find(params[:id])
-      if @product.update(product_params)
-        redirect_to product_path(params[:id])
+      @product.update(product_params)
+      cat_ids = params[:product][:categories_products]
+      new_cat = params[:product][:categories][:name].capitalize
+      if @product.save
+        new_category(cat_ids, new_cat)
+        # raise
+        redirect_to product_path(@product.id)
       else
         render :edit
       end
@@ -116,6 +112,22 @@ class ProductsController < ApplicationController
       if current_user.nil?
         flash[:error] = "You must be logged in to make seller changes" #this only shows if you tell it to show
         redirect_to root_path
+      end
+    end
+
+    def new_category(cat_ids, new_cat)
+      cat_ids.each_value do |v|
+        unless v.blank?
+          @product.categories << Category.find(v)
+        end
+      end
+      unless new_cat.blank?
+        new_category = @product.categories.new(name: new_cat)
+        if new_category.valid?
+          new_category.save
+        else
+          @product.categories << Category.find_by(name: new_cat)
+        end
       end
     end
 end

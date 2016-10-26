@@ -1,16 +1,1 @@
-<%= form_for @product do |f| %>
-
-  <%= f.label "Description" %>
-  <%= f.text_field :description %>
-  <%= f.label "link to product photo" %>
-  <%= f.text_field :photo_url%>
-  <p> "would you like to discontinue this product?" </p>
-  <%= radio_button_tag(:product, "retired") %>
-  <%= label_tag(:product, "I would like to retire this product") %>
-  <%= radio_button_tag(:product, "retired") %>
-  <%= label_tag(:product, "No, don't retire this product") %>
-  <%= f.label "how much inventory is in stock" %>
-  <%= f.text_field :inventory %>
-  <%# f.select :categories %>
-  <%= f.submit :save %>
-<% end %>
+<%= render partial: "form", locals: { http_verb: "patch"} %>
