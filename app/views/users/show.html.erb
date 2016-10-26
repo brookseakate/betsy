@@ -9,7 +9,9 @@
     <h2>ORDER FULFILLMENT</h2>
     <section class="order-summary">
       <h3><%= "Total Number of Orders: #{@orders.count}" %></h3>
-      <h3><%= "Total Revenues: #{currency(@user.revenues)}" %></h3>
+      <% unless @user.revenues.nil? %>
+        <h3><%= "Total Revenues: #{currency(@user.revenues)}" %></h3>
+      <% end %>
     </section>
     <section class="filter">
       <span>Select View</span>
