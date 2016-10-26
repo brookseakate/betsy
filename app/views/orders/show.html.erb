@@ -5,11 +5,13 @@ should show buyer information and payment
 should also show order items for the associated seller/authorized user -->
 <article>
   <!-- Should display only the items sold by the user for that particular order -->
-<h1>Merchant View for <%= @user.user_name %></h1>
+<h1>(Orders#show) Merchant View for <%= @user.user_name %></h1>
 
 <h4> Items sold to <%= @order.cc_holder_name %> from you: </h4>
 
-
+<% @matched_items.each do |product|%>
+<%= product.product.name %>
+<% end %>
 
 </article>
 <h1> Order confirmation for <%= @order.cc_holder_name %></h1>

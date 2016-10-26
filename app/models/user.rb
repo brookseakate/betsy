@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
     user.user_name  = auth_hash['info']['name']
     user.email = auth_hash['info']['email']
     # could user.save here then return true or false and pivot on that in the controller
+    #@TODO need to add something here to give a user a user_name when nil from Github, something like:
+    # if user.user_name.nil?
+    #   user.user_name = "Github Seller #{user.uid}"
+    # end ?? -dkl
     return user
   end
 
