@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
     user       = User.new #create a new user
     user.uid   = auth_hash[:uid] #assign attributes
     user.provider = 'github'
-    user_name  = auth_hash['info']['name']
+    user.user_name  = auth_hash['info']['name']
     user.email = auth_hash['info']['email']
     # could user.save here then return true or false and pivot on that in the controller
     return user

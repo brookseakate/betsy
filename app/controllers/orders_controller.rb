@@ -7,8 +7,8 @@ class OrdersController < ApplicationController
 
   def show # for paid order confirmation
     @order = Order.find(params[:id])
-    # @user = session[:user_id]
-    # @user_items =
+    user_id = session[:user_id]
+    @user = User.find(user_id)
   end
 
   def edit # for "cart"/pending order (the update actions for this happen in OrderItemsController)
