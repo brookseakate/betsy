@@ -9,7 +9,11 @@
 <% end %>
 <!-- Product Details -->
 <h1 class="details"><%= "#{@product.name.capitalize}" %></h1>
-
+<h3>Categories</h3>
+<% @product.categories.each do |category| %>
+  <%= category.name %>
+<% end %>
+<h3>Details</h3>
 <%=image_tag "#{@product.photo_url}"%>
 <ul>
   <li>
@@ -43,8 +47,13 @@
 <% if session[:user_id] != @product.user_id || session[:user_id] == nil %>
 <%= link_to "review this product", new_product_review_path(@product.id), method: :get, class: "button" %>
 <%end %>
-<% if session[:user_id] == @product.user_id %>
-<%= link_to "edit this product", edit_product_path(@product.id), method: :get, class: "button" %>
-<%= link_to "add another product", new_product_path, method: :get, class: "button" %>
-<%= link_to "delete this product", product_path(@product.id), method: :delete, class: "button" %>
-<%end%>
+
+<%#TODO: how do I make the method to only allow the user selling the product to be able to edit it? @session means seller %>
+<%# if @session == true %>
+
+<%# if session[:user_id] == @product.user_id %>
+
+<%# link_to "edit this product", edit_product_path(@product.id), method: :get, class: "button" %>
+<%# link_to "add another product", new_product_path, method: :get, class: "button" %>
+<%# link_to "delete this product", product_path(@product.id), method: :delete, class: "button" %>
+<%#end%>
