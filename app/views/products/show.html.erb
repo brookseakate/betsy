@@ -9,7 +9,11 @@
 <% end %>
 <!-- Product Details -->
 <h1 class="details"><%= "#{@product.name.capitalize}" %></h1>
-
+<h3>Categories</h3>
+<% @product.categories.each do |category| %>
+  <%= category.name %>
+<% end %>
+<h3>Details</h3>
 <%=image_tag "#{@product.photo_url}"%>
 <ul>
   <li>

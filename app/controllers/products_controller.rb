@@ -8,6 +8,9 @@ class ProductsController < ApplicationController
 
     def new
       @product = Product.new
+      @categories = Category.all.map do | category |
+        [category.name, category.id]
+      end
     end
 
     def show
@@ -17,8 +20,24 @@ class ProductsController < ApplicationController
     end
 
     def create
-      @product = @user.products.new(product_params) #EN: I think this will need to change to .new with params or @user.products.new to associate user_id with the product
+      @product = @user.products.new(product_params) #EN: I think this will need to change to .new with params or @user.products.new to associate user_id with the product]
+      cat_ids = params[:product][:categories_products]
+      new_cat = params[:product][:categories][:name].capitalize
       if @product.save
+        cat_ids.each_value do |v|
+          unless v.blank?
+            @product.categories << Category.find(v)
+          end
+        end
+        unless new_cat.blank?
+          new_category = @product.categories.new(new_cat)
+          if new_category.valid?
+            new_category.save
+          else
+            @product.categories << Categories.find_by(name: new_cat)
+          end
+        end
+        # raise
         redirect_to user_path(@user)
       else
         render :new
