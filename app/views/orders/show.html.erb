@@ -31,7 +31,7 @@ should also show order items for the associated seller/authorized user -->
 <% @matched_items.each do |item|%>
 
 <li>Product: <%= link_to "#{item.product.name}", product_path(item.product_id) %></li>
-<li>Quantity: <%= item.quantity %></li>
+<li>Quantity: <%= item.product.inventory %></li>
 <li>Price: <%= currency(item.product.price) %></li>
 <!-- Subtotal for one item -->
 <li>Subtotal: <%= currency(item.subtotal) %></li>
