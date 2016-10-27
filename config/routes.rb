@@ -31,8 +31,6 @@ Rails.application.routes.draw do
     resources :products, except: [:index, :show]
   end
 
-
-
   resources :orders do
     resources :order_items, only: [:create, :update, :destroy]
   end
@@ -49,6 +47,7 @@ Rails.application.routes.draw do
 #order cofirmation page for guest user
 
 get 'orders/:id/confirmation', to: 'orders#confirmation', as: 'confirmation'
+
 
 
   # resources :users, shallow: do

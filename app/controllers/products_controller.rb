@@ -22,10 +22,14 @@ class ProductsController < ApplicationController
 
     def create
       @product = @user.products.new(product_params) #EN: I think this will need to change to .new with params or @user.products.new to associate user_id with the product]
-      cat_ids = params[:product][:categories_products]
-      new_cat = params[:product][:categories][:name].capitalize
+        cat_ids = params[:product][:categories_products]
+
+        # new_cat = params[:product][:categories][:name].capitalize ##commented out for product-tests
       if @product.save
+
         new_category(cat_ids, new_cat)
+        #  new_category(cat_ids, new_cat) ##product-test comment
+        #  raise
         redirect_to user_path(@user)
       else
         render :new
@@ -77,7 +81,7 @@ class ProductsController < ApplicationController
 
     def popular
       @products = Product.products_by_rating
-      
+
       render :index
     end
 

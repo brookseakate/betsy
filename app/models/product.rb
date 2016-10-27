@@ -6,7 +6,12 @@ class Product < ActiveRecord::Base
 
   validates :inventory,
     presence: true,
-    numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+    numericality: { only_integer: true, greater_than_or_equal_to: 0,  }
+    validates :price,
+    presence: true,
+    numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than: 20000}
+    validates :name,
+    presence: true, uniqueness: true
 
   def retire
     self.retired = true
