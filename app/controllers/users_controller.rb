@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @status = params[:orderstatus]
+    @show = params[:show]
 
     case @status
     when nil, "all"
@@ -25,15 +26,20 @@ class UsersController < ApplicationController
       @revenues = @user.revenues_by_status("cancelled")
     end
 
-    @products = @user.products.where(retired: false)
-    @retired = @user.products.where(retired: true)
-
+    case @show
+    when "", nil
+      @products = @user.products
+    when "active"
+      @products = @user.products.where(retired: false)
+    when "retired"
+      @products = @user.products.where(retired: true)
+    end
   end
 
   def public_show
     @user = User.find(params[:id])
     @products = @user.products
-    
+
   end
 
   # def new; end

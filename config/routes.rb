@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # @TODO - remove below route; it's redundant due to resources :products
   # get '/products/:id', to: 'products#show'
 
+  # @TODO - clarify & refactor '/products' route - there are currently two routes for this path: here (pointing to 'products#popular') & in the resources routes (pointing to 'products#index') - ks
   get '/products', to: 'products#popular', as: 'popular'
   get '/search', to: 'products#category', as: 'by_category'
   get '/auth/:provider/callback', to: "sessions#create"
