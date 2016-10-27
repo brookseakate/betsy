@@ -48,12 +48,10 @@
 <%= link_to "review this product", new_product_review_path(@product.id), method: :get, class: "button" %>
 <%end %>
 
-<%#TODO: how do I make the method to only allow the user selling the product to be able to edit it? @session means seller %>
-<%# if @session == true %>
+<%#TODO: how do I make the method to only allow the user selling the product to be able to edit it? @session means has seller, @session == true && if  %>
+<% if session[:user_id] == @product.user_id %>
 
-<%# if session[:user_id] == @product.user_id %>
-
-<%# link_to "edit this product", edit_product_path(@product.id), method: :get, class: "button" %>
+<%= link_to "Edit this Product", edit_product_path(@product.id), method: :get, class: "button" %>
 <%# link_to "add another product", new_product_path, method: :get, class: "button" %>
-<%# link_to "delete this product", product_path(@product.id), method: :delete, class: "button" %>
-<%#end%>
+<%= link_to "Delete this Product", product_path(@product.id), method: :delete, class: "button" %>
+<%end%>
