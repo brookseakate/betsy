@@ -1,9 +1,10 @@
-<h3> How would you rate<%= @product.name %>?</h3>
+<h3> How would you rate <%= @product.name %>?</h3>
 <h4 class="rating"><%= radio_button_tag(:rating, "1 star") %></h4>
 <h4 class="rating"><%= radio_button_tag(:rating, "2 stars") %></h4>
 <h4 class="rating"><%= radio_button_tag(:rating, "3 stars") %></h4>
 <h4 class="rating"><%= radio_button_tag(:rating, "4 stars") %></h4>
 <h4 class="rating"><%= radio_button_tag(:rating, "5 stars") %></h4>
-<h4 class="rating"><%= (@product.rating) %></h4>
+<%# @TODO - commented out @product.rating because it was causing the page not to load (product doesn't have a rating directly, only through a review -- I should make an average rating method for products...) -ks %>
+<h4 class="rating"><%# (@product.rating) %></h4>
 <h4><%= text_field_tag(:review) %></h4>
 <h4><%= submit_tag("Submit") %></h4>
