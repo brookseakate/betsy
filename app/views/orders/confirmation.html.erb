@@ -18,7 +18,7 @@
 <% @order.order_items.each do |item| %>
 <li>  Name: <%= link_to "#{item.product.name}", product_path(item.product_id) %></li>
 <li>  Quantity:  <%= item.quantity %></li>
-<li>  Order id:  <%= item.quantity %></li>
+<li>  Order id:  <%= item.order_id %></li>
 <li>  Cost:  <%= currency(item.product.price) %></li>
 <li>  Subtotal:  <%= currency(item.subtotal) %></li>
 <% end  %>

@@ -76,22 +76,26 @@ class OrderTest < ActiveSupport::TestCase
     assert_equal "XXX - 3333", order.mask(order.cc_number)
   end
 
-test "should display the unique items of a user in a unique order" do
-  # find a way to parse out the order item for the current signed in user
-  #I want to get the user's order items, and only get the order items that match the order_id
-  order_id = orders(:lil_order).id
-  user = users(:lil)
-  matched_items = [] #collects all matching order items
-   user.order_items.each do |item|
-      if item.order_id == order_id
-        matched_items <<  item
-      end
-    return matched_items
-    end
-   assert_equal user.order_items.order_id, orders(:lil_order).id
+# test "HEY" do #PUT IN CONTROLLER TEST
+#   # find a way to parse out the order item for the current signed in user
+#   #I want to get the user's order items, and only get the order items that match the order_id
+#   the_orders_id = orders(:lil_order).id
+#   user = users(:lil)
+#   matched_items = [] #collects all matching order items
+#    user.order_items.each do |item|
+#       if item.order_id == the_orders_id
+#         matched_items <<  item
+#       end
+#         matched_items
+#     end
+#   assert_equal user.order_items[0].order_id, orders(:lil_order).id
+#   #
+#   assert_equal user.order_items.count, matched_items.count
+#
+#   assert_includes orders(:lil_order).order_items, matched_items.first
+#
+#   # assert_equal assigns(:user), users(:lil)
+#   end
 
-  assert_includes matched_items, orders(:lil_order).id
-
-  # assert_equal assigns(:user), users(:lil)
-  end
+# test "match the order items "
 end
