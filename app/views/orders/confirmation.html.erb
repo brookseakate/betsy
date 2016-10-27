@@ -1,0 +1,26 @@
+<!-- Find the route! -->
+<h1> Order confirmation for <%= @order.cc_holder_name %></h1>
+
+<h2> Buyer Information </h2>
+<ul>
+  <li> Name: <%= @order.cc_holder_name %> </li>
+  <li> Email Address: <%= @order.email %> </li>
+  <li> Mailing Address: <%= @order.mailing_address %> </li>
+    <!-- masks numbers except last 4 -->
+  <li> Credit Card Number: <%= @order.mask(@order.cc_number) %> </li>
+  <li> Credit Card Exp. Date: <%= @order.exp %> </li>
+
+  <li> Order placed at: <%= pretty_date(@order.created_at) %> </li>
+  <li> Order status: <%= @order.status %> </li>
+</ul>
+<!-- Make sure that the user's products are just seen, not the entire ordered items -->
+<h2> Ordered Items </h2>
+<% @order.order_items.each do |item| %>
+<li>  Name: <%= link_to "#{item.product.name}", product_path(item.product_id) %></li>
+<li>  Quantity:  <%= item.quantity %></li>
+<li>  Order id:  <%= item.quantity %></li>
+<li>  Cost:  <%= currency(item.product.price) %></li>
+<li>  Subtotal:  <%= currency(item.subtotal) %></li>
+<% end  %>
+
+<li>  Final Cost:  <%= currency(@order.order_total) %></li>

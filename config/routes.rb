@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     resources :products, except: [:index, :show]
   end
 
+  
+
   resources :orders do
     resources :order_items, only: [:create, :update, :destroy]
   end
@@ -43,6 +45,7 @@ Rails.application.routes.draw do
 
 #route to show the products of a user for a public guest...maybe change this? dkl
   get '/user/:id/products', to: 'users#public_show', as: 'users_products'
+
 
 
   # resources :users, shallow: do
