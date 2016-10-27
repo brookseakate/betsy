@@ -7,7 +7,7 @@ class Order < ActiveRecord::Base
   # @TODO - remove if unused
   # def self.status_options
   #   return ["pending", "paid", "complete", "cancelled"]
-  # end # self.status_options
+  # end # self.status_options --deleted
 
   # def status_must_be_limited
   #   if status != "pending" && status != "paid" && status != "completed" && status != "cancelled"

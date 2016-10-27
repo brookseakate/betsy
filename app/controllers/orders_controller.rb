@@ -40,8 +40,7 @@ class OrdersController < ApplicationController
     session[:cart_id] = nil
 
     if @order.update(order_params)
-      redirect_to order_path(@order)
-      # @TODO go to order#confirmation view
+      redirect_to confirmation_path(@order)
     else
       render :checkout
     end
@@ -49,16 +48,6 @@ class OrdersController < ApplicationController
 
   def confirmation # for paid order confirmation
     @order = Order.find(params[:id])
-    user_id = session[:user_id]
-    @user = User.find(user_id)
-
-    @matched_items = [] #collects all matching order items
-     @user.order_items.each do |item|
-        if item.order_id = @order.id
-          @matched_items <<  item
-        end
-      return @matched_items
-      end
   end
 
   private
