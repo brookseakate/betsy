@@ -62,7 +62,7 @@ class OrdersControllerTest < ActionController::TestCase
     assert_template 'orders/show'
     assert_response :success
 
-    assert_equal assigns(:user).order_items.count, assigns(:matched_items).count
+    assert_equal assigns(:current_user).order_items.count, assigns(:matched_items).count
 
     assert_includes orders(:lil_order).order_items, assigns(:matched_items).first
 
