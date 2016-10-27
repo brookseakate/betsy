@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     end
 
     case @show
-    when ""
+    when "", nil
       @products = @user.products
     when "active"
       @products = @user.products.where(retired: false)
