@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
     before_action :require_login, except: [:index, :show, :category, :seller, :popular]
 
     def index
+      # NOTE: This action is currently unused
       @products = Product.all
     end
 
@@ -25,7 +26,6 @@ class ProductsController < ApplicationController
       new_cat = params[:product][:categories][:name].capitalize
       if @product.save
         new_category(cat_ids, new_cat)
-        # raise
         redirect_to user_path(@user)
       else
         render :new
@@ -61,7 +61,6 @@ class ProductsController < ApplicationController
       new_cat = params[:product][:categories][:name].capitalize
       if @product.save
         new_category(cat_ids, new_cat)
-        # raise
         redirect_to product_path(@product.id)
       else
         render :edit
@@ -77,26 +76,8 @@ class ProductsController < ApplicationController
     end
 
     def popular
-      # @TODO - refactor this action DRYer -ks
-
-      @all_products = Product.all
-      @products_and_ratings = []
-
-      # lines 86-98 (everything before the render) are collecting products ordered by the average rating in their reviews (descending) -ks
-      @all_products.each do |product|
-        reviews = product.reviews
-        if !reviews.blank?
-          ratings = reviews.map { |review| !review.rating.blank? ? review.rating : 0 }
-          average_rating = ratings.reduce(:+)/ratings.length
-        else
-          average_rating = 0
-        end
-
-        @products_and_ratings << [product, average_rating]
-      end
-
-      @products = @products_and_ratings.sort_by { |arr| arr[1] }.map { |arr| arr[0] }.reverse
-
+      @products = Product.products_by_rating
+      
       render :index
     end
 

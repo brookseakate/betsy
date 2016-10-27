@@ -19,4 +19,33 @@ class Product < ActiveRecord::Base
   def in_stock?
     return self.inventory > 0
   end
+
+  def average_rating
+    reviews = self.reviews
+
+    if !reviews.blank?
+      ratings = reviews.map { |review| !review.rating.blank? ? review.rating.to_f : 0.0 }
+
+      average_rating = ratings.reduce(:+)/ratings.length
+    else
+      average_rating = 0.0
+    end
+
+    return average_rating
+  end
+
+  def self.products_by_rating
+    all_products = Product.all
+    products_and_ratings = []
+
+    # collect products with their average rating
+    all_products.each do |product|
+      products_and_ratings << [product, product.average_rating]
+    end
+
+    # map the collection of products ordered by their average rating
+    desc_sorted_products = products_and_ratings.sort_by { |arr| arr[1] }.map { |arr| arr[0] }.reverse
+
+    return desc_sorted_products
+  end
 end
