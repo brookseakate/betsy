@@ -40,15 +40,6 @@ class Product < ActiveRecord::Base
 
     # collect products with their average rating
     all_products.each do |product|
-      #
-      # reviews = product.reviews
-      # if !reviews.blank?
-      #   ratings = reviews.map { |review| !review.rating.blank? ? review.rating : 0 }
-      #   average_rating = ratings.reduce(:+)/ratings.length
-      # else
-      #   average_rating = 0
-      # end
-
       products_and_ratings << [product, product.average_rating]
     end
 
