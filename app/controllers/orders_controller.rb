@@ -66,4 +66,9 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:placed, :email, :mailing_address, :mailing_city, :mailing_state, :mailing_zip, :cc_holder_name, :cc_number, :exp, :cvv, :billing_zip, :status)
   end
 
+#use this method to make sure signed in users cannot see other users' orders
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+
 end

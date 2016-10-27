@@ -8,7 +8,7 @@ should also show order items for the associated seller/authorized user -->
 
 <h2> Buyer Information </h2>
 <ul>
-  <li> Name: <%= @order.cc_holder_name %> </li>
+  <li> Buyer Name: <%= @order.cc_holder_name %> </li>
   <li> Email Address: <%= @order.email %> </li>
   <li> Mailing Address: <%= @order.mailing_address %> </li>
     <!-- masks numbers except last 4 -->
@@ -17,8 +17,9 @@ should also show order items for the associated seller/authorized user -->
 
   <li> Order placed at: <%= pretty_date(@order.created_at) %> </li>
   <li> Order status: <%= @order.status %> </li>
+  <li> Order Number: <%= @order.id %> </li>
 </ul>
-<!-- Make sure that the user's products are just seen, not the entire ordered items -->
+
 <h2> Ordered Items </h2>
 <article>
   <!-- Should display only the items sold by the user for that particular order -->
@@ -26,10 +27,27 @@ should also show order items for the associated seller/authorized user -->
 
 <h4> Items sold to <%= @order.cc_holder_name %> from you: </h4>
 
-<% @matched_items.each do |product|%>
-<%= product.product.name %>
+<% item_total = 0 %>
+<% @matched_items.each do |item|%>
+
+<li>Product: <%= link_to "#{item.product.name}", product_path(item.product_id) %></li>
+<li>Quantity: <%= item.product.inventory %></li>
+<li>Price: <%= currency(item.product.price) %></li>
+<!-- Subtotal for one item -->
+<li>Subtotal: <%= currency(item.subtotal) %></li>
+<% item_total += item.subtotal %>
 <% end %>
 
 </article>
 
-<li>  Final Cost:  <%# currency(@order.order_total) %></li>
+<!-- Must calculate the cost of all the items ordered for this user's order  -->
+<li>  Final Cost:  <%= currency(item_total) %></li>
+
+
+
+A list of orders including at least one of my products:
+Each order item sold by me with a quantity and line-item subtotal
+A link to the item description page
+DateTime the order was placed
+Link to transition the order item to marked as shipped
+The current status of the order ("pending", "paid", "complete", "cancell
