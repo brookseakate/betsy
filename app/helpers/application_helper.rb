@@ -11,7 +11,7 @@ module ApplicationHelper
     begin
       user = User.find(session[:user_id])
       if user.user_name
-        return user.name
+        return user.user_name
       else
         return "Guest"
       end
