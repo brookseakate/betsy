@@ -38,16 +38,18 @@ should also show order items for the associated seller/authorized user -->
 <% item_total += item.subtotal %>
 <% end %>
 
+
+<b>  Final Cost:  <%= currency(item_total) %></b>
 </article>
 
 <!-- Must calculate the cost of all the items ordered for this user's order  -->
-<li>  Final Cost:  <%= currency(item_total) %></li>
 
 
 
-A list of orders including at least one of my products:
+
+<!-- A list of orders including at least one of my products:
 Each order item sold by me with a quantity and line-item subtotal
 A link to the item description page
 DateTime the order was placed
-Link to transition the order item to marked as shipped
-The current status of the order ("pending", "paid", "complete", "cancell
+****Link to transition the order item to marked as shipped***** @TODO
+The current status of the order ("pending", "paid", "complete", "cancell -->
