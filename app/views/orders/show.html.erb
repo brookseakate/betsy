@@ -20,12 +20,16 @@ should also show order items for the associated seller/authorized user -->
 </ul>
 <!-- Make sure that the user's products are just seen, not the entire ordered items -->
 <h2> Ordered Items </h2>
-<% @order.order_items.each do |item| %>
-<li>  Name: <%= link_to "#{item.product.name}", product_path(item.product_id) %></li>
-<li>  Quantity:  <%= item.quantity %></li>
-<li>  Order id:  <%= item.quantity %></li>
-<li>  Cost:  <%= currency(item.product.price) %></li>
-<li>  Subtotal:  <%= currency(item.subtotal) %></li>
-<% end  %>
+<article>
+  <!-- Should display only the items sold by the user for that particular order -->
+<h1>(Merchant View for <%= @user.user_name %>)</h1>
 
-<li>  Final Cost:  <%= currency(@order.order_total) %></li>
+<h4> Items sold to <%= @order.cc_holder_name %> from you: </h4>
+
+<% @matched_items.each do |product|%>
+<%= product.product.name %>
+<% end %>
+
+</article>
+
+<li>  Final Cost:  <%# currency(@order.order_total) %></li>
