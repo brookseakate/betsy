@@ -41,7 +41,6 @@ class OrdersController < ApplicationController
 
     if @order.update(order_params)
       redirect_to confirmation_path(@order)
-      # @TODO go to order#confirmation view
     else
       render :checkout
     end

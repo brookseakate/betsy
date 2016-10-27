@@ -14,10 +14,10 @@ class OrdersControllerTest < ActionController::TestCase
     assert_equal assigns(:order), Order.find(1)
   end
 
-  test "should show paid order" do
-    get :show, id: @paid_order
+  test "should show confirmation order view" do
+    get :confirmation, id: @paid_order
     assert_response :success
-    assert_template :show
+    assert_template :confirmation
   end
 
   test "should get edit" do
@@ -37,7 +37,7 @@ class OrdersControllerTest < ActionController::TestCase
     patch :update, id: @pending_order, order: { email: "a@b.com", cc_number: 11111 }
 
     assert_response :redirect
-    assert_redirected_to order_path(assigns(:order))
+    assert_redirected_to confirmation_path(assigns(:order))
     assert_equal "a@b.com", assigns(:order).email
     assert_equal 11111, assigns(:order).cc_number
   end
@@ -57,12 +57,21 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test "TEST 8: should display the unique items of a user in a unique order" do
+    session[:user_id] = users(:lil)
     get :show, {id: orders(:lil_order).id }
     assert_template 'orders/show'
     assert_response :success
 
+    assigns(:matched_items)
+
+    # assert_equal user.order_items[0].order_id, orders(:lil_order).id
+
+    assert_equal assigns(:user).order_items.count, assigns(:matched_items).count
+
+    assert_includes orders(:lil_order).order_items, assigns(:matched_items).first
 
   end
+
   # test "match the correct order items to the order for the authorized user" do
   #   get :show, {}
   #   # find a way to parse out the order item for the current signed in user
