@@ -21,22 +21,40 @@ class Product < ActiveRecord::Base
   end
 
   def average_rating
+    reviews = self.reviews
+
+    if !reviews.blank?
+      ratings = reviews.map { |review| !review.rating.blank? ? review.rating.to_f : 0.0 }
+
+      average_rating = ratings.reduce(:+)/ratings.length
+    else
+      average_rating = 0.0
+    end
+
+    return average_rating
+  end
+
+  def self.products_by_rating
     all_products = Product.all
     products_and_ratings = []
 
-    # lines 86-98 (everything before the render) are collecting products ordered by the average rating in their reviews (descending) -ks
-    @all_products.each do |product|
-      reviews = product.reviews
-      if !reviews.blank?
-        ratings = reviews.map { |review| !review.rating.blank? ? review.rating : 0 }
-        average_rating = ratings.reduce(:+)/ratings.length
-      else
-        average_rating = 0
-      end
+    # collect products with their average rating
+    all_products.each do |product|
+      #
+      # reviews = product.reviews
+      # if !reviews.blank?
+      #   ratings = reviews.map { |review| !review.rating.blank? ? review.rating : 0 }
+      #   average_rating = ratings.reduce(:+)/ratings.length
+      # else
+      #   average_rating = 0
+      # end
 
-      @products_and_ratings << [product, average_rating]
+      products_and_ratings << [product, product.average_rating]
     end
 
-    @products = @products_and_ratings.sort_by { |arr| arr[1] }.map { |arr| arr[0] }.reverse
+    # map the collection of products ordered by their average rating
+    desc_sorted_products = products_and_ratings.sort_by { |arr| arr[1] }.map { |arr| arr[0] }.reverse
+
+    return desc_sorted_products
   end
 end
