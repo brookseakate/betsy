@@ -7,16 +7,7 @@ class OrdersController < ApplicationController
 
   def show # for paid order confirmation
     @order = Order.find(params[:id])
-    user_id = session[:user_id]
-    @user = User.find(user_id)
 
-    @matched_items = [] #collects all matching order items
-     @user.order_items.each do |item|
-        if item.order_id = @order.id
-          @matched_items <<  item
-        end
-      return @matched_items
-      end
   end
 
   def edit # for "cart"/pending order (the update actions for this happen in OrderItemsController)
@@ -42,6 +33,20 @@ class OrdersController < ApplicationController
     else
       render :checkout
     end
+  end
+
+  def confirmation # for paid order confirmation
+    @order = Order.find(params[:id])
+    user_id = session[:user_id]
+    @user = User.find(user_id)
+
+    @matched_items = [] #collects all matching order items
+     @user.order_items.each do |item|
+        if item.order_id = @order.id
+          @matched_items <<  item
+        end
+      return @matched_items
+      end
   end
 
   private

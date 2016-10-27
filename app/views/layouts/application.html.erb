@@ -25,7 +25,7 @@
               <%= link_to "Login", "/auth/github", class: "button" %>
               <%= link_to "Sign Up", "/auth/github", class: "button" %> <%# need to adjust the sign up path %>
               <% else %>
-              <%= link_to "My Account", user_path(:id), class: "button" %>
+              <%= link_to "My Account", user_path(session[:user_id]), class: "button" %> 
               <%= link_to "Logout", logout_path(:id), method: :delete, class: "button" %>
               <% end %>
               <%= link_to "View Cart", cart_path(session[:cart_id]), class: "button" %>
