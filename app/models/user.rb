@@ -2,8 +2,8 @@ class User < ActiveRecord::Base
   has_many :products
   has_many :order_items, through: :products
 
-  # validates :user_name, :email, :uid, :provider presence: true
-  # validates :user_name, :email, uniqueness: true
+  validates :user_name, :email, :uid, :provider, presence: true
+  validates :user_name, :email, uniqueness: true
 
 
   def self.search(search)
