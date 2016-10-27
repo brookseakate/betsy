@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ProductsControllerTest < ActionController::TestCase
 
-  test "1. should get the homepage" do
+  test "1. should get the index page" do
     get :index
     assert_response :success
     assert_template :index
@@ -13,6 +13,7 @@ class ProductsControllerTest < ActionController::TestCase
     assert_response :success
     assert_template :show
   end
+
 
   test "3. not everyone should be able to create a new product" do
     product_params = {product: {id: 2, inventory: 80, description: "the best", user_id: nil}}
@@ -30,11 +31,14 @@ class ProductsControllerTest < ActionController::TestCase
     assert_equal current_count + 1, Product.all.count
   end
 
-  test "5. user should get to edit" do
-    @session = true
-    get :edit, { id: products(:one).id }
-    assert_response :success
-  end
+    test "5. Allow user to edit her/their own products" do
+      user = session[:user_id] = users(:lil).id
+      id = products(:lil_product).id
+      product_params = {product: {user_id: user, id: id}}
+      get :edit, product_params
+      assert_response :success
+      assert_redirected_to user_product_path(product_params)
+    end
 
   #
   # test "can't update a product without an id" do
@@ -55,7 +59,6 @@ class ProductsControllerTest < ActionController::TestCase
       delete :destroy, {id: products(:one).id}
       assert :success
     end
-    assert_redirected_to products_path
   end
-
+    # assert_redirected_to user_products_path routes are a thing
 end
