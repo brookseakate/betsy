@@ -2,7 +2,7 @@
 <h1 class="AllList"> </h1>
 
 
-<% @product.each do |product| %>
+<% @products.each do |product| %>
 <%=image_tag "#{product.photo_url}"%>
   <h3><%= "#{product.name.capitalize}" %></h3>
   <h3><%= "#{product.price}" %></h3>
@@ -12,6 +12,7 @@
   <h3><%= link_to "view other products in this category", category_path(product.id), method: :get, class:"button" %></h3>
   <h3><%# button_to ##TODO make a button to "buy this product" method: :get %></h3>
 
+  <%# @TODO - what is the @session doing here, & where is it being passed in to this view? - ks %>
   <% if @session == false %>
   <h3><%= link_to "review this product", new_product_review_path(product.id), method: :get, class:"button" %></h3>
   <%end %>
@@ -22,8 +23,9 @@
 <% @products.each do |item| %>
 <ul>
   <li>Seller: <%# user name find to display as link %><%=link_to item.name, product_path(item.id), method: :get %></td>
-    <td><%= button_to "review this item", new_product_review_path(item.id), method: :get %></td>
+    <td><%= button_to "review this item", new_product_review_path(item), method: :get %></td>
     <td><%= link_to 'view all products by this merchant', products_path(item.user_id) %></td>
   </ul>
   <% end %>
+    <%# @TODO - where do we want this path to go? right now it's self-referential, is that right? - ks %>
     <h3><%= link_to "popular products", products_path, method: :get %></h3>
