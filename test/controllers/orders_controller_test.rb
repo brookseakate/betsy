@@ -76,4 +76,18 @@ class OrdersControllerTest < ActionController::TestCase
     assert_equal "Sorry, you're not a vendor for this order.", flash[:errors]
   end
 
+  test "should flash an error for a not-logged-in user trying to view orders" do
+    session[:user_id] = nil
+    get :show, { id: orders(:complete_order).id }
+    assert_response :redirect
+    assert_equal "Sorry, you must be logged in to view orders.", flash[:errors]
+  end
+
+  test "should flash an error for a user trying to view not-their-own cart" do
+    session[:cart_id] = 12
+    get :edit, { id: orders(:complete_order).id }
+    assert_response :redirect
+    assert_equal "Sorry, you may only view your own cart", flash[:error]
+  end
+
 end
