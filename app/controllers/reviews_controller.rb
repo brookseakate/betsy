@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
     @review = @product.reviews.new
     # @review = Review.new
     # @review.id = :product_id
-    # redirect_to products_path
+    # redirect_to product_path(@product)
   end
 
   def create
