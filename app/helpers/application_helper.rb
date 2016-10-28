@@ -3,6 +3,10 @@ module ApplicationHelper
     sprintf("$%0.02f", amount/100.to_f)
   end
 
+  def pretty_date(datetime)
+    datetime.strftime("%I:%M %p, %A, %B %d, %Y (%Z)")
+  end
+
   def copyright_notice_year_range(start_year)
   # In case the input was not a number (nil.to_i will return a 0)
   start_year = start_year.to_i

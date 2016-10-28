@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
       if item.order_id == @order.id
         @matched_items <<  item
       end
-      return @matched_items
+      # return @matched_items
     end
   end #show
 
