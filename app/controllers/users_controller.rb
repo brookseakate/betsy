@@ -19,8 +19,19 @@ class UsersController < ApplicationController
       @orders = @user.orders_by_status("paid")
       @revenues = @user.revenues_by_status("paid")
     when "completed"
-      @orders = @user.orders_by_status("completed")
-      @revenues = @user.revenues_by_status("completed")
+      @orders = []
+      @user.orders.each do |order|
+        unless order.complete_order_for_user(@user).nil?
+          @orders << order
+        end
+      end
+      results = []
+      @orders.each do |order|
+        order.order_items.map do |item|
+          results << item.subtotal if @user.products.include?(item.product)
+        end
+      end
+      @revenues = results.reduce(:+)
     when "cancelled"
       @orders = @user.orders_by_status("cancelled")
       @revenues = @user.revenues_by_status("cancelled")

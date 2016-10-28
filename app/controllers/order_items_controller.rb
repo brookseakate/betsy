@@ -37,6 +37,13 @@ class OrderItemsController < ApplicationController
     redirect_to edit_order_path(@order)
   end
 
+  def ship
+    @order_item = OrderItem.find(params[:id])
+    @order_item.shipped = true
+    @order_item.save
+    redirect_to order_path(params[:order_id])
+  end
+
   private
 
   def order_item_params
