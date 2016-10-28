@@ -6,4 +6,11 @@
 #
 one:
   name: Beer
+
+two:
+  name: Drink
+
+three:
+  name: Games
+
 #  column: value
