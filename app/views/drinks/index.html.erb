@@ -1,20 +1,32 @@
 
-<% if flash[:error] %>
+<%# if flash[:error] %>
 <h3 class="errors">
-  <%= flash[:error] %>
+  <%# flash[:error] %>
 </h3>
-<% end %>
-<h1 class ="title">ThinkieDrinkie, for the cerebral drinker with a purpose</h1>
+<%# end %>
 
-<div class="row">
-  <div class="small-12 columns">...</div>
-  <div class="row">
+<div class="callout medium primary">
+  <div class="row column">
+    <div class="top-bar">
+    <%= link_to "Here You Can Browse Products List by Seller", users_path, method: :get, class: "button"%>
+
+          <%= link_to "Browse Products by Category", categories_path, method: :get, class: "button"%>
+
+            <%= link_to "Our Most Popular Products", popular_path, method: :get, class: "button"%>
+          </div>
+        </div>
+    </div>
+
+
+<div class="row small-up-3 medium-up-3 large-up-4">
+  <% @products.each do |products| %>
+  <% i = 0 %>
+  <div class="column">
+    <li class="thumbnail"><%=image_tag "#{products.photo_url}"%></li>
+    <%=link_to "Investigate", product_path(products.id), method: :get, class:"button small expanded hollow"%>
+    <%i += 1%>
   </div>
-  <div class="row">
-    <ul class="small-block-grid-3">
-      <li class="link"><%#img_tag product.image_url%></li>
-      <li class="link"><%#img_tag%></li>
-      <li class="link"><%#img_tag%></li>
-      <li class="link"><%#img_tag%></li>
-    </ul>
-  </div>
+  <% if i == 10 %>
+  <% end %>
+  <% end %>
+</div>

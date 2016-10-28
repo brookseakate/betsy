@@ -16,58 +16,39 @@
 
  */
 
-
+  li:hover{
+    text-decoration: none;
+    list-style-type: none;
+  }
 
 .errors {
   color: red;
 }
-.body {
-  margin: 20px;
-}
-h1.title{
-  border: 10px;
-  width: 100%;
+div.row.column{
+  width:100%;
+  text-align: content-center;
   display: inline-block;
-  color: white;
-  text-align: center;
-  background-color: deepskyblue;
-  font-family: monospace;
-}
-
-.search {
-  display: inline-block;
-  width: 80%;
-  border-style: double;
-  border-color: black;
-  border-width: medium;
-  align-items: center;
-}
-
-a.button, .nav {
+  position: relative;
   text-decoration: none;
-  align-items: center;
-  display: inline-block;
-  width: 150px;
-  font-size: 2em;
-  font-family: monospace;
-  padding: 5px;
-  margin: 5px;
-  border-style: double;
-  border-color: black;
-  border-width: medium;
+  list-style-type: none;
+}
+.top-bar{
+  background-color: deepskyblue;
+  text-decoration: none;
+  list-style-type: none;
 }
 
-.form, .label, .input#q{
-  display: inline-block;
+.container, .body{
   width: 100%;
-  font-family: monospace;
-  text-align: center;
-  border-color: black;
-  margin: 25px, 50px;
-  border-style: groove;
-  align-items: center;
+  height: 100%;
+  font-family: sans-serif;
+  font-weight: 100;
+  text-decoration: none;
+  list-style-type: none;
 }
-
-main li, form li {
-  list-style: none;
-}
+//
+// main li, form li {
+//   list-style-type: none;
+//   text-decoration: none;
+//
+// }
