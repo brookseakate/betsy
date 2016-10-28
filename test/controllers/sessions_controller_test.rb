@@ -31,11 +31,12 @@ class SessionsControllerTest < ActionController::TestCase
       login_nonexisting_user
       login_a_user
     end
+    logout_a_user
     assert_no_difference('User.count') do
       login_nonexisting_user
       login_a_user
       assert_response :redirect
-      assert_redirected_to user_path(session[:user_id])
+      assert_redirected_to user_path(assigns[:user].id)
       assert_not_nil session[:user_id]
     end
   end

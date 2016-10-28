@@ -37,8 +37,8 @@ end
         render :creation_failure
       end
     # Save the user ID in the session
+    end
     session[:user_id] = @user.id
     redirect_to user_path(@user.id)
-    end
   end
 end
