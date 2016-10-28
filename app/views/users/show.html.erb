@@ -70,7 +70,8 @@
       <h2>PRODUCTS</h2>
       <section class="add row">
         <%= link_to "Add a category", new_category_path, method: :get, class: "button hollow large-3 column large-offset-3" %>
-        <%= link_to "Add a product", new_product_path, method: :get, class: "button hollow large-3 column large-offset-3 end" %>
+        <%= link_to "Add a product", new_product_path, method: :get, class: "button hollow large-3 column large-offset-3 " %>
+        <%= link_to "Browse all my active products", users_products_path(@user.id), method: :get, class: "button hollow large03 column large-offset-3 end" %>
       </section>
 
       <table>

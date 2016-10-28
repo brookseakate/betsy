@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   delete '/sessions', to: 'sessions#destroy', as: 'logout'
   get '/user/:id/order_items/:product_id', to: 'user#order_items', as: 'user_order_items'
   get 'orders/:id/checkout', to: 'orders#checkout', as: 'checkout_order'
-  get '/users/:id/:orderstatus', to: 'users#show', as: 'orderstatus' #EN
 
   patch '/orders/:order_id/order_items/:id/ship', to: 'order_items#ship', as: 'ship_item'
 
@@ -50,6 +49,7 @@ Rails.application.routes.draw do
 
 get 'orders/:id/confirmation', to: 'orders#confirmation', as: 'confirmation'
 
+get '/users/:id/:orderstatus', to: 'users#show', as: 'orderstatus' #EN
 
 
   # resources :users, shallow: do
