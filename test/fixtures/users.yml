@@ -21,3 +21,10 @@ ada:
   email: ada@adadevelopersacademy
   uid: 12346
   provider: github
+
+two:
+  id: 2
+  user_name: DAda
+  email: Dada@adadevelopersacademy
+  uid: 72346
+  provider: github
