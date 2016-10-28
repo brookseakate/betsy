@@ -38,9 +38,9 @@ class ProductsControllerTest < ActionController::TestCase
   end
 
   test "7. should create a new user product" do
-    assert_difference('Product.count') do
-      session[:user_id] = users(:lil).id
-      product_params = {product: { id: 567, name: "beveled coup", inventory: 80, description: "the worst best thing"}}
+    session[:user_id] = users(:lil).id
+    product_params = {product: { id: 567, name: "beveled coup", inventory: 80, description: "the worst best thing"}}
+    assert_difference('Product.count', 1) do
       post :create, product_params
     end
     assert_redirected_to user_path(users(:lil).id)

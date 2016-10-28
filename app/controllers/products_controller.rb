@@ -22,9 +22,12 @@ class ProductsController < ApplicationController
 
     def create
       @product = @user.products.new(product_params) #EN: I think this will need to change to .new with params or @user.products.new to associate user_id with the product]
-        cat_ids = params[:product][:categories_products]
-
-        # new_cat = params[:product][:categories][:name].capitalize ##commented out for product-tests
+        unless params[:product][:categories_products].nil?
+          cat_ids = params[:product][:categories_products]
+        end
+        unless params[:product][:categories].nil?
+          new_cat = params[:product][:categories][:name].capitalize ##commented out for product-tests
+        end
       if @product.save
 
         new_category(cat_ids, new_cat)
@@ -121,17 +124,19 @@ class ProductsController < ApplicationController
     end
 
     def new_category(cat_ids, new_cat)
-      cat_ids.each_value do |v|
-        unless v.blank?
-          @product.categories << Category.find(v)
+      unless cat_ids.nil?
+        cat_ids.each_value do |v|
+          unless v.blank?
+            @product.categories << Category.find(v)
+          end
         end
-      end
-      unless new_cat.blank?
-        new_category = @product.categories.new(name: new_cat)
-        if new_category.valid?
-          new_category.save
-        else
-          @product.categories << Category.find_by(name: new_cat)
+        unless new_cat.blank? || new_cat.nil?
+          new_category = @product.categories.new(name: new_cat)
+          if new_category.valid?
+            new_category.save
+          else
+            @product.categories << Category.find_by(name: new_cat)
+          end
         end
       end
     end
