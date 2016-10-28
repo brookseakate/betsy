@@ -20,7 +20,7 @@
 <div class="row small-up-3 medium-up-3 large-up-4">
   <% @products.each do |products| %>
   <div class="column">
-    <li class="thumbnail"><%=image_tag"#{products.photo_url}"%></li>
+    <li class="thumbnail"><%=image_tag products.photo_url, rwidth: '150', rheight: '150'%></li>
     <%=link_to "Take a peak", product_path(products.id), method: :get, class:"button small expanded hollow"%>
   </div>
   <% end %>
