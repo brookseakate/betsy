@@ -76,4 +76,12 @@ class OrderTest < ActiveSupport::TestCase
     assert_equal "XXX - 3333", order.mask(order.cc_number)
   end
 
+  test "should return orders where all seller's items are shipped" do
+    order = orders(:paid_order)
+    item = order_items(:three)
+    item.shipped = true
+    user = User.find(2)
+    assert_equal order.complete_order_for_user(user), order
+  end
+
 end
