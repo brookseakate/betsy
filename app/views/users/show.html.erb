@@ -1,5 +1,5 @@
 <h2>Hello <%= @user.user_name %></h2>
-
+<h2><%= flash[:errors] %></h2>
 <% if @user.products.blank? %>
   <p>You have not listed any products yet, time to change that!</p>
   <%= link_to "get started", new_product_path, method: :get, class: "button hollow"  %>

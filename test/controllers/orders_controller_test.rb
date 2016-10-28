@@ -62,35 +62,16 @@ class OrdersControllerTest < ActionController::TestCase
     assert_template 'orders/show'
     assert_response :success
 
-    assigns(:matched_items)
-
-    # assert_equal user.order_items[0].order_id, orders(:lil_order).id
-
-    assert_equal assigns(:user).order_items.count, assigns(:matched_items).count
+    assert_equal assigns(:current_user).order_items.count, assigns(:matched_items).count
 
     assert_includes orders(:lil_order).order_items, assigns(:matched_items).first
-
   end
 
-  # test "match the correct order items to the order for the authorized user" do
-  #   get :show, {}
-  #   # find a way to parse out the order item for the current signed in user
-  #   #I want to get the user's order items, and only get the order items that match the order_id
-  #   the_orders_id = orders(:lil_order).id
-  #   user = users(:lil)
-  #   matched_items = [] #collects all matching order items
-  #    user.order_items.each do |item|
-  #       if item.order_id == the_orders_id
-  #         matched_items <<  item
-  #       end
-  #         matched_items
-  #     end
-  #   assert_equal user.order_items[0].order_id, orders(:lil_order).id
-  #   #
-  #   assert_equal user.order_items.count, matched_items.count
-  #
-  #   assert_includes orders(:lil_order).order_items, matched_items.first
-  #
-  #   # assert_equal assigns(:user), users(:lil)
-  #   end
+  test "Should have flash notice for a signed-in user trying to access another user's orders" do
+    session[:user_id] = users(:lil)
+    get :show, { id: orders(:complete_order).id }
+    assert_response :redirect
+    assert_equal "Sorry, you're not a vendor for this order.", flash[:errors]
+  end
+
 end
