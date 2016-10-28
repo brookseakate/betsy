@@ -7,6 +7,7 @@
   <% end %>
 </ul>
 <% end %>
+<h2><%= flash[:errors] %></h2>
 <!-- Product Details -->
 <h1 class="details"><%= "#{@product.name.capitalize}" %></h1>
 <h3>Categories</h3>
@@ -41,6 +42,21 @@
   </li>
   <% end %>
 </ul>
+<!-- Reviews --><!-- &#x2605; makes a star! -->
+<section id="reviews" class="row small-up-1 medium-up-2">
+  <h3>Reviews</h3>
+  <% if @reviews.blank? %>
+    <h5>There are no reviews for this product. <%= link_to "Add a Review!", new_product_review_path(@product.id) %></h5>
+  <% else %>
+  <h4>Average Rating: <%= @product.average_rating %> <big>&#x2605;</big></h4>
+    <% @reviews.each do |review| %>
+      <article class="review column">
+        <h2>&#x2605; </h2>
+        <h5>Review: <%= review.review %></h5>
+      </article>
+    <% end %>
+  <% end %>
+</section>
 <!-- Buttons -->
 <%= link_to "view related items", category_path(@product.id), method: :get, class: "button" %>
 <%= link_to "view all products by this seller", search_sellers_products_path(@product.user_id), method: :get, class: "button" %>
@@ -53,5 +69,5 @@
 
 <%= link_to "Edit this Product", edit_product_path(@product.id), method: :get, class: "button" %>
 <%# link_to "add another product", new_product_path, method: :get, class: "button" %>
-<%= link_to "Delete this Product", product_path(@product.id), method: :delete, class: "button" %>
+<%= link_to "Delete this Product", product_path(@product.id), method: :delete, class: "button", data: { confirm: 'Are you certain you want to delete this?' }  %>
 <%end%>

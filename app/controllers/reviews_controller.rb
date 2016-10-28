@@ -5,9 +5,11 @@ class ReviewsController < ApplicationController
   def new
     @product = Product.find(params[:product_id])
     @review = @product.reviews.new
-    # @review = Review.new
-    # @review.id = :product_id
-    # redirect_to products_path
+
+    if !session[:user_id].nil? && session[:user_id] == @product.user.id
+      flash[:errors] = "Sorry, vendors cannot review their own products."
+      redirect_to product_path(@product)
+    end
   end
 
   def create
