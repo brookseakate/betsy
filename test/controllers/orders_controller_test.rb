@@ -21,12 +21,14 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
+    session[:cart_id] = @pending_order.id
     get :edit, id: @pending_order
     assert_response :success
     assert_template :edit
   end
 
   test "should get checkout" do
+    session[:cart_id] = @pending_order.id
     get :checkout, id: @pending_order
     assert_response :success
     assert_template :checkout

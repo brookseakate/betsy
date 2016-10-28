@@ -9,6 +9,14 @@ class OrdersController < ApplicationController
 
   def show # for user's sold ordered items
     @order = Order.find(params[:id])
+
+    if @current_user.blank?
+      # @TODO - show these errors/redirect somewhere else? - ks
+      flash[:errors] = "Sorry, you must be logged in to view orders."
+
+      redirect_to products_path and return
+    end
+
     @orders = @current_user.orders
     #keeps an unauthorized user to access orders that do not belong to them
     unless @orders.include?(@order)
@@ -23,15 +31,31 @@ class OrdersController < ApplicationController
       end
       return @matched_items
     end
-  end
+  end #show
 
   def edit # for "cart"/pending order (the update actions for this happen in OrderItemsController)
-    @order = Order.find(params[:id])
-    @order_items = @order.order_items
+    requested_id = params[:id].to_i
+    cart_id = session[:cart_id]
+
+    if requested_id == cart_id
+      @order = Order.find(cart_id)
+      @order_items = @order.order_items
+    else
+      flash[:error] = "Sorry, you may only view your own cart"
+      redirect_to edit_order_path(cart_id)
+    end
   end
 
   def checkout # "edit"-like action for checkout/order confirmation when moving order to paid
-    @order = Order.find(params[:id])
+    requested_id = params[:id].to_i
+    cart_id = session[:cart_id]
+
+    if requested_id == cart_id
+      @order = Order.find(cart_id)
+    else
+      flash[:error] = "Sorry, you may only checkout your own cart"
+      redirect_to edit_order_path(cart_id)
+    end
   end
 
   def update # update action for CHECKOUT - order moving to paid

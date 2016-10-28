@@ -1,4 +1,5 @@
 <section id="errors" class="small-12 medium-6 medium-centered">
+  <h4 class="errors text-center"> <%= flash[:error] %> </h4>
   <% if !@order_item.nil? && @order_item.errors.any? %>
   <ul class="errors">
     <% @order_item.errors.each do |column, message| %>
