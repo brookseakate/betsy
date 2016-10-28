@@ -63,3 +63,7 @@ a.button, .nav {
   border-style: groove;
   align-items: center;
 }
+
+main li, form li {
+  list-style: none;
+}
