@@ -1,15 +1,18 @@
-<% if @order_item.errors.any? %>
-<ul class="errors">
-  <% @order_item.errors.each do |column, message| %>
-  <li>
-    <strong><%= column.capitalize %></strong> <%= message %>
-  </li>
+<!-- Errors -->
+<section id="errors" class="small-12 medium-6 medium-centered">
+  <% if @order_item.errors.any? %>
+  <ul class="errors">
+    <% @order_item.errors.each do |column, message| %>
+    <li>
+      <strong><%= column.capitalize %></strong> <%= message %>
+    </li>
+    <% end %>
+  </ul>
   <% end %>
-</ul>
-<% end %>
-<h2><%= flash[:errors] %></h2>
+  <h2><%= flash[:errors] %></h2>
+</section>
 <!-- Product Details -->
-<main>
+<main class="row">
   <section id="product-details" class="small-12 medium-6 medium-centered">
     <h1 class="details text-center"><%= "#{@product.name.capitalize}" %></h1>
     <h3>Categories</h3>
@@ -45,8 +48,8 @@
       <% end %>
     </ul>
   </section>
-  <!-- Reviews --><!-- &#x2605; makes a star! -->
-  <section id="product-reviews" class="row">
+  <!-- Reviews -->
+  <section class="row" id="product-reviews">
     <div class="small-12 medium-10 medium-centered columns">
       <div class="row small-up-1 medium-up-2">
         <h3>Reviews</h3>
