@@ -22,6 +22,9 @@ class OrderItem < ActiveRecord::Base
     end
   end #must_have_enough_stock
 
+  # def mark_shipped #need to add a migration for this
+  #
+  # end
   # def sufficient_stock?
   #   return self.product.inventory >= self.quantity
   # end
