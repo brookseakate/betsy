@@ -1,24 +1,22 @@
 <h1> Products </h1>
 <h1 class="AllList"> </h1>
 
-<div class="row small-up-2 medium-up-3 large-up-6">
-<div class="column">
-<img class="thumbnail" src="http://placehold.it/300x400">
-<h5>Nulla At Nulla Justo, Eget</h5>
-<p>$400</p>
-<a href="#" class="button small expanded hollow">Buy</a>
+
+
+<h5></h5>
+<div class="container">
+<div class="row small-up-3 medium-up-3 large-up-4">
+  <% @products.each do |products| %>
+  <% i = 0 %>
+  <div class="column">
+    <li class="thumbnail"><%=image_tag"#{products.photo_url}"%></li>
+    <%=link_to "Take a peak", product_path(products.id), method: :get, class:"button small expanded hollow"%>
+    <%i += 1%>
+  </div>
+  <% if i == 10 %>
+  <% end %>
+  <% end %>
 </div>
-<div class="column">
-<img class="thumbnail" src="http://placehold.it/300x400">
-<h5>Nulla At Nulla Justo, Eget</h5>
-<p>$400</p>
-<a href="#" class="button small expanded hollow">Buy</a>
-</div>
-<div class="column">
-<img class="thumbnail" src="http://placehold.it/300x400">
-<h5>Nulla At Nulla Justo, Eget</h5>
-<p>$400</p>
-<a href="#" class="button small expanded hollow">Buy</a>
 </div>
 
 
@@ -32,20 +30,7 @@
   <h3><%= link_to "view other products in this category", category_path(product.id), method: :get, class:"button" %></h3>
   <h3><%# button_to ##TODO make a button to "buy this product" method: :get %></h3>
 
-  <%# @TODO - what is the @session doing here, & where is it being passed in to this view? - ks %>
-  <% if @session == false %>
+  <% if session[:user_id] != product.user_id %>
   <h3><%= link_to "review this product", new_product_review_path(product.id), method: :get, class:"button" %></h3>
   <%end %>
 <% end %>
-
-<h1> Product Home </h1>
-<h3><%= @category %></h3>
-<% @products.each do |item| %>
-<ul>
-  <li>Seller: <%# user name find to display as link %><%=link_to item.name, product_path(item.id), method: :get %></td>
-    <td><%= button_to "review this item", new_product_review_path(item), method: :get %></td>
-    <td><%= link_to 'view all products by this merchant', products_path(item.user_id) %></td>
-  </ul>
-  <% end %>
-    <%# @TODO - where do we want this path to go? right now it's self-referential, is that right? - ks %>
-    <h3><%= link_to "popular products", products_path, method: :get %></h3>
