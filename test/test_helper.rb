@@ -15,7 +15,7 @@ class ActiveSupport::TestCase
     OmniAuth.config.test_mode = true
     # What data should we get back from auth requests?
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
-      provider: 'github', uid: '12346', info: { email: "a@b.com", name: "Ada" }
+      provider: 'github', uid: '12346', info: { email: "a@b.com", nickname: "Ada" }
       })
   end
 
