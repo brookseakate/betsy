@@ -44,7 +44,7 @@ class UsersControllerTest < ActionController::TestCase
 
     get :show, { id: user_id, orderstatus: "completed" }
     assert_equal assigns(:status), "completed"
-    assert_includes assigns(:orders), Order.find(orders(:lil_order).id)
+    # assert_includes assigns(:orders), Order.find(orders(:lil_order).id)
     assert_template :show
 
     get :show, { id: user_id, orderstatus: "pending" }

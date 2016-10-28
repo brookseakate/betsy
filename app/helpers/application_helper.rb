@@ -24,10 +24,11 @@ module ApplicationHelper
 
   def user_name
     begin
-      user = User.find(session[:user_id])
-      if user.user_name
-        return user.user_name
-      else
+      unless session[:user_id].nil?
+        user = User.find(session[:user_id])
+        if user.user_name
+          return user.user_name
+      end
         return "Guest"
       end
     rescue ActiveRecord::RecordNotFound
@@ -37,7 +38,7 @@ module ApplicationHelper
 
   def login_status
     if session[:user_id].nil?
-      "Viewing as #{user_name}"
+      "Viewing as Guest"
     else
       "Logged in as #{user_name}"
     end

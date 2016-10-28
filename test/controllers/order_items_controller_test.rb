@@ -80,4 +80,9 @@ class OrderItemsControllerTest < ActionController::TestCase
 
     assert_redirected_to edit_order_path(assigns(:order))
   end
+
+  test "should ship an order item" do
+    patch :ship, id: @order_item, order_id: @order_item.order
+    assert assigns(:order_item).shipped
+  end
 end

@@ -1,36 +1,14 @@
-<h1> Products </h1>
-<h1 class="AllList"> </h1>
 
-
-
-<h5></h5>
-<div class="container">
-<div class="row small-up-3 medium-up-3 large-up-4">
-  <% @products.each do |products| %>
-  <% i = 0 %>
-  <div class="column">
-    <li class="thumbnail"><%=image_tag"#{products.photo_url}"%></li>
-    <%=link_to "Take a peak", product_path(products.id), method: :get, class:"button small expanded hollow"%>
-    <%i += 1%>
+<main class="row container">
+  <h1 class="AllList text-center small-12 column">Products </h1>
+  <div class="row small-up-3 medium-up-3 large-up-4" id="product-list">
+    <% @products.each do |product| %>
+      <div class="column">
+        <%=image_tag "#{product.photo_url}", class: "thumbnail", alt: "#{product.name}"%>
+        <h5><%= product.name %></h5>
+        <p><%= currency(product.price) %></p>
+        <%= link_to "Buy", product_path(product.id), class: "button small expanded hollow" %>
+      </div>
+    <% end %>
   </div>
-  <% if i == 10 %>
-  <% end %>
-  <% end %>
-</div>
-</div>
-
-
-<% @products.each do |product| %>
-<%=image_tag "#{product.photo_url}"%>
-  <h3><%= "#{product.name.capitalize}" %></h3>
-  <h3><%= "#{product.price}" %></h3>
-  <h3><%= "#{product.inventory}" %></h3>
-  <h3><%= "#{product.description}" %></h3>
-  <h3><%= link_to "take a quick look", product_path(product.id), method: :get, class:"button" %></h3>
-  <h3><%= link_to "view other products in this category", category_path(product.id), method: :get, class:"button" %></h3>
-  <h3><%# button_to ##TODO make a button to "buy this product" method: :get %></h3>
-
-  <% if session[:user_id] != product.user_id %>
-  <h3><%= link_to "review this product", new_product_review_path(product.id), method: :get, class:"button" %></h3>
-  <%end %>
-<% end %>
+</main>

@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   get 'orders/:id/checkout', to: 'orders#checkout', as: 'checkout_order'
   get '/users/:id/:orderstatus', to: 'users#show', as: 'orderstatus' #EN
 
+  patch '/orders/:order_id/order_items/:id/ship', to: 'order_items#ship', as: 'ship_item'
+
   patch '/products/:id/:productstatus', to: 'products#retire', as: 'productstatus' #EN retire or activate product
 
   resources :products do
