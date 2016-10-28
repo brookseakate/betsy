@@ -41,7 +41,7 @@ class Order < ActiveRecord::Base
   end
 
   def mask(number)
-    if !number.nil? && number.length >= 4
+    if !number.nil? && number.to_s.length >= 4
       return "#{'X' * (number.to_s.length - 4)} - #{last_digits(number)}"
     elsif !number.nil?
       return number.to_s
