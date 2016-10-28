@@ -1,79 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
 
-  <body>
-    <h1 class="title"> Good Afternoon</h1>
-    <nav class="row">
-     <section class="small-12 columns">
-       <ul class="vertical menu medium-horizontal" data-responsive-menu="accordion medium-dropdown">
-         <li>
-          <%= link_to "Home", root_path, class: "button" %>
+<body>
+  <h1 class="title"> Good Afternoon <%= content_for?(:title) ? yield(:title) : " " %> it is <%=Time.new.strftime("%B #{Time.new.day.ordinalize}, %Y") %></h1>
+  <nav class="row">
+    <section class="small-12 columns">
+      <ul class="vertical menu medium-horizontal" data-responsive-menu="accordion medium-dropdown">
+        <li>
+          <%= link_to "Home", root_path, method: :get, class:"button"%>
         </li>
         <li>
-              <%= link_to "Products", products_path, method: :get, class: "button" %>
-              <ul class="menu vertical">
+          <%= link_to "Products", products_path, method: :get, class:"button" %>
+          <ul class="menu vertical">
             <li>
-             <%= link_to "Browse Products By User", users_path, method: :get, class:"button" %>
-           <li>
-        <%= link_to "View Popular Products", popular_path, method: :get, class:"button" %>
-          <li>
-            <%= link_to "Products by Category", categories_path, method: :get, class:"button"%>
-          </li>
-          </li>
+              <%= link_to "Browse Products By User", users_path, method: :get, class:"button" %>
+              <li>
+                <%= link_to "View Popular Products", popular_path, method: :get, class:"button" %>
+                <li>
+                  <%= link_to "Products by Category", categories_path, method: :get, class:"button"%>
+                </li>
+              </li>
+            </li>
+          </ul>
         </li>
-        </ul>
-      </li>
         <% if session[:user_id].nil? %>
         <li>
-        <%= link_to "Login", "/auth/github", class: "button" %>
-      </li>
-      <li>
-        <%= link_to "Sign Up", "/auth/github", class: "button" %>
-      </li>
+          <%= link_to "Login", "/auth/github", class: "button" %>
+        </li>
+        <li>
+          <%= link_to "Sign Up", "/auth/github", class: "button" %>
+        </li>
         <% else %>
         <li>
-        <%= link_to "My Account", user_path(session[:user_id]), class: "button" %>
-      </li>
+          <%= link_to "My Account", user_path(session[:user_id]), class: "button" %>
+        </li>
         <li>
-        <%= link_to "Logout", logout_path(:id), method: :delete, class: "button" %>
-      </li>
+          <%= link_to "Logout", logout_path(:id), method: :delete, class: "button" %>
+        </li>
         <% end %>
         <li>
-        <%= link_to "View Cart", cart_path(session[:cart_id]), class: "button" %>
-      </li>
-      <li>
+          <%= link_to "View Cart", cart_path(session[:cart_id]), class: "button" %>
+        </li>
+        <li>
           <%= form_tag("/search", method: "get") do %>
           <%= label_tag(:q, "Search for a category:") %>
-          <%= text_field_tag(query) %>
+          <%= text_field_tag(:query) %>
           <%= submit_tag("Search") %>
           <% end %>
         </li>
-    </ul>
-</section>
-</nav>
+      </ul>
+    </section>
+  </nav>
 
 
 
-    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+  <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
 
 
 
-            </article>
-          </div>
-        </div>
+</article>
+</div>
+</div>
 
-        <footer>
-          <!-- We need this Time.zone code to convert UTC times -->
-        <h3 class = "footer"><%= login_status %>
-        <% Time.zone = "Pacific Time (US & Canada)" %> ThinkieDrinkieProductions <%= Time.now.parse  %>Time.now
-        </footer>
-      </body>
-      </html>
+<footer>
+  <!-- We need this Time.zone code to convert UTC times -->
+  <h3 class = "footer"><%= login_status %>
+    <% Time.zone = "Pacific Time (US & Canada)" %> ThinkieDrinkieProductions   &copy; <%= copyright_notice_year_range(2015) %> All Rights Reserved.</h3>
+    </footer>
+    </body>
+    </html>
