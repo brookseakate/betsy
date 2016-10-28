@@ -8,7 +8,7 @@ class SessionsControllerTest < ActionController::TestCase
 
   def login_nonexisting_user
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
-      provider: 'github', uid: '99999', info: { email: "new@b.com", name: "Na Ada" }
+      provider: 'github', uid: '99999', info: { email: "new@b.com", nickname: "Na Ada" }
       })
   end
 
