@@ -10,60 +10,59 @@
 
 <body class="body">
   <div class ="container">
-    <nav class="row nav">
-      <div class="callout large primary">
-        <div class="row column">
-            <div class="top-bar-left">
-              <ul class="menu">
-                <li><%= link_to "Home", root_path, method: :get, class:"button"%></li>
-                <li><%= link_to "Products", products_path, method: :get, class:"button" %></li>
-                <li><%= link_to "Purchase", cart_path(session[:cart_id]), method: :get, class:"button"%></li>
-              </ul>
-            </div>
-                <div class="top-bar-center">
-                <ul class="menu">
-                <% if session[:user_id].nil? %>
-                <li><%= link_to "Login", "/auth/github", class: "button" %></li>
-                <li><%= link_to "Sign Up", "/auth/github", class: "button" %></li>
-                <% else %>
-                <li><%= link_to "My Account", user_path(session[:user_id]), class: "button" %></li>
-                <li><%= link_to "Logout", logout_path(:id), method: :delete, class: "button" %></li>
-                <% end %>
-              </ul>
-            </div>
+    <nav class="nav">
+      <div class="callout large">
+        <div class="link">
+            <div class="row small-up-1 medium-up-1 large-up-1">
+            <ul class="menu">
+              <li><%= link_to "Home", root_path, method: :get, class:"button"%></li>
+              <li><%= link_to "Products", products_path, method: :get, class:"button" %></li>
+              <li><%= link_to "Purchase", cart_path(session[:cart_id]), method: :get, class:"button"%></li>
+
+              <% if session[:user_id].nil? %>
+              <li><%= link_to "Login", "/auth/github", method: :get, class:"button"%></li>
+              <li><%= link_to "Sign Up", "/auth/github", class: "button" %></li>
+              <% else %>
+              <li><%= link_to "My Account", user_path(session[:user_id]), class: "button" %></li>
+              <li><%= link_to "Logout", logout_path(:id), method: :delete, class: "button" %></li>
+              <% end %>
+            </ul>
           </div>
-          <div class="callout small primary">
-            <div class="row column text-center">
-                <li><%= form_tag("/search", method: "get") do %>
-                 <%= label_tag(:query, "Search for a category:") %>
-                  <%= text_field_tag(:query) %>
-                <%= submit_tag("Search")%> </li>
-                <% end %>
-              </ul>
+        </div>
+        <div class="callout small">
+          <div class="row column text-center">
+            <li><%= form_tag('/search', :action => "search", :method => "get") do %>
+              <%= label_tag(:query, "Query for your thoughts") %>
+              <%= text_field_tag(:query) %>
+              <%= submit_tag("Search")%></li>
+              <% end %>
             </div>
+        </div>
+        <div class="callout small">
+          <div class="row column text-center">
+            <h1 class="row text-center">ThinkieDrinkie</h1>
+            <h2 class="row text-center">for the cerebral drinker with a purpose</h2>
+            <h3 class= "subheader"><%=Time.new.strftime("%B #{Time.new.day.ordinalize}, %Y") %></h3>
+            <p class="row text-center"><%= content_for?(:title) ? yield(:title) : " " %></p>
           </div>
-    <div class="callout medium primary">
-    <div class="row">
-    <h1 class="row text-center">ThinkieDrinkie</h1>
-    <h2 class="row text-center">for the cerebral drinker with a purpose</h2>
-    <p class= "subheader"><%=Time.new.strftime("%B #{Time.new.day.ordinalize}, %Y") %></p>
-    <p class="row text-center"><%= content_for?(:title) ? yield(:title) : " " %></p>
-    </div>
-  </div>
-  </nav>
-
-
-
-<%= yield %>
-
-
-
-
-
-<!-- We need this Time.zone code to convert UTC times -->
-<footer class = "footer">
-  <% Time.zone = "Pacific Time (US & Canada)" %> ThinkieDrinkieProductions   &copy; <%= copyright_notice_year_range(2015) %> All Rights Reserved.</h3>
-</footer>
 </div>
-</body>
-</html>
+      </nav>
+
+
+
+      <%= yield %>
+
+
+
+
+      <div class="row column">
+        <div class="top-bar-left">
+          <!-- We need this Time.zone code to convert UTC times -->
+          <footer class = "footer">
+            <% Time.zone = "Pacific Time (US & Canada)" %> ThinkieDrinkieProductions   &copy; <%= copyright_notice_year_range(2015) %> All Rights Reserved.</h3>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>

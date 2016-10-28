@@ -1,6 +1,6 @@
 class DrinksController < ApplicationController
   def index
-    @products =  Product.all
+    @products =  Product.all.shuffle
   end
 
   def show
