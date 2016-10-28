@@ -39,6 +39,12 @@ class Product < ActiveRecord::Base
     return average_rating
   end
 
+
+  def self.search(query)
+    query = "%#{query}%"
+    Product.where("name LIKE ? OR description LIKE ?", query, query)
+  end
+
   def self.products_by_rating
     all_products = Product.all
     products_and_ratings = []

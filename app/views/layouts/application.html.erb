@@ -12,7 +12,52 @@
   </head>
 
   <body>
+    <h1 class="title"> Good Afternoon</h1>
+    <nav class="row">
+     <section class="small-12 columns">
+       <ul class="vertical menu medium-horizontal" data-responsive-menu="accordion medium-dropdown">
+         <li>
+          <%= link_to "Home", root_path, class: "button" %>
+        </li>
+        <li>
+              <%= link_to "Products", products_path, method: :get, class: "button" %>
+              <ul class="menu vertical">
+            <li>
+             <%= link_to "Browse Products By User", users_path, method: :get, class:"button" %>
+           <li>
+        <%= link_to "View Popular Products", popular_path, method: :get, class:"button" %>
+          <li>
+            <%= link_to "Products by Category", categories_path, method: :get, class:"button"%>
+          </li>
+          </li>
+        </li>
+        </ul>
+      </li>
+        <% if session[:user_id].nil? %>
+        <li>
+        <%= link_to "Login", "/auth/github", class: "button" %>
+      </li>
+      <li>
+        <%= link_to "Sign Up", "/auth/github", class: "button" %>
+      </li>
+        <% else %>
+        <li>
+        <%= link_to "My Account", user_path(session[:user_id]), class: "button" %>
+      </li>
+        <li>
+        <%= link_to "Logout", logout_path(:id), method: :delete, class: "button" %>
+      </li>
+        <% end %>
+        <li>
+        <%= link_to "View Cart", cart_path(session[:cart_id]), class: "button" %>
+      </li>
+    </ul>
+</section>
+</nav>
+  
 
+  <!-- We need this Time.zone code to convert UTC times -->
+  <% Time.zone = "Pacific Time (US & Canada)" %>
     <%= yield %>
 
   </body>
