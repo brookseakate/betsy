@@ -21,10 +21,10 @@
 
               <% if session[:user_id].nil? %>
               <li><%= link_to "Login", "/auth/github", method: :get, class:"button"%></li>
-              <li><%= link_to "Sign Up", "/auth/github", class: "button" %></li>
+              <li><%= link_to "Sign Up", "/auth/github", class:"button" %></li>
               <% else %>
-              <li><%= link_to "My Account", user_path(session[:user_id]), class: "button" %></li>
-              <li><%= link_to "Logout", logout_path(:id), method: :delete, class: "button" %></li>
+              <li><%= link_to "My Account", user_path(session[:user_id]), class:"button" %></li>
+              <li><%= link_to "Logout", logout_path(:id), method: :delete, class:"button" %></li>
               <% end %>
             </ul>
           </div>
@@ -55,8 +55,8 @@
 
 
 
-      <div class="row column">
-        <div class="top-bar-left">
+      <div class="callout small">
+        <div class="row column text-center">
           <!-- We need this Time.zone code to convert UTC times -->
           <footer class = "footer">
             <% Time.zone = "Pacific Time (US & Canada)" %> ThinkieDrinkieProductions   &copy; <%= copyright_notice_year_range(2015) %> All Rights Reserved.

@@ -5,25 +5,24 @@
 </h3>
 <%# end %>
 <div class="container">
-<div class="link">
-<div class="row small-up-3 medium-up-3 large-up-6">
-<li>  <%= link_to "Browse Products List by Seller", users_path, method: :get, class:"button expanded"%></li>
+  <div class="link">
+  <div class="row small-up-1 medium-up-1 large-up-1">
 
-  <li><%= link_to "Browse Products by Category", categories_path, method: :get, class: "button expanded"%></li>
+    <%= link_to "Browse Products List by Seller", users_path, method: :get, class: "button"%>
 
-  <li><%= link_to "Our Most Popular Products", popular_path, method: :get, class:"button expanded"%></li>
-</div>
-<div class="row small-up-3 medium-up-3 large-up-6">
+          <%= link_to "Browse Products by Category", categories_path, method: :get, class: "button"%>
+
+            <%= link_to "Our Most Popular Products", popular_path, method: :get, class: "button"%>
+
+        </div>
+    </div>
+
+<div class="row small-up-3 medium-up-3 large-up-4">
   <% @products.each do |products| %>
-  <% i = 0 %>
   <div class="column">
-    <h3 class="thumbnail"><%=image_tag "#{products.photo_url}",:rwidth => 400, :rheight => 300 %></h3>
-    <li><%=link_to "Take a peak", product_path(products.id), method: :get, class:"button small expanded hollow"%></li>
-    <%i += 1%>
+    <li class="thumbnail"><%=image_tag"#{products.photo_url}"%></li>
+    <%=link_to "Take a peak", product_path(products.id), method: :get, class:"button small expanded hollow"%>
   </div>
-  <% if i == 10 %>
   <% end %>
-  <% end %>
-</div>
 </div>
 </div>
