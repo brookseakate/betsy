@@ -5,10 +5,6 @@ class Order < ActiveRecord::Base
   # An Order must have one or more Order Items
 
   # @TODO - remove if unused
-  # def self.status_options
-  #   return ["pending", "paid", "complete", "cancelled"]
-  # end # self.status_options --deleted
-
   # def status_must_be_limited
   #   if status != "pending" && status != "paid" && status != "completed" && status != "cancelled"
   #     errors.add(:status, "Must be pending, paid, completed or cancelled")
@@ -45,7 +41,12 @@ class Order < ActiveRecord::Base
   end
 
   def mask(number)
-    "#{'X' * (number.to_s.length - 4)} - #{last_digits(number)}"
+    if !number.nil? && number.length >= 4
+      return "#{'X' * (number.to_s.length - 4)} - #{last_digits(number)}"
+    elsif !number.nil?
+      return number.to_s
+    else
+      return nil
+    end
   end
-
 end
