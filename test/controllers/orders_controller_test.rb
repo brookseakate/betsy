@@ -65,7 +65,13 @@ class OrdersControllerTest < ActionController::TestCase
     assert_equal assigns(:current_user).order_items.count, assigns(:matched_items).count
 
     assert_includes orders(:lil_order).order_items, assigns(:matched_items).first
+  end
 
+  test "Should have flash notice for a signed-in user trying to access another user's orders" do
+    session[:user_id] = users(:lil)
+    get :show, { id: orders(:complete_order).id }
+    assert_response :redirect
+    assert_equal "Sorry, you're not a vendor for this order.", flash[:errors]
   end
 
 end
