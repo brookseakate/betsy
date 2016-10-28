@@ -65,8 +65,13 @@ class ProductsController < ApplicationController
     def update # EN: do I need the same logic from edit?
       @product = Product.find(params[:id])
       @product.update(product_params)
-      cat_ids = params[:product][:categories_products]
-      new_cat = params[:product][:categories][:name].capitalize
+      # raise
+      unless params[:product][:categories_products].nil?
+        cat_ids = params[:product][:categories_products]
+      end
+      unless params[:product][:categories].nil?
+        new_cat = params[:product][:categories][:name].capitalize ##commented out for product-tests
+      end
       if @product.save
         new_category(cat_ids, new_cat)
         redirect_to product_path(@product.id)
@@ -135,6 +140,7 @@ class ProductsController < ApplicationController
           new_category = @product.categories.new(name: new_cat)
           if new_category.valid?
             new_category.save
+            @product.categories << new_category
           else
             @product.categories << Category.find_by(name: new_cat)
           end

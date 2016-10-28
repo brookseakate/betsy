@@ -1,57 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Betsy</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
-  <nav>
-    <header>
-      <div class="row">
-        <div class="small-12 columns">
-          <h1 class="title"> Good Afternoon!</h1>
-          <div class = "row">
-            <ul class="small-block-grid-3">
-              <%= link_to "Browse All Products", products_path, method: :get, class: "button" %>
-              <%= link_to "Browse Products By User", users_path, method: :get, class:"button"%>
-              <%= link_to "View Popular Products", popular_path, method: :get, class:"button" %></h3>
-                <!-- minor change to this link to, so it now points to categories#index (all categories) -->
-              <%= link_to "Products by Category", categories_path, method: :get, class:"button"%></div>
-              <%= link_to "Home", root_path, class: "button" %>
+  <h1 class="title"> Good Afternoon <%= content_for?(:title) ? yield(:title) : " " %> it is <%=Time.new.strftime("%B #{Time.new.day.ordinalize}, %Y") %></h1>
+  <nav class="row">
+    <section class="small-12 columns">
+      <ul class="vertical menu medium-horizontal" data-responsive-menu="accordion medium-dropdown">
+        <li>
+          <%= link_to "Home", root_path, method: :get, class:"button"%>
+        </li>
+        <li>
+          <%= link_to "Products", products_path, method: :get, class:"button" %>
+          <ul class="menu vertical">
+            <li>
+              <%= link_to "Browse Products By User", users_path, method: :get, class:"button" %>
+              <li>
+                <%= link_to "View Popular Products", popular_path, method: :get, class:"button" %>
+                <li>
+                  <%= link_to "Products by Category", categories_path, method: :get, class:"button"%>
+                </li>
+              </li>
+            </li>
+          </ul>
+        </li>
+        <% if session[:user_id].nil? %>
+        <li>
+          <%= link_to "Login", "/auth/github", class: "button" %>
+        </li>
+        <li>
+          <%= link_to "Sign Up", "/auth/github", class: "button" %>
+        </li>
+        <% else %>
+        <li>
+          <%= link_to "My Account", user_path(session[:user_id]), class: "button" %>
+        </li>
+        <li>
+          <%= link_to "Logout", logout_path(:id), method: :delete, class: "button" %>
+        </li>
+        <% end %>
+        <li>
+          <%= link_to "View Cart", cart_path(session[:cart_id]), class: "button" %>
+        </li>
+        <li>
+          <%= form_tag("/search", method: "get") do %>
+          <%= label_tag(:q, "Search for a category:") %>
+          <%= text_field_tag(:query) %>
+          <%= submit_tag("Search") %>
+          <% end %>
+        </li>
+      </ul>
+    </section>
+  </nav>
 
-              <% if session[:user_id].nil? %>
-              <%= link_to "Login", "/auth/github", class: "button" %>
-              <%= link_to "Sign Up", "/auth/github", class: "button" %> <%# need to adjust the sign up path %>
-              <% else %>
-              <%= link_to "My Account", user_path(session[:user_id]), class: "button" %> 
-              <%= link_to "Logout", logout_path(:id), method: :delete, class: "button" %>
-              <% end %>
-              <%= link_to "View Cart", cart_path(session[:cart_id]), class: "button" %>
-            </div>
-          </nav>
-        </header>
-
-        <!-- We need this Time.zone code to convert UTC times -->
-        <% Time.zone = "Pacific Time (US & Canada)" %>
-
-        <%= yield %>
 
 
-        <div class="row">
-          <div "small-12 columns">
-            <ul class = "search">
-              <%= form_tag("/search", method: "get") do %>
-              <%= label_tag(:q, "Search for a category:") %>
-              <%= text_field_tag(:q) %>
-              <%= submit_tag("Search") %>
-              <% end %>
-            </article>
-          </div>
-        </div>
+  <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
-        <footer>
-        </footer>
-      </body>
-      </html>
+<%= yield %>
+
+
+</article>
+</div>
+</div>
+
+
+
+  <!-- We need this Time.zone code to convert UTC times -->
+  <footer class = "footer">
+    <% Time.zone = "Pacific Time (US & Canada)" %> ThinkieDrinkieProductions   &copy; <%= copyright_notice_year_range(2015) %> All Rights Reserved.</h3>
+    </footer>
+    </body>
+    </html>

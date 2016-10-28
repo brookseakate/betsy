@@ -6,8 +6,6 @@ class ApplicationController < ActionController::Base
   before_action :set_cart_id
   before_action :view
 
-
-
   private
 
   def set_cart_id

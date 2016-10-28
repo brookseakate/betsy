@@ -7,10 +7,12 @@ class Product < ActiveRecord::Base
   validates :inventory,
     presence: true,
     numericality: { only_integer: true, greater_than_or_equal_to: 0,  }
-    validates :price,
+
+  validates :price,
     presence: true,
     numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than: 20000}
-    validates :name,
+    
+  validates :name,
     presence: true, uniqueness: true
 
   def retire
@@ -37,6 +39,12 @@ class Product < ActiveRecord::Base
     end
 
     return average_rating
+  end
+
+
+  def self.search(query)
+    query = "%#{query}%"
+    Product.where("name LIKE ? OR description LIKE ?", query, query)
   end
 
   def self.products_by_rating

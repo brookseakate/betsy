@@ -12,7 +12,11 @@
  *
  *= require_tree .
  *= require_self
+//= require foundation_and_overrides
+
  */
+
+
 
 .errors {
   color: red;
@@ -62,4 +66,8 @@ a.button, .nav {
   margin: 25px, 50px;
   border-style: groove;
   align-items: center;
+}
+
+main li, form li {
+  list-style: none;
 }
