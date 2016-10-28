@@ -79,20 +79,30 @@ class ProductsControllerTest < ActionController::TestCase
     assert_redirected_to user_path(users(:lil).id)
   end # EN
 
-  # test "12. User should be able to update their own product" do
-  #   login_a_user
-  #   # session[:user_id] = users(:ada).id
-  #   # product = Product.find(products(:ada_product).id)
-  #   patch :update, id: products(:ada_product), product: { name: "overwrite old name", inventory: 80, description: "the worst best thing"}
-  #   # puts "This is fixture product id: #{product.id}"
-  #   puts "This is fixture user id: #{product.user_id}"
-  #   # puts "This is session user id: #{session[:user_id]}"
-  #   puts "This is assigns name: #{assigns(:product).name}"
-  #
-  #   assert_equal Product.find(products(:ada_product)).name, "overwrite old name"
-  #   assert_redirected_to product_path(product.id)
-  # end
+  test "12. should be able to retire a product" do
+    session[:user_id] = users(:ada).id
+    product_params = { id: products(:ada_product), productstatus: "retire"}
+    patch :retire, product_params
+    assert assigns[:product].retired
+  end
 
+  test "13. User should be able to update their own product" do
+    session[:user_id] = users(:ada).id
+
+    patch :update, id: products(:ada_product).id, product: {name: "overwrite old name"}
+
+    assert_equal assigns(:product).name, "overwrite old name"
+    assert_redirected_to product_path(products(:ada_product).id)
+  end
+
+  test "12. should be able to activate a product" do
+    session[:user_id] = users(:ada).id
+    product_params = { id: products(:ada_product), productstatus: "retire"}
+    patch :retire, product_params
+    product_params = { id: products(:ada_product), productstatus: "activate"}
+    patch :retire, product_params
+    assert_not assigns[:product].retired
+  end
 
   # test "12. user should not destroy a product if it does not belong to them" do
   #   login_nonexisting_user
@@ -111,6 +121,7 @@ class ProductsControllerTest < ActionController::TestCase
   #   end
   #   assert_template :new
   # end # EN
+
   def login_a_user
     request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:github]
     get :create,  {provider: "github"}

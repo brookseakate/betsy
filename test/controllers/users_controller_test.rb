@@ -18,6 +18,15 @@ class UsersControllerTest < ActionController::TestCase
     # assert_includes assigns(:retired), retired
     assert_includes assigns(:orders), order
     # assert_includes assigns(:order_items), order_item
+    get :show, { id: user_id, show: "retired"}
+    assert_response :success
+    assert_equal assigns(:show), "retired"
+    assert_template :show
+
+    get :show, { id: user_id, show: "active"}
+    assert_response :success
+    assert_equal assigns(:show), "active"
+    assert_template :show
   end
 
   test "will redirect and flash error if not logged in" do
@@ -32,9 +41,22 @@ class UsersControllerTest < ActionController::TestCase
     user_id = users(:lil).id
     session[:user_id] = user_id
     user = User.find(user_id)
+
     get :show, { id: user_id, orderstatus: "completed" }
     assert_equal assigns(:status), "completed"
     assert_includes assigns(:orders), Order.find(orders(:lil_order).id)
+    assert_template :show
+
+    get :show, { id: user_id, orderstatus: "pending" }
+    assert_equal assigns(:status), "pending"
+    assert_template :show
+
+    get :show, { id: user_id, orderstatus: "paid" }
+    assert_equal assigns(:status), "paid"
+    assert_template :show
+
+    get :show, { id: user_id, orderstatus: "cancelled" }
+    assert_equal assigns(:status), "cancelled"
     assert_template :show
   end
 

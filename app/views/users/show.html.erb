@@ -1,5 +1,5 @@
 <main id="seller_dashboard">
-  <h2 class="welcome">Welcome to <%= @user.user_name %>'s Dashboard</h2>
+  <h2 class="welcome">Welcome to <%= user_name %>'s Dashboard</h2>
 
   <h2><%= flash[:errors] %></h2>
   <% if @user.products.blank? %>
