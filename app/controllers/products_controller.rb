@@ -140,6 +140,7 @@ class ProductsController < ApplicationController
           new_category = @product.categories.new(name: new_cat)
           if new_category.valid?
             new_category.save
+            @product.categories << new_category
           else
             @product.categories << Category.find_by(name: new_cat)
           end
