@@ -90,4 +90,14 @@ class OrdersControllerTest < ActionController::TestCase
     assert_equal "Sorry, you may only view your own cart", flash[:error]
   end
 
+  test "should flash an error for a user trying to checkout a cart they do not own" do
+    session[:cart_id] = 12
+    get :checkout, { id: orders(:lil_order).id }
+    assert_response :redirect
+    assert_equal "Sorry, you may only checkout your own cart", flash[:error]
+  end
+
+
+
+
 end
