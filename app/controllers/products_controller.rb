@@ -65,6 +65,7 @@ class ProductsController < ApplicationController
     def update # EN: do I need the same logic from edit?
       @product = Product.find(params[:id])
       @product.update(product_params)
+      # raise
       unless params[:product][:categories_products].nil?
         cat_ids = params[:product][:categories_products]
       end
