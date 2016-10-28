@@ -52,7 +52,12 @@
           <% @orders.each do |order| %>
           <tr>
             <td><%= link_to "Order No. #{order.id}", order_path(order) %></td>
-            <td>Status: <%= order.status %></td>
+            <td>Status:
+              <% unless order.complete_order_for_user(@user).nil? %>
+                complete
+              <% else %>
+              <%= order.status %></td>
+              <% end %>
           </tr>
           <% end %>
         </tbody>

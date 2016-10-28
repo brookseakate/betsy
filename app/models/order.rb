@@ -49,4 +49,24 @@ class Order < ActiveRecord::Base
       return nil
     end
   end
+
+  def complete_order_for_user(user)
+    matched_items = [] #collects all matching order items
+    user.order_items.each do |item|
+      if item.order_id == self.id
+        matched_items <<  item
+      end
+    end
+    all = matched_items.length
+    matched_items.each do |order_item|
+      if order_item.shipped
+        all -= 1
+      end
+    end
+    if all == 0
+      return self
+    else
+      return nil
+    end
+  end
 end
