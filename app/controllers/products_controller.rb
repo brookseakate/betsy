@@ -18,6 +18,7 @@ class ProductsController < ApplicationController
       @product = Product.find(params[:id])
       @order = Order.find(session[:cart_id])
       @order_item = @order.order_items.new(quantity: 1)
+      @reviews = @product.reviews
     end
 
     def create
