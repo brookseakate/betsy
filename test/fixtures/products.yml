@@ -82,3 +82,13 @@ order_test_product_22:
   description: order test product 22 description
   photo_url: http://product_1.com
   retired: false
+
+ada_product:
+  id: 58
+  user_id: 225478506
+  name: original name
+  price: 1100
+  inventory: 10
+  description: some description
+  photo_url: http://product_1.com
+  retired: false

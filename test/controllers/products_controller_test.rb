@@ -77,5 +77,52 @@ class ProductsControllerTest < ActionController::TestCase
       post :create, product_params
     end
     assert_redirected_to user_path(users(:lil).id)
+  end # EN
+
+  # test "12. User should be able to update their own product" do
+  #   login_a_user
+  #   # session[:user_id] = users(:ada).id
+  #   # product = Product.find(products(:ada_product).id)
+  #   patch :update, id: products(:ada_product), product: { name: "overwrite old name", inventory: 80, description: "the worst best thing"}
+  #   # puts "This is fixture product id: #{product.id}"
+  #   puts "This is fixture user id: #{product.user_id}"
+  #   # puts "This is session user id: #{session[:user_id]}"
+  #   puts "This is assigns name: #{assigns(:product).name}"
+  #
+  #   assert_equal Product.find(products(:ada_product)).name, "overwrite old name"
+  #   assert_redirected_to product_path(product.id)
+  # end
+
+
+  # test "12. user should not destroy a product if it does not belong to them" do
+  #   login_nonexisting_user
+  #   login_a_user
+  #   assert_difference('Product.count', 0) do
+  #     delete :destroy, {id: products(:esthern).id}
+  #   end
+  #   assert_redirected_to root_path
+  #   assert_equal "You must be logged in to make seller changes", flash[:error]
+  # end
+  # test "12. should render :new if product does not save" do
+  #   session[:user_id] = users(:lil).id
+  #   product_params = {product: { name: "Kates" }}
+  #   assert_difference('Product.count', 0) do
+  #     post :create, product_params
+  #   end
+  #   assert_template :new
+  # end # EN
+  def login_a_user
+    request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:github]
+    get :create,  {provider: "github"}
+  end
+
+  def login_nonexisting_user
+    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+      provider: 'github', uid: '99999', info: { email: "new@b.com", name: "Na Ada" }
+      })
+  end
+
+  def logout_a_user
+    delete :destroy
   end
 end
