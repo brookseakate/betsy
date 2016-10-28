@@ -41,14 +41,14 @@ products.each do |product|
 end
 
 #Category seed
-# categories = %w(Drinks Equipment Programming Thinkie Drinkie Fun Nerdy Awesome Drinkable Edible).shuffle
-#
+categories = %w(Drinks Equipment Programming Thinkie Drinkie Fun Nerdy Awesome Drinkable Edible).shuffle
+
 product_list = Product.all
-# categories.length.times do |i|
-#   product_id = product_list[i].id
-#   category_hash = {name:"#{categories.pop}", product_ids: product_id}
-#   Category.create(category_hash)
-# end
+categories.length.times do |i|
+  product_id = product_list[i].id
+  category_hash = {name:"#{categories.pop}", product_ids: product_id}
+  Category.create(category_hash)
+end
 
 #Review seed: assigns random number of reviews to all products
 product_list.length.times do |product|
